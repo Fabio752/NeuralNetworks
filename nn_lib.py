@@ -98,7 +98,10 @@ class SigmoidLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        # g(z) = 1 / (1 + e^{-z})
+        self._cache_current = float(1 / (1 + np.exp(-x)))
+        return self._cache_current
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -108,7 +111,9 @@ class SigmoidLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        # g'(z) = g(z)(1 - g(z))
+        return float((self._cache_current * (1 - self._cache_current)) * grad_z)
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -127,7 +132,10 @@ class ReluLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        # g(z) = z for z > 0; 0 for <= 0
+        self._cache_current = np.maximum(x, 0) # cancel out all negatives
+        return self._cache_current
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -137,7 +145,12 @@ class ReluLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        grad_z_copy = np.array(grad_z) # passed by ref, need to copy
+
+        # g'(z) = 1 for z > 0; 0 for z <= 0
+        grad_z_copy[self._cache_current <= 0] = 0
+        return grad_z_copy
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -162,12 +175,15 @@ class LinearLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        self._W = None
-        self._b = None
+        
+        # use Xavier Goplot to init initial W and b
+        self._W = xavier_init((n_in, n_out)) # dim: (n_in, n_out)
+        self._b = xavier_init((1, n_out)) # dim: (1, n_out)
 
         self._cache_current = None
         self._grad_W_current = None
         self._grad_b_current = None
+
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -189,7 +205,11 @@ class LinearLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        # cache information needed for later stage
+        self._cache_current = (self._W, x)
+
+        return x @ self._W + self._b
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -212,7 +232,15 @@ class LinearLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+
+        # get from cache
+        _W, x = self._cache_current
+
+        # get current W & b
+        self._grad_W_current = x.T @ grad_z
+        self._grad_b_current = np.sum(grad_z, axis=0)
+
+        return grad_z @ _W.T
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -229,7 +257,10 @@ class LinearLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+
+        # learning_rate is alpha (minus because we are seeking to minimise)
+        self._W -= learning_rate * self._grad_W_current
+        self._b -= learning_rate * self._grad_b_current
 
         #######################################################################
         #                       ** END OF YOUR CODE **
