@@ -48,3 +48,5 @@ graphs
 *.pdf
 
 .vscode
+
+tmp.py

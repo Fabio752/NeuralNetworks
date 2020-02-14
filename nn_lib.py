@@ -47,9 +47,12 @@ class _Constants(object):
     def DEBUG():
         return True
     @constant
+    def VERBOSE():
+        return True
+    @constant
     def EPOCH_GRANULARITY():
         # how many epochs per log
-        return 5
+        return 100
     
 CONST = _Constants()    
 
@@ -188,12 +191,10 @@ class ReluLayer(Layer):
         #                       ** START OF YOUR CODE **
         #######################################################################
         
-        grad_z_copy = np.array(grad_z) # passed by ref, need to copy
         # g'(z) = 1 for z > 0; 0 for z <= 0
         # can use == 0 here as in forward we already canceled 0's
-        grad_z_copy[self._cache_current == 0] = 0
-        return grad_z_copy
-
+        grad_z[self._cache_current == 0] = 0
+        return grad_z
         #######################################################################
         #                       ** END OF YOUR CODE **
         #######################################################################
@@ -551,27 +552,26 @@ class Trainer(object):
         for epoch in range(self.nb_epoch):
 
             if self.shuffle_flag: 
-                input_dataset, target_dataset = self.shuffle(input_dataset, target_dataset)   
+                input_dataset, target_dataset = self.shuffle(input_dataset, target_dataset)
 
-            # losses = []
+            loss = None 
+
             for batch in range(input_dataset.shape[0] // self.batch_size):
                 begin_idx = batch * self.batch_size
                 end_idx = (batch + 1) * self.batch_size
 
-                x_train = input_dataset[begin_idx : end_idx]
+                x_in = input_dataset[begin_idx : end_idx]
 
-                y = target_dataset[begin_idx : end_idx]
+                y_exp = target_dataset[begin_idx : end_idx]
 
-                y_output = self.network(x_train)
-
-                loss = self._loss_layer.forward(y_output, y)
-                # losses.append(loss)
+                y_got = self.network(x_in)
+                loss = self._loss_layer.forward(y_got, y_exp)
 
                 grad_z = self._loss_layer.backward()
                 self.network.backward(grad_z)
                 self.network.update_params(self.learning_rate)
 
-            if CONST.DEBUG:
+            if CONST.VERBOSE:
                 if epoch % CONST.EPOCH_GRANULARITY == 0:
                     print('EPOCH: {}; LOSS: {}'.format(epoch, loss))
         #######################################################################
@@ -706,7 +706,7 @@ def example_main():
     trainer = Trainer(
         network=net,
         batch_size=8,
-        nb_epoch=1000,
+        nb_epoch=10000,
         learning_rate=0.01,
         loss_fun="cross_entropy",
         shuffle_flag=True,
