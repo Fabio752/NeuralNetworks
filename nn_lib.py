@@ -10,6 +10,51 @@ def xavier_init(size, gain=1.0):
     high = gain * np.sqrt(6.0 / np.sum(size))
     return np.random.uniform(low=low, high=high, size=size)
 
+def constant(f):
+    def fset(self, value):
+        raise TypeError
+    def fget(self):
+        return f()
+    return property(fget, fset)
+
+class _Constants(object):
+    """
+    Class for constants
+    """
+
+    # activation
+    @constant
+    def SIGMOID():
+        return 'sigmoid'
+
+    @constant
+    def RELU():
+        return 'relu'
+
+
+    # loss layers 
+    @constant
+    def MSE():
+        return 'mse'
+
+    @constant
+    def CROSS_ENTROPY():
+        return 'cross_entropy'
+
+
+    # debugging
+    @constant
+    def DEBUG():
+        return True
+    @constant
+    def VERBOSE():
+        return True
+    @constant
+    def EPOCH_GRANULARITY():
+        # how many epochs per log
+        return 100
+    
+CONST = _Constants()    
 
 class Layer:
     """
@@ -146,12 +191,10 @@ class ReluLayer(Layer):
         #                       ** START OF YOUR CODE **
         #######################################################################
         
-        grad_z_copy = np.array(grad_z) # passed by ref, need to copy
-
         # g'(z) = 1 for z > 0; 0 for z <= 0
-        grad_z_copy[self._cache_current <= 0] = 0
-        return grad_z_copy
-
+        # can use == 0 here as in forward we already canceled 0's
+        grad_z[self._cache_current == 0] = 0
+        return grad_z
         #######################################################################
         #                       ** END OF YOUR CODE **
         #######################################################################
@@ -290,7 +333,25 @@ class MultiLayerNetwork(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        self._layers = None
+        self._layers = []
+        for i in range(len(neurons)):
+            # layer
+            layer_dim = input_dim if i == 0 else neurons[i-1]
+            layer = LinearLayer(layer_dim, neurons[i])
+
+            # activation
+            activation_str = activations[i]
+            activation = None # default: identity
+
+            if activation_str == CONST.SIGMOID:
+                activation = SigmoidLayer()
+            elif activation_str == CONST.RELU:
+                activation = ReluLayer()
+            # else is None, we take as identity
+
+            self._layers.append((layer, activation))
+            
+            
         #######################################################################
         #                       ** END OF YOUR CODE **
         #######################################################################
@@ -309,7 +370,13 @@ class MultiLayerNetwork(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        for (layer, activation) in self._layers:
+            x = layer.forward(x)
+            # not identity
+            if not activation is None:
+                x = activation.forward(x)
+        return x
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -333,8 +400,15 @@ class MultiLayerNetwork(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        for (layer, activation) in reversed(self._layers):
+            # not identity
+            if not activation is None:
+                grad_z = activation.backward(grad_z)
+            
+            grad_z = layer.backward(grad_z)
 
+        return grad_z
         #######################################################################
         #                       ** END OF YOUR CODE **
         #######################################################################
@@ -350,7 +424,9 @@ class MultiLayerNetwork(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        for (layer, _) in self._layers:
+            layer.update_params(learning_rate)
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -411,6 +487,14 @@ class Trainer(object):
         #                       ** START OF YOUR CODE **
         #######################################################################
         self._loss_layer = None
+
+        if loss_fun == CONST.MSE:
+            self._loss_layer = MSELossLayer()
+        elif loss_fun == CONST.CROSS_ENTROPY:
+            self._loss_layer = CrossEntropyLossLayer()
+        else:
+            raise NotImplementedError()
+
         #######################################################################
         #                       ** END OF YOUR CODE **
         #######################################################################
@@ -431,7 +515,11 @@ class Trainer(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        # don't modify original datasets
+        rand_i = np.arange(len(input_dataset))
+        np.random.shuffle(rand_i)
+        return input_dataset[rand_i], target_dataset[rand_i] 
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -460,8 +548,32 @@ class Trainer(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
 
+        for epoch in range(self.nb_epoch):
+
+            if self.shuffle_flag: 
+                input_dataset, target_dataset = self.shuffle(input_dataset, target_dataset)
+
+            loss = None 
+
+            for batch in range(input_dataset.shape[0] // self.batch_size):
+                begin_idx = batch * self.batch_size
+                end_idx = (batch + 1) * self.batch_size
+
+                x_in = input_dataset[begin_idx : end_idx]
+
+                y_exp = target_dataset[begin_idx : end_idx]
+
+                y_got = self.network(x_in)
+                loss = self._loss_layer.forward(y_got, y_exp)
+
+                grad_z = self._loss_layer.backward()
+                self.network.backward(grad_z)
+                self.network.update_params(self.learning_rate)
+
+            if CONST.VERBOSE:
+                if epoch % CONST.EPOCH_GRANULARITY == 0:
+                    print('EPOCH: {}; LOSS: {}'.format(epoch, loss))
         #######################################################################
         #                       ** END OF YOUR CODE **
         #######################################################################
@@ -479,7 +591,19 @@ class Trainer(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        loss = None
+        y_output = self.network(input_dataset)
+
+        if self.loss_fun == CONST.MSE:
+            loss = self._loss_layer.forward(y_output, target_dataset)
+        elif self.loss_fun == CONST.CROSS_ENTROPY:
+            y_pred = CrossEntropyLossLayer.softmax(y_output)
+            loss = self._loss_layer.forward(y_pred, target_dataset)
+        # else caught in init as NotImplementedError()
+
+        return loss
+
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -504,7 +628,10 @@ class Preprocessor(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+
+        # save the max and min so revert is possible
+        self._max = np.max(data, axis=0)
+        self._min = np.min(data, axis=0)
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -523,7 +650,9 @@ class Preprocessor(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        # scale to [0,1]
+        return (data - self._min) / (self._max - self._min)
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -542,7 +671,8 @@ class Preprocessor(object):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        pass
+        
+        return data * (self._max - self._min) + self._min
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -576,7 +706,7 @@ def example_main():
     trainer = Trainer(
         network=net,
         batch_size=8,
-        nb_epoch=1000,
+        nb_epoch=10000,
         learning_rate=0.01,
         loss_fun="cross_entropy",
         shuffle_flag=True,
