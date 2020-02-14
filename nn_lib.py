@@ -17,7 +17,6 @@ def constant(f):
         return f()
     return property(fget, fset)
 
-
 class _Constants(object):
     """
     Class for constants
@@ -27,14 +26,17 @@ class _Constants(object):
     @constant
     def SIGMOID():
         return 'sigmoid'
+
     @constant
     def RELU():
         return 'relu'
+
 
     # loss layers 
     @constant
     def MSE():
         return 'mse'
+
     @constant
     def CROSS_ENTROPY():
         return 'cross_entropy'
@@ -187,9 +189,9 @@ class ReluLayer(Layer):
         #######################################################################
         
         grad_z_copy = np.array(grad_z) # passed by ref, need to copy
-
         # g'(z) = 1 for z > 0; 0 for z <= 0
-        grad_z_copy[self._cache_current <= 0] = 0
+        # can use == 0 here as in forward we already canceled 0's
+        grad_z_copy[self._cache_current == 0] = 0
         return grad_z_copy
 
         #######################################################################
@@ -333,7 +335,7 @@ class MultiLayerNetwork(object):
         self._layers = []
         for i in range(len(neurons)):
             # layer
-            layer_dim = neurons[i - 1] if i != 0 else input_dim
+            layer_dim = input_dim if i == 0 else neurons[i-1]
             layer = LinearLayer(layer_dim, neurons[i])
 
             # activation
@@ -552,8 +554,7 @@ class Trainer(object):
                 input_dataset, target_dataset = self.shuffle(input_dataset, target_dataset)   
 
             # losses = []
-
-            for batch in range(input_dataset.shape[0]):
+            for batch in range(input_dataset.shape[0] // self.batch_size):
                 begin_idx = batch * self.batch_size
                 end_idx = (batch + 1) * self.batch_size
 
