@@ -31,6 +31,10 @@ class _Constants(object):
     def RELU():
         return 'relu'
 
+    @constant
+    def IDENTITY():
+        return 'identity'
+
 
     # loss layers 
     @constant
@@ -143,9 +147,9 @@ class SigmoidLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        
+
         # g(z) = 1 / (1 + e^{-z})
-        self._cache_current = float(1 / (1 + np.exp(-x)))
+        self._cache_current = 1. / (1 + np.exp(-x))
         return self._cache_current
 
         #######################################################################
@@ -156,9 +160,8 @@ class SigmoidLayer(Layer):
         #######################################################################
         #                       ** START OF YOUR CODE **
         #######################################################################
-        
         # g'(z) = g(z)(1 - g(z))
-        return float((self._cache_current * (1 - self._cache_current)) * grad_z)
+        return (self._cache_current * (1 - self._cache_current)) * grad_z
 
         #######################################################################
         #                       ** END OF YOUR CODE **
@@ -347,7 +350,10 @@ class MultiLayerNetwork(object):
                 activation = SigmoidLayer()
             elif activation_str == CONST.RELU:
                 activation = ReluLayer()
-            # else is None, we take as identity
+            elif activation_str == CONST.IDENTITY:
+                activation = None
+            else:
+                raise NotImplementedError
 
             self._layers.append((layer, activation))
             
@@ -682,7 +688,7 @@ class Preprocessor(object):
 def example_main():
     input_dim = 4
     neurons = [16, 3]
-    activations = ["relu", "identity"]
+    activations = ["sigmoid", "identity"]
     net = MultiLayerNetwork(input_dim, neurons, activations)
 
     dat = np.loadtxt("iris.dat")
@@ -706,7 +712,7 @@ def example_main():
     trainer = Trainer(
         network=net,
         batch_size=8,
-        nb_epoch=10000,
+        nb_epoch=1000,
         learning_rate=0.01,
         loss_fun="cross_entropy",
         shuffle_flag=True,
