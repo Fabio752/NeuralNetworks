@@ -2,6 +2,28 @@ import numpy as np
 import pickle
 import torch
 import torch.nn as nn
+import torchvision.datasets as dsets
+from torch.autograd import Variable
+from torch.utils.data import DataLoader, Dataset
+import sys
+
+def to_categorical(y, num_classes):
+    """1-hot encodes a tensor"""
+    return np.eye(num_classes, dtype='uint8')[y]
+
+
+class PrepareData(Dataset):
+    def __init__(self, X, y):
+        if not torch.is_tensor(X):
+            self.X = torch.from_numpy(X)
+        if not torch.is_tensor(y):
+            self.y = torch.from_numpy(y)
+
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
 
 
 class ClaimClassifier():
@@ -14,9 +36,11 @@ class ClaimClassifier():
         super(ClaimClassifier, self).__init__()
         self.model = nn.Sequential(
             nn.Linear(9,5),
+            nn.Tanh(),
+            nn.Linear(5,5),
             nn.ReLU(),
             nn.Linear(5,1),
-            nn.Sigmoid(),
+            #nn.Sigmoid(),
         )
 
     def _preprocessor(self, X_raw):
@@ -61,52 +85,57 @@ class ClaimClassifier():
             an instance of the fitted model
         """
 
+
+        '''if y_raw is None: <--DEAL WITH THIS!'''
+
+        #data preprocessing
         X_clean = self._preprocessor(X_raw)
+        X = X_clean[:, :self.n_cols - 2]
+        #y = to_categorical(X_clean[:, self.n_cols-1:],2)
+        y = X_clean[:, self.n_cols-1:]
+        ds = PrepareData(X=X, y=y)
+        ds = DataLoader(ds, batch_size=50, shuffle=True)
 
+        n_epochs = 30
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.1)
+        cost_func = nn.BCELoss()
 
-        if y_raw is None:
-            np.random.shuffle(X_clean)
-            split_idx = int(0.8*len(X_clean))
-
-            x_train = torch.tensor(X_clean[:split_idx, :self.n_cols-2], dtype=torch.float32)
-            x_val = X_clean[split_idx:, :self.n_cols-2]
-            y_raw = X_clean[:, self.n_cols-1:]
-
-            y_train = torch.tensor(y_raw[:split_idx], dtype=torch.float32)
-            y_val = y_raw[split_idx:]
-
-        else: #not sure about this bit
-            split_idx = int(0.8*len(X_clean))
-
-            x_train = X_clean[:split_idx, :self.n_cols-2]
-            x_val = X_clean[split_idx:, :self.n_cols-2]
-
-            y_train = y_raw[:split_idx]
-            y_val = y_raw[split_idx:]
-
-
-
-        # Defines number of epochs
-        n_epochs = 5
-        # Optimizers require the parameters to optimize and a learning rate
-        optimizer = torch.optim.SGD(self.model.parameters(), lr=0.003)
+        losses = []
+        accuracies = []
 
         for epoch in range(n_epochs):
-            # Training pass
-            optimizer.zero_grad()
-            # Computes our model's predicted output
-            prediction = self.model(x_train)
-            print(prediction)
-            pred_y = torch.tensor((prediction >= 0.5), dtype=torch.float32, requires_grad=True)
-            print(pred_y)
+            for ix, (_x, _y) in enumerate(ds):
+                #=========make inpur differentiable=======================
+                _x = Variable(_x).float()
+                _y = Variable(_y).float()
 
-            criterion = nn.BCELoss()
-            loss = criterion(pred_y, y_train.float())
-            running_loss = 0
-            loss.backward()
-            optimizer.step()
-            running_loss += loss.item()
-            print(f"Training loss: {running_loss}")
+                #========forward pass=====================================
+                prediction = self.model(_x).float()
+                #print(prediction)
+                yhat = torch.tensor((prediction >= 0.5), dtype=torch.float32, requires_grad=True)
+                loss = cost_func(yhat, _y)
+                acc = torch.eq(yhat.round(), _y).float().mean() # accuracy
+
+                #=======backward pass=====================================
+                self.model.zero_grad() # zero the gradients on each pass before the update
+                loss.backward() # backpropagate the loss through the model
+                optimizer.step() # update the gradients w.r.t the loss
+
+                #print(loss.data)
+
+                losses.append(loss.data)
+                accuracies.append(acc.data)
+
+                '''for n,x in self.model.named_modules():
+                    if isinstance(x, nn.Linear):
+                        print(x.__dict__.keys())
+
+                print(optimizer.__dict__.keys())'''
+
+            if epoch % 1 == 0:
+                print("[{}/{}], loss: {} acc: {}".format(epoch,
+                n_epochs, np.average(losses), np.average(accuracies)))
+
 
 
     def predict(self, X_raw):
