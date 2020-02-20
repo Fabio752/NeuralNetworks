@@ -6,10 +6,17 @@ import torchvision.datasets as dsets
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
 import sys
+import time
 
 
 def get_accuracy(y_out, y_target):
   y_pred = y_out >= 0.5       # a Tensor of 0s and 1s
+  num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
+  acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
+  return acc
+
+def get_accuracy_zero_tensor(y_out, y_target):
+  y_pred = y_out > 1       # a Tensor of 0s 
   num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
   acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
   return acc
@@ -62,9 +69,15 @@ class ClaimClassifier():
 
         self.raw_data = np.genfromtxt(X_raw, delimiter=',')[1:, :]
         self.n_cols = np.size(self.raw_data, 1)
-        max = np.max(self.raw_data, axis=0)
-        min = np.min(self.raw_data, axis=0)
-        return (self.raw_data - min) / (max - min)
+        self.n_rows = np.size(self.raw_data, 0)
+        #Create a temporary copy in order to store only the data the model will be training on
+        raw_data_temp = self.raw_data[:, : self.n_cols-2]
+        max = np.max(raw_data_temp, axis=0)
+        min = np.min(raw_data_temp, axis=0)
+        #Normalize relevant columns
+        raw_data_temp = (raw_data_temp - min) / (max - min)
+        self.raw_data[:, : self.n_cols-2] = raw_data_temp
+        return self.raw_data 
 
 
     def fit(self, X_raw, y_raw=None):
@@ -88,21 +101,75 @@ class ClaimClassifier():
 
         '''if y_raw is None: <--DEAL WITH THIS!'''
 
+        
+        one_indexes = []
+
         #data preprocessing
         X_clean = self._preprocessor(X_raw)
+
+        X_ = X_clean[:, self.n_cols - 1]
+        #TODO Get rid of the below and reimplement properly
+        y_test = X_[round(self.n_rows*0.8): ]
+
+        #Count the number of occurences of zeros and ones, using a for loop in order to count indexes as well
+        count_zeros = 0
+        count_ones = 0
+        for i in range(len(X_)):
+            if X_[i] == 0.0:
+                count_zeros += 1
+            else:
+                count_ones += 1
+                one_indexes.append(i)
+
+        diff = round(count_zeros/count_ones)
+
+        #TODO FIt this into an oversampling function
+        
+        #Upsample cases of made_claim == 1 in order to get a balanced dataset
+        for i in range(count_ones):
+            for j in range(round(diff/6)):
+                row = X_clean[one_indexes[i], :]
+                if j == 0:
+                    x_upsample = np.vstack([row, row])
+                else:
+                    x_upsample = np.vstack([x_upsample, row])
+            X_clean = np.vstack([X_clean, x_upsample])
+
+        X_ = X_clean[:, self.n_cols - 1]
+        count_zeros = 0
+        count_ones = 0
+        for i in range(len(X_)):
+            if X_[i] == 0.0:
+                count_zeros += 1
+                one_indexes.append(i)
+            else:
+                count_ones += 1
+        diff = round(count_zeros/count_ones)
+        print("Ones: ", count_ones)
+        print("Zeros: ", count_zeros)
+        print("Diff: ", diff)
+
+
         X = X_clean[:, :self.n_cols - 2]
-        #y = to_categorical(X_clean[:, self.n_cols-1:],2)
+        #Shuffle the array in order to remove bias
+        np.random.shuffle(X)
+        #TODO comment this out later
+        #X_train = X[ :round(self.n_rows*0.8), :]
+        #X_test = X[round(self.n_rows*0.8): , :]
+        #X = X_train
         y = X_clean[:, self.n_cols-1:]
         ds = PrepareData(X=X, y=y)
         ds = DataLoader(ds, batch_size=50, shuffle=True)
 
         n_epochs = 30
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.01)
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
         cost_func = nn.BCELoss()
 
         losses = []
         accuracies = []
+        zero_accuracies = []
 
+        #Training model 
         for epoch in range(n_epochs):
             for ix, (_x, _y) in enumerate(ds):
                 #=========make inpur differentiable=======================
@@ -113,6 +180,7 @@ class ClaimClassifier():
                 yhat = self.model(_x).float()
                 loss = cost_func(yhat, _y)
                 accuracy = get_accuracy(yhat, _y)
+                zero_accuracy = get_accuracy_zero_tensor(yhat, _y)
                 #acc = torch.eq(yhat.round(), _y).float().mean() # accuracy
 
                 #=======backward pass=====================================
@@ -124,6 +192,7 @@ class ClaimClassifier():
 
                 losses.append(loss.data)
                 accuracies.append(accuracy)
+                zero_accuracies.append(zero_accuracy)
 
                 '''for n,x in self.model.named_modules():
                     if isinstance(x, nn.Linear):
@@ -135,6 +204,16 @@ class ClaimClassifier():
             if epoch % 1 == 0:
                 print("[{}/{}], loss: {} acc: {}".format(epoch,
                 n_epochs, np.average(losses), np.average(accuracies)))
+                print("[{}/{}],  zero acc: {}".format(epoch,
+                n_epochs, np.average(zero_accuracies)))
+
+
+        #Check performance on the training set
+        yhat = self.model(X_test).float()
+        accuracy = get_accuracy(yhat, y_test)
+        zero_accuracy = get_accuracy_zero_tensor(yhat, y_test)
+        print("acc after testing: {}".format(accuracy))
+        print("zero acc after testing: {}".format(zero_accuracy))
 
 
 
@@ -202,6 +281,4 @@ def ClaimClassifierHyperParameterSearch():
 path_to_data = "part2_training_data.csv"
 
 cc = ClaimClassifier()
-print(cc._preprocessor(path_to_data))
-
 cc.fit(path_to_data)
