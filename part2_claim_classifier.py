@@ -46,6 +46,22 @@ class ClaimClassifier():
         self.model = nn.Sequential(
             nn.Linear(9,5),
             nn.ReLU(),
+            nn.Linear(5,50),
+            nn.ReLU(),
+            nn.Linear(50,50),
+            nn.ReLU(),
+            nn.Linear(50,50),
+            nn.ReLU(),
+            nn.Linear(50,50),
+            nn.ReLU(),
+            nn.Linear(50,50),
+            nn.ReLU(),
+            nn.Linear(50,50),
+            nn.ReLU(),
+            nn.Linear(50,50),
+            nn.ReLU(),
+            nn.Linear(50,5),
+            nn.ReLU(),
             nn.Linear(5,1),
             nn.Sigmoid(),
         )
@@ -79,8 +95,25 @@ class ClaimClassifier():
         self.raw_data[:, : self.n_cols-2] = raw_data_temp
         return self.raw_data 
 
+    def upsample_ones(self, X, y, count_ones, count_zeros, one_indexes):
+        ''' Function to upsample the instances of ones (minority class) in the dataset '''
+        #Prevent division by zero
+        if (count_ones == 0):
+            return X,y #returning both unaltered
+        diff = round(count_zeros/count_ones)
+        original_length = len(X)
+        for i in range(count_ones):
+            for j in range(diff):
+                row = X[one_indexes[i], :]
+                X = np.vstack([X, row])
+                y = np.vstack([y, 1.0])
+                if(len(y) == (7/4)*original_length):
+                    return (X,y)
+        return (X, y)
 
-    def fit(self, X_raw, y_raw=None):
+
+
+    def fit(self, X_raw, y_raw=None, n_epochs=6):
         """Classifier training function.
 
         Here you will implement the training function for your classifier.
@@ -101,78 +134,68 @@ class ClaimClassifier():
 
         '''if y_raw is None: <--DEAL WITH THIS!'''
 
-        
+        #TODO Comment this out
         one_indexes = []
 
-        #data preprocessing
-        X_clean = self._preprocessor(X_raw)
-
-        X_ = X_clean[:, self.n_cols - 1]
-        #TODO Get rid of the below and reimplement properly
-        y_test = X_[round(self.n_rows*0.8): ]
-
-        #Count the number of occurences of zeros and ones, using a for loop in order to count indexes as well
-        count_zeros = 0
-        count_ones = 0
-        for i in range(len(X_)):
-            if X_[i] == 0.0:
-                count_zeros += 1
-            else:
-                count_ones += 1
-                one_indexes.append(i)
-
-        diff = round(count_zeros/count_ones)
-
-        #TODO FIt this into an oversampling function
+        X = X_raw[:, :self.n_cols - 2]
+        y = X_raw[:, self.n_cols-1:]
         
-        #Upsample cases of made_claim == 1 in order to get a balanced dataset
-        for i in range(count_ones):
-            for j in range(round(diff/6)):
-                row = X_clean[one_indexes[i], :]
-                if j == 0:
-                    x_upsample = np.vstack([row, row])
-                else:
-                    x_upsample = np.vstack([x_upsample, row])
-            X_clean = np.vstack([X_clean, x_upsample])
-
-        X_ = X_clean[:, self.n_cols - 1]
-        count_zeros = 0
-        count_ones = 0
-        for i in range(len(X_)):
-            if X_[i] == 0.0:
-                count_zeros += 1
-                one_indexes.append(i)
-            else:
-                count_ones += 1
-        diff = round(count_zeros/count_ones)
-        print("Ones: ", count_ones)
-        print("Zeros: ", count_zeros)
-        print("Diff: ", diff)
-
-
-        X = X_clean[:, :self.n_cols - 2]
-        #Shuffle the array in order to remove bias
-        np.random.shuffle(X)
-        #TODO comment this out later
-        #X_train = X[ :round(self.n_rows*0.8), :]
-        #X_test = X[round(self.n_rows*0.8): , :]
-        #X = X_train
-        y = X_clean[:, self.n_cols-1:]
-        ds = PrepareData(X=X, y=y)
-        ds = DataLoader(ds, batch_size=50, shuffle=True)
-
-        n_epochs = 30
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
-        cost_func = nn.BCELoss()
-
+        
         losses = []
         accuracies = []
         zero_accuracies = []
 
+        count_zeros = 0
+        count_ones = 0
+        for i in range(len(y)):
+            if y[i] == 0.0:
+                count_zeros += 1
+            elif y[i] == 1.0:
+                count_ones += 1
+                one_indexes.append(i)
+        print("Original Zeros Counted: ", count_zeros)
+        print("Original Ones Counted: ", count_ones)
+
+        #Upsampling
+        X_ = self.upsample_ones(X, y, count_ones, count_zeros, one_indexes)
+
+        #Shuffle the array in order to remove bias
+        #np.random.shuffle(X)
+
+        X = X_[0]
+        y = X_[1]
+
+        count_zeros = 0
+        count_ones = 0
+        for i in range(len(y)):
+            if y[i] == 0.0:
+                count_zeros += 1
+            elif y[i] == 1.0:
+                count_ones += 1
+                one_indexes.append(i)
+                
+        print("Upsampled Zeros Counted: ", count_zeros)
+        print("Upsampled Ones Counted: ", count_ones)
+
+        print("Length of X: ", len(X[:, 0]))
+        print("Length of y: ", len(y[:, 0]))
+
+
+        #Shuffle the array in order to remove bias
+        # TODO Join the two and then shuffle them       
+        #np.random.shuffle(X)
+
+        #Prepare data to be accepted by Pytorch
+        ds = PrepareData(X=X, y=y)
+        ds = DataLoader(ds, batch_size=50, shuffle=True)
+
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
+        cost_func = nn.BCELoss()
+
         #Training model 
         for epoch in range(n_epochs):
             for ix, (_x, _y) in enumerate(ds):
-                #=========make inpur differentiable=======================
+                #=========make input differentiable=======================
                 _x = Variable(_x).float()
                 _y = Variable(_y).float()
 
@@ -183,12 +206,16 @@ class ClaimClassifier():
                 zero_accuracy = get_accuracy_zero_tensor(yhat, _y)
                 #acc = torch.eq(yhat.round(), _y).float().mean() # accuracy
 
+                #=========iterate to find predicted zeros and ones========
+                for i in range(len(yhat)):
+                    if yhat[i] < 0.5:
+                        count_zeros += 1
+                    else:
+                        count_ones += 1
                 #=======backward pass=====================================
                 self.model.zero_grad() # zero the gradients on each pass before the update
                 loss.backward() # backpropagate the loss through the model
                 optimizer.step() # update the gradients w.r.t the loss
-
-                #print(loss.data)
 
                 losses.append(loss.data)
                 accuracies.append(accuracy)
@@ -206,15 +233,12 @@ class ClaimClassifier():
                 n_epochs, np.average(losses), np.average(accuracies)))
                 print("[{}/{}],  zero acc: {}".format(epoch,
                 n_epochs, np.average(zero_accuracies)))
+                print("Ones predicted: ", count_ones)
+                print("Zeros predicted: ", count_zeros)
+                count_zeros = 0
+                count_ones = 0
 
-
-        #Check performance on the training set
-        yhat = self.model(X_test).float()
-        accuracy = get_accuracy(yhat, y_test)
-        zero_accuracy = get_accuracy_zero_tensor(yhat, y_test)
-        print("acc after testing: {}".format(accuracy))
-        print("zero acc after testing: {}".format(zero_accuracy))
-
+        print("Finished Training")
 
 
     def predict(self, X_raw):
@@ -251,7 +275,6 @@ class ClaimClassifier():
         You can use external libraries such as scikit-learn for this
         if necessary.
         """
-        pass
 
     def save_model(self):
         # Please alter this file appropriately to work in tandem with your load_model function below
@@ -279,6 +302,20 @@ def ClaimClassifierHyperParameterSearch():
 
 
 path_to_data = "part2_training_data.csv"
-
 cc = ClaimClassifier()
-cc.fit(path_to_data)
+#data preprocessing
+X_clean = cc._preprocessor(path_to_data)
+
+np.random.shuffle(X_clean)
+X_train = X_clean[:round(cc.n_rows*0.8) , :]
+X_test = X_clean[round(cc.n_rows*0.8):, : X_clean.shape[1]-2]
+y_test = X_clean[round(cc.n_rows*0.8):, X_clean.shape[1]-1:]
+
+cc.fit(X_train, None, 1)
+
+#Test the data
+X_test = Variable(torch.from_numpy(X_test))
+#Trasnposing input in order for it to be accepted
+#X_test = X_test.T
+out = cc.model(X_test.float())
+print(out)
