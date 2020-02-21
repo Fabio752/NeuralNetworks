@@ -7,19 +7,34 @@ from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
 import sys
 import time
+import random
 
 
-def get_accuracy(y_out, y_target):
-  y_pred = y_out >= 0.5       # a Tensor of 0s and 1s
-  num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
-  acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
-  return acc
+def get_accuracy(y_out, y_target, test=False):
+    misclassified_ones = 0
+    misclassified_zeros = 0
+    y_pred = y_out >= 0.5       # a Tensor of 0s and 1s
+    num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
+    acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
+    if test:
+        for i in range(len(y_out)):
+            print("y_target: ", y_target[i], "y_out: ", y_out[i], "y_pred", y_pred[i])
+            if (y_target[i] == 1.0) and (y_pred[i] == 0.0):
+                misclassified_ones += 1
+            elif (y_target[i] == 0.0) and (y_pred[i] == 1.0):
+                misclassified_zeros += 1
+        return acc, misclassified_ones, misclassified_zeros
+    else:
+        return acc
+   
 
 def get_accuracy_zero_tensor(y_out, y_target):
   y_pred = y_out > 1       # a Tensor of 0s 
   num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
   acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
   return acc
+
+
 
 
 class PrepareData(Dataset):
@@ -45,22 +60,29 @@ class ClaimClassifier():
         super(ClaimClassifier, self).__init__()
         self.model = nn.Sequential(
             nn.Linear(9,5),
-            nn.ReLU(),
-            nn.Linear(5,50),
-            nn.ReLU(),
-            nn.Linear(50,250),
-            nn.ReLU(),
-            nn.Linear(250,250),
-            nn.ReLU(),
-            nn.Linear(250,250),
-            nn.ReLU(),
-            nn.Linear(250,250),
-            nn.ReLU(),
-            nn.Linear(250,5),
-            nn.ReLU(),
+            nn.Tanh(),
+            nn.Linear(5,5),
+            nn.Tanh(),
+            nn.Linear(5,5),
+            nn.Tanh(),
+            nn.Linear(5,20
+            ),
+            nn.Tanh(),
+            nn.Linear(20,50),
+            nn.Tanh(),
+            nn.Linear(50,50),
+            nn.Tanh(),
+            nn.Linear(50,20),
+            nn.Tanh(),
+            nn.Linear(20,5),
+            nn.Tanh(),
             nn.Linear(5,1),
             nn.Sigmoid(),
         )
+        self.count_zeros = 0
+        self.count_ones = 0
+        self.one_indexes = []
+        self.zero_indexes = []
 
     def _preprocessor(self, X_raw):
         """Data preprocessing function.
@@ -91,23 +113,30 @@ class ClaimClassifier():
         self.raw_data[:, : self.n_cols-2] = raw_data_temp
         return self.raw_data 
 
-    def upsample_ones(self, X, y, count_ones, count_zeros, one_indexes):
+    def upsample_ones(self, X, y, w):
         ''' Function to upsample the instances of ones (minority class) in the dataset '''
         #Prevent division by zero
-        if (count_ones == 0):
+        if (self.count_ones == 0):
             return X,y #returning both unaltered
-        diff = round(count_zeros/count_ones)
+        diff = round(self.count_zeros/self.count_ones)
         original_length = len(X)
-        for i in range(count_ones):
+        for i in range(self.count_ones):
             for j in range(diff):
-                row = X[one_indexes[i], :]
+                row = X[self.one_indexes[i], :]
                 X = np.vstack([X, row])
                 y = np.vstack([y, 1.0])
-                if(len(y) == (6.5/4)*original_length):
+                if(len(y) == (w)*original_length):
                     return (X,y)
         return (X, y)
 
-
+    def downsample_zeros(self, X, y, w):
+        original_length = len(X)
+        for i in range(len(self.zero_indexes)-1, round(len(self.zero_indexes)*w), -1):
+            X = np.delete(X, self.zero_indexes[i], 0)
+            y = np.delete(y, self.zero_indexes[i], 0)
+            
+        return (X,y)
+                    
 
     def fit(self, X_raw, y_raw=None, n_epochs=6):
         """Classifier training function.
@@ -132,6 +161,7 @@ class ClaimClassifier():
 
         #TODO Comment this out
         one_indexes = []
+        zero_indexes = []
 
         X = X_raw[:, :self.n_cols - 2]
         y = X_raw[:, self.n_cols-1:]
@@ -141,19 +171,25 @@ class ClaimClassifier():
         accuracies = []
         zero_accuracies = []
 
-        count_zeros = 0
-        count_ones = 0
         for i in range(len(y)):
             if y[i] == 0.0:
-                count_zeros += 1
+                self.count_zeros += 1
+                self.zero_indexes.append(i)
             elif y[i] == 1.0:
-                count_ones += 1
-                one_indexes.append(i)
-        print("Original Zeros Counted: ", count_zeros)
-        print("Original Ones Counted: ", count_ones)
+                self.count_ones += 1
+                self.one_indexes.append(i)
+        print("Original Zeros Counted: ", self.count_zeros)
+        print("Original Ones Counted: ", self.count_ones)
 
         #Upsampling
-        X_ = self.upsample_ones(X, y, count_ones, count_zeros, one_indexes)
+        X_ = self.upsample_ones(X, y, 1.2)
+
+        X = X_[0]
+        y = X_[1]
+
+
+        #Downsampling
+        X_ = self.downsample_zeros(X, y, 0.5)
 
         #Shuffle the array in order to remove bias
         #np.random.shuffle(X)
@@ -161,20 +197,23 @@ class ClaimClassifier():
         X = X_[0]
         y = X_[1]
 
-        count_zeros = 0
-        count_ones = 0
+
+        self.count_zeros = 0
+        self.count_ones = 0
         for i in range(len(y)):
             if y[i] == 0.0:
-                count_zeros += 1
+                self.count_zeros += 1
             elif y[i] == 1.0:
-                count_ones += 1
-                one_indexes.append(i)
+                self.count_ones += 1
+                self.one_indexes.append(i)
                 
-        print("Upsampled Zeros Counted: ", count_zeros)
-        print("Upsampled Ones Counted: ", count_ones)
+        print("Down/Upsampled Zeros Counted: ", self.count_zeros)
+        print("Down/Upsampled Ones Counted: ", self.count_ones)
 
         print("Length of X: ", len(X[:, 0]))
         print("Length of y: ", len(y[:, 0]))
+
+        #assert(False)
 
 
         #Shuffle the array in order to remove bias
@@ -190,6 +229,8 @@ class ClaimClassifier():
 
         #Training model 
         for epoch in range(n_epochs):
+            count_zeros = 0
+            count_ones = 0
             for ix, (_x, _y) in enumerate(ds):
                 #=========make input differentiable=======================
                 _x = Variable(_x).float()
@@ -231,8 +272,7 @@ class ClaimClassifier():
                 n_epochs, np.average(zero_accuracies)))
                 print("Ones predicted: ", count_ones)
                 print("Zeros predicted: ", count_zeros)
-                count_zeros = 0
-                count_ones = 0
+            
 
         print("Finished Training")
 
@@ -307,7 +347,7 @@ X_train = X_clean[:round(cc.n_rows*0.8) , :]
 X_test = X_clean[round(cc.n_rows*0.8):, : X_clean.shape[1]-2]
 y_test = X_clean[round(cc.n_rows*0.8):, X_clean.shape[1]-1:]
 
-cc.fit(X_train, None, 150)
+cc.fit(X_train, None, 30)
 
 #Test the data
 X_test = Variable(torch.from_numpy(X_test))
@@ -315,5 +355,7 @@ y_test = Variable(torch.from_numpy(y_test))
 #Trasnposing input in order for it to be accepted
 #X_test = X_test.T
 out = cc.model(X_test.float())
-accuracy = get_accuracy(out, y_test)
+accuracy, m_1, m_0 = get_accuracy(out, y_test, True)
 print("Accuracy: ", accuracy)
+print("Misclassified Ones: ", m_1, "/", cc.count_ones)
+print("Misclassified Zeros: ", m_0, "/", cc.count_zeros)
