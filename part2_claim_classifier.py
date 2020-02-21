@@ -48,19 +48,15 @@ class ClaimClassifier():
             nn.ReLU(),
             nn.Linear(5,50),
             nn.ReLU(),
-            nn.Linear(50,50),
+            nn.Linear(50,250),
             nn.ReLU(),
-            nn.Linear(50,50),
+            nn.Linear(250,250),
             nn.ReLU(),
-            nn.Linear(50,50),
+            nn.Linear(250,250),
             nn.ReLU(),
-            nn.Linear(50,50),
+            nn.Linear(250,250),
             nn.ReLU(),
-            nn.Linear(50,50),
-            nn.ReLU(),
-            nn.Linear(50,50),
-            nn.ReLU(),
-            nn.Linear(50,5),
+            nn.Linear(250,5),
             nn.ReLU(),
             nn.Linear(5,1),
             nn.Sigmoid(),
@@ -107,7 +103,7 @@ class ClaimClassifier():
                 row = X[one_indexes[i], :]
                 X = np.vstack([X, row])
                 y = np.vstack([y, 1.0])
-                if(len(y) == (7/4)*original_length):
+                if(len(y) == (6.5/4)*original_length):
                     return (X,y)
         return (X, y)
 
@@ -311,11 +307,13 @@ X_train = X_clean[:round(cc.n_rows*0.8) , :]
 X_test = X_clean[round(cc.n_rows*0.8):, : X_clean.shape[1]-2]
 y_test = X_clean[round(cc.n_rows*0.8):, X_clean.shape[1]-1:]
 
-cc.fit(X_train, None, 1)
+cc.fit(X_train, None, 150)
 
 #Test the data
 X_test = Variable(torch.from_numpy(X_test))
+y_test = Variable(torch.from_numpy(y_test))
 #Trasnposing input in order for it to be accepted
 #X_test = X_test.T
 out = cc.model(X_test.float())
-print(out)
+accuracy = get_accuracy(out, y_test)
+print("Accuracy: ", accuracy)
