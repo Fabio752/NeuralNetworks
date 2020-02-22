@@ -11,19 +11,31 @@ import random
 
 
 def get_accuracy(y_out, y_target, test=False):
-    misclassified_ones = 0
-    misclassified_zeros = 0
-    y_pred = y_out >= 0.5       # a Tensor of 0s and 1s
+    false_positive = 0
+    true_positive = 0
+    false_negative = 0
+    true_negative = 0
+    test_zeros = 0
+    test_ones = 0
+    y_pred = y_out >= 0.435       # a Tensor of 0s and 1s
     num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
     acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
     if test:
         for i in range(len(y_out)):
-            print("y_target: ", y_target[i], "y_out: ", y_out[i], "y_pred", y_pred[i])
-            if (y_target[i] == 1.0) and (y_pred[i] == 0.0):
-                misclassified_ones += 1
-            elif (y_target[i] == 0.0) and (y_pred[i] == 1.0):
-                misclassified_zeros += 1
-        return acc, misclassified_ones, misclassified_zeros
+            #print("y_target: ", y_target[i], "y_out: ", y_out[i], "y_pred", y_pred[i].float(), "Classification: ", y_target[i]==y_pred[i].float())
+            if (y_target[i] == 1.0):
+                test_ones += 1
+                if (y_pred[i] == 0.0):
+                    false_negative += 1
+                else:
+                    true_positive += 1
+            elif (y_target[i] == 0.0):
+                test_zeros += 1
+                if (y_pred[i] == 1.0):
+                    false_positive += 1
+                else:
+                    true_negative
+        return acc, false_negative, true_negative, false_positive, true_positive, test_ones, test_zeros
     else:
         return acc
    
@@ -189,7 +201,7 @@ class ClaimClassifier():
 
 
         #Downsampling
-        X_ = self.downsample_zeros(X, y, 0.5)
+        X_ = self.downsample_zeros(X, y, 0.575)
 
         #Shuffle the array in order to remove bias
         #np.random.shuffle(X)
@@ -245,7 +257,7 @@ class ClaimClassifier():
 
                 #=========iterate to find predicted zeros and ones========
                 for i in range(len(yhat)):
-                    if yhat[i] < 0.5:
+                    if yhat[i] < 0.425:
                         count_zeros += 1
                     else:
                         count_ones += 1
@@ -343,11 +355,11 @@ cc = ClaimClassifier()
 X_clean = cc._preprocessor(path_to_data)
 
 np.random.shuffle(X_clean)
-X_train = X_clean[:round(cc.n_rows*0.8) , :]
-X_test = X_clean[round(cc.n_rows*0.8):, : X_clean.shape[1]-2]
-y_test = X_clean[round(cc.n_rows*0.8):, X_clean.shape[1]-1:]
+X_train = X_clean[:round(cc.n_rows*0.7) , :]
+X_test = X_clean[round(cc.n_rows*0.7):, : X_clean.shape[1]-2]
+y_test = X_clean[round(cc.n_rows*0.7):, X_clean.shape[1]-1:]
 
-cc.fit(X_train, None, 30)
+cc.fit(X_train, None, 20)
 
 #Test the data
 X_test = Variable(torch.from_numpy(X_test))
@@ -355,7 +367,25 @@ y_test = Variable(torch.from_numpy(y_test))
 #Trasnposing input in order for it to be accepted
 #X_test = X_test.T
 out = cc.model(X_test.float())
-accuracy, m_1, m_0 = get_accuracy(out, y_test, True)
-print("Accuracy: ", accuracy)
-print("Misclassified Ones: ", m_1, "/", cc.count_ones)
-print("Misclassified Zeros: ", m_0, "/", cc.count_zeros)
+acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_test, True)
+print("Accuracy: ", acc)
+print("------------------------------------------------------------------")
+print("Misclassified Ones: ", fn, "/", test_ones, "  Misclassification %: ", (fn/test_ones)*100, "%")
+print("Misclassified Zeros: ", fp, "/", test_zeros, "  Misclassification %: ", (fp/test_zeros)*100, "%")
+print("------------------------------------------------------------------")
+precision = tp/(tp+fp)
+recall = tp/(tp+fn)
+print("Precision -> Pr(positive example|example classified as positive): ", precision)
+print("Recall -> Pr(correctly classified|positive example): ", recall)
+print("------------------------------------------------------------------")
+print("F1 Score: ", 2*(precision*recall)/(precision + recall))
+print("------------------------------------------------------------------")
+print("Confusion Matrix")
+print("TP: ", tp, " FN: ", fn)
+print("FP: ", fp, " TN: ", tn)
+print("")
+print("Normalized Confusion Matrix")
+print("TP: ", tp/(tp+fn), " FN: ", fn/(tp+fn))
+print("FP: ", fp/(fp+tn), " TN: ", tn/(fp+tn))
+
+
