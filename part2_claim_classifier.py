@@ -17,7 +17,7 @@ def get_accuracy(y_out, y_target, test=False):
     true_negative = 0
     test_zeros = 0
     test_ones = 0
-    y_pred = y_out >= 0.435       # a Tensor of 0s and 1s
+    y_pred = y_out >= 0.5       # a Tensor of 0s and 1s
     num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
     acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
     if test:
@@ -71,24 +71,11 @@ class ClaimClassifier():
         """
         super(ClaimClassifier, self).__init__()
         self.model = nn.Sequential(
-            nn.Linear(9,5),
-            nn.Tanh(),
-            nn.Linear(5,5),
-            nn.Tanh(),
-            nn.Linear(5,5),
-            nn.Tanh(),
-            nn.Linear(5,20
-            ),
-            nn.Tanh(),
-            nn.Linear(20,50),
-            nn.Tanh(),
-            nn.Linear(50,50),
-            nn.Tanh(),
-            nn.Linear(50,20),
-            nn.Tanh(),
-            nn.Linear(20,5),
-            nn.Tanh(),
-            nn.Linear(5,1),
+            nn.Linear(9,6),
+            nn.ReLU(),
+            nn.Linear(6,6),
+            nn.ReLU(),
+            nn.Linear(6,1),
             nn.Sigmoid(),
         )
         self.count_zeros = 0
@@ -112,6 +99,8 @@ class ClaimClassifier():
         ndarray
             A clean data set that is used for training and prediction.
         """
+
+        #TODO Check if data normalisation is correct in the new way (also passing CSV and that nonesense)
 
         self.raw_data = np.genfromtxt(X_raw, delimiter=',')[1:, :]
         self.n_cols = np.size(self.raw_data, 1)
@@ -137,7 +126,7 @@ class ClaimClassifier():
                 row = X[self.one_indexes[i], :]
                 X = np.vstack([X, row])
                 y = np.vstack([y, 1.0])
-                if(len(y) == (w)*original_length):
+                if(len(y) == round((w)*original_length)):
                     return (X,y)
         return (X, y)
 
@@ -194,17 +183,16 @@ class ClaimClassifier():
         print("Original Ones Counted: ", self.count_ones)
 
         #Upsampling
-        X_ = self.upsample_ones(X, y, 1.2)
+        X_ = self.upsample_ones(X, y, 1.5)
 
         X = X_[0]
         y = X_[1]
 
 
         #Downsampling
-        X_ = self.downsample_zeros(X, y, 0.575)
+        X_ = self.downsample_zeros(X, y, 0.65)
 
         #Shuffle the array in order to remove bias
-        #np.random.shuffle(X)
 
         X = X_[0]
         y = X_[1]
@@ -257,7 +245,7 @@ class ClaimClassifier():
 
                 #=========iterate to find predicted zeros and ones========
                 for i in range(len(yhat)):
-                    if yhat[i] < 0.425:
+                    if yhat[i] < 0.5:
                         count_zeros += 1
                     else:
                         count_ones += 1
@@ -323,11 +311,23 @@ class ClaimClassifier():
         You can use external libraries such as scikit-learn for this
         if necessary.
         """
-
-    def save_model(self):
-        # Please alter this file appropriately to work in tandem with your load_model function below
-        with open('part2_claim_classifier.pickle', 'wb') as target:
-            pickle.dump(self, target)
+        acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_test, True)
+        print("Accuracy: ", acc)
+        print("------------------------------------------------------------------")
+        print("Misclassified Ones: ", fn, "/", test_ones, "  Misclassification %: ", (fn/test_ones)*100, "%")
+        print("Misclassified Zeros: ", fp, "/", test_zeros, "  Misclassification %: ", (fp/test_zeros)*100, "%")
+        print("------------------------------------------------------------------")
+        precision = tp/(tp+fp)
+        recall = tp/(tp+fn)
+        print("Precision -> Pr(positive example|example classified as positive): ", precision)
+        print("Recall -> Pr(correctly classified|positive example): ", recall)
+        print("------------------------------------------------------------------")
+        print("F1 Score: ", 2*(precision*recall)/(precision + recall))
+        print("------------------------------------------------------------------")
+        print("Confusion Matrix")
+        print("TP: ", tp, " FN: ", fn)
+        print("FP: ", fp, " TN: ", tn)
+        print("")
 
 
 def load_model():
@@ -349,43 +349,36 @@ def ClaimClassifierHyperParameterSearch():
     return  # Return the chosen hyper parameters
 
 
-path_to_data = "part2_training_data.csv"
+path_to_train = "part2_train_.csv"
+path_to_val = "part2_validation.csv"
+path_to_test = "part2_test.csv"
 cc = ClaimClassifier()
 #data preprocessing
-X_clean = cc._preprocessor(path_to_data)
+X_train = cc._preprocessor(path_to_train)
+X_val = cc._preprocessor(path_to_val)
+#shuffling data to aboid bias
+np.random.shuffle(X_train)
 
-np.random.shuffle(X_clean)
-X_train = X_clean[:round(cc.n_rows*0.7) , :]
-X_test = X_clean[round(cc.n_rows*0.7):, : X_clean.shape[1]-2]
-y_test = X_clean[round(cc.n_rows*0.7):, X_clean.shape[1]-1:]
+acc = []
+cost_func = nn.BCELoss()
 
-cc.fit(X_train, None, 20)
+
+cc.fit(X_train, None, 250)
+np.random.shuffle(X_val)
+y_val = X_val[:, X_val.shape[1]-1:]
+X_val = X_val[:, :X_val.shape[1]-2]
 
 #Test the data
-X_test = Variable(torch.from_numpy(X_test))
-y_test = Variable(torch.from_numpy(y_test))
-#Trasnposing input in order for it to be accepted
-#X_test = X_test.T
-out = cc.model(X_test.float())
-acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_test, True)
-print("Accuracy: ", acc)
-print("------------------------------------------------------------------")
-print("Misclassified Ones: ", fn, "/", test_ones, "  Misclassification %: ", (fn/test_ones)*100, "%")
-print("Misclassified Zeros: ", fp, "/", test_zeros, "  Misclassification %: ", (fp/test_zeros)*100, "%")
-print("------------------------------------------------------------------")
-precision = tp/(tp+fp)
-recall = tp/(tp+fn)
-print("Precision -> Pr(positive example|example classified as positive): ", precision)
-print("Recall -> Pr(correctly classified|positive example): ", recall)
-print("------------------------------------------------------------------")
-print("F1 Score: ", 2*(precision*recall)/(precision + recall))
-print("------------------------------------------------------------------")
-print("Confusion Matrix")
-print("TP: ", tp, " FN: ", fn)
-print("FP: ", fp, " TN: ", tn)
-print("")
-print("Normalized Confusion Matrix")
-print("TP: ", tp/(tp+fn), " FN: ", fn/(tp+fn))
-print("FP: ", fp/(fp+tn), " TN: ", tn/(fp+tn))
+X_val = Variable(torch.from_numpy(X_val)).float()
+y_val = Variable(torch.from_numpy(y_val)).float()
+#Run through the generated model
+out = cc.model(X_val).float()
+acc = get_accuracy(out, y_val)
+loss = cost_func(out, y_val)
+
+print("Acc: ", acc)
+print("Loss(BCE): ", loss)
+
+
 
 

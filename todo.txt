@@ -19,3 +19,55 @@ Figure out if it works on LabTS machine
 ASIDE
 
 	⁃	Take a look at preprocessing problem
+	- Check if we should be doing anything related to random weigth initialisation
+
+	https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/ - useful discussion on relu activation
+	https://towardsdatascience.com/can-neural-networks-really-learn-any-function-65e106617fc6 - single layer able to model all functions useful article
+	https://www.heatonresearch.com/2017/06/01/hidden-layers.html - choosing the number of hidden layers
+
+
+
+OBSERVATIONS 
+
+	- For lower neurons, much more oscillations when it came to predicitons
+
+
+RESULTS
+
+250 epoch
+
+1 LAYER
+
+1 neuron
+	1. BCE: 0.6947, Acc: 9.7032
+
+2 neuron
+1. BCE: 0.6971, Acc: 0.6971
+
+3 neuron
+	1. BCE: 0.4705, Acc: 78.959
+	1. BCE: 0.4808, Acc: 83.62
+
+4 neuron
+	1. BCE: 0.4516, Acc: 83.427
+	1. BCE: 0.4636, Acc: 83.927
+
+5 neuron
+	1. BCE:0.5097 , Acc: 79.0263
+	2. BCE:0.5169 , Acc: 74.6915
+
+6 neurons
+
+	1. BCE: 0.5653
+
+7 neuron
+
+
+25 neuron
+	1. BCE:0.5444 , Acc: 71.35
+	2. BCE: 0.5818 , Acc: 64.82
+
+125 neuron
+	1. BCE:1.1218 , Acc: 
+
+
