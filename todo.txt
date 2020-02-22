@@ -1,0 +1,21 @@
+MACHINE LEARNING TODO 
+	⁃	Deal with y_raw nonsense
+	⁃	We need to preprocess without taking the test set into account and check that we are doing it per feature
+	⁃	Perhaps we need to make the inputs have different forms 
+	⁃	Clean up the code
+	⁃	Finish Part 2
+
+Steps to finishing Part 2:
+	⁃	Add data to report performance on the initial architecture used + why
+	⁃	Complete the evaluate_architecture function with all of the evaluation metrics —> Find out how sticky learn can be used for this
+	⁃	Fine tune all of the parameters and save data + generate graphs from it —> Figure out how touse stick learn
+	⁃	Save the best performing model with pickle file ??
+	⁃	Test on LabTS
+	⁃	Write Report
+
+
+Figure out if it works on LabTS machine
+
+ASIDE
+
+	⁃	Take a look at preprocessing problem
