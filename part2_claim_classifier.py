@@ -1,13 +1,14 @@
 import numpy as np
 import pickle
 import torch
+import sys
+import time
+import random
 import torch.nn as nn
 import torchvision.datasets as dsets
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
-import sys
-import time
-import random
+
 
 
 def get_accuracy(y_out, y_target, test=False):
@@ -70,18 +71,23 @@ class ClaimClassifier():
         necessary.
         """
         super(ClaimClassifier, self).__init__()
-        self.model = nn.Sequential(
-            nn.Linear(9,6),
-            nn.ReLU(),
-            nn.Linear(6,6),
-            nn.ReLU(),
-            nn.Linear(6,1),
-            nn.Sigmoid(),
-        )
+        self.n_H = 6
+        self.activation = nn.ReLU()
+        self.dropout_rate = 0.0
         self.count_zeros = 0
         self.count_ones = 0
         self.one_indexes = []
         self.zero_indexes = []
+        self.model = nn.Sequential(
+            nn.Linear(9,self.n_H),
+            nn.Dropout(self.dropout_rate),
+            self.activation,
+            nn.Linear(self.n_H,self.n_H),
+            nn.Dropout(self.dropout_rate),
+            self.activation,
+            nn.Linear(self.n_H,1),
+            nn.Sigmoid(),
+        )
 
     def _preprocessor(self, X_raw):
         """Data preprocessing function.
@@ -314,15 +320,13 @@ class ClaimClassifier():
         acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_test, True)
         print("Accuracy: ", acc)
         print("------------------------------------------------------------------")
-        print("Misclassified Ones: ", fn, "/", test_ones, "  Misclassification %: ", (fn/test_ones)*100, "%")
-        print("Misclassified Zeros: ", fp, "/", test_zeros, "  Misclassification %: ", (fp/test_zeros)*100, "%")
-        print("------------------------------------------------------------------")
         precision = tp/(tp+fp)
         recall = tp/(tp+fn)
         print("Precision -> Pr(positive example|example classified as positive): ", precision)
         print("Recall -> Pr(correctly classified|positive example): ", recall)
         print("------------------------------------------------------------------")
-        print("F1 Score: ", 2*(precision*recall)/(precision + recall))
+        f1 = 2*(precision*recall)/(precision + recall)
+        print("F1 Score: ", f1)
         print("------------------------------------------------------------------")
         print("Confusion Matrix")
         print("TP: ", tp, " FN: ", fn)
@@ -337,7 +341,7 @@ def load_model():
     return trained_model
 
 # ENSURE TO ADD IN WHATEVER INPUTS YOU DEEM NECESSARRY TO THIS FUNCTION
-def ClaimClassifierHyperParameterSearch():
+def ClaimClassifierHyperParameterSearch(cc, X_test, y_test):
     """Performs a hyper-parameter for fine-tuning the classifier.
 
     Implement a function that performs a hyper-parameter search for your
@@ -345,7 +349,6 @@ def ClaimClassifierHyperParameterSearch():
 
     The function should return your optimised hyper-parameters.
     """
-
     return  # Return the chosen hyper parameters
 
 
@@ -358,12 +361,6 @@ X_train = cc._preprocessor(path_to_train)
 X_val = cc._preprocessor(path_to_val)
 #shuffling data to aboid bias
 np.random.shuffle(X_train)
-
-acc = []
-cost_func = nn.BCELoss()
-
-
-cc.fit(X_train, None, 250)
 np.random.shuffle(X_val)
 y_val = X_val[:, X_val.shape[1]-1:]
 X_val = X_val[:, :X_val.shape[1]-2]
@@ -371,6 +368,15 @@ X_val = X_val[:, :X_val.shape[1]-2]
 #Test the data
 X_val = Variable(torch.from_numpy(X_val)).float()
 y_val = Variable(torch.from_numpy(y_val)).float()
+
+
+
+acc = []
+cost_func = nn.BCELoss()
+
+
+cc.fit(X_train, None, 250)
+
 #Run through the generated model
 out = cc.model(X_val).float()
 acc = get_accuracy(out, y_val)
