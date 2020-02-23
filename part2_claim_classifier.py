@@ -4,10 +4,14 @@ import torch
 import sys
 import time
 import random
+import sklearn
 import torch.nn as nn
 import torchvision.datasets as dsets
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
+from sklearn import svm, datasets
+from sklearn.metrics import roc_curve, auc
+from sklearn.metrics import roc_auc_score
 
 
 
@@ -35,7 +39,7 @@ def get_accuracy(y_out, y_target, test=False):
                 if (y_pred[i] == 1.0):
                     false_positive += 1
                 else:
-                    true_negative
+                    true_negative += 1
         return acc, false_negative, true_negative, false_positive, true_positive, test_ones, test_zeros
     else:
         return acc
@@ -71,19 +75,22 @@ class ClaimClassifier():
         necessary.
         """
         super(ClaimClassifier, self).__init__()
-        self.n_H = 6
+        self.n_H = 7
         self.activation = nn.ReLU()
         self.dropout_rate = 0.0
         self.count_zeros = 0
         self.count_ones = 0
         self.one_indexes = []
         self.zero_indexes = []
+        self.train = None
+        self.val = None
+        self.test = None
         self.model = nn.Sequential(
             nn.Linear(9,self.n_H),
-            nn.Dropout(self.dropout_rate),
+            #nn.Dropout(self.dropout_rate),
             self.activation,
             nn.Linear(self.n_H,self.n_H),
-            nn.Dropout(self.dropout_rate),
+            #nn.Dropout(self.dropout_rate),
             self.activation,
             nn.Linear(self.n_H,1),
             nn.Sigmoid(),
@@ -118,6 +125,8 @@ class ClaimClassifier():
         #Normalize relevant columns
         raw_data_temp = (raw_data_temp - min) / (max - min)
         self.raw_data[:, : self.n_cols-2] = raw_data_temp
+        #Shuffle to remove bias in the dataset
+        np.random.shuffle(self.raw_data)
         return self.raw_data 
 
     def upsample_ones(self, X, y, w):
@@ -317,7 +326,14 @@ class ClaimClassifier():
         You can use external libraries such as scikit-learn for this
         if necessary.
         """
-        acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_test, True)
+        #Run the model on test set
+        out = self.model(X_val).float()
+        y_val = cc.val[:, cc.val.shape[1]-1:]
+        y_val = Variable(torch.from_numpy(y_val)).float()
+        out = out.detach()
+
+        acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_val, True)
+        print("------------------------------------------------------------------")
         print("Accuracy: ", acc)
         print("------------------------------------------------------------------")
         precision = tp/(tp+fp)
@@ -331,7 +347,11 @@ class ClaimClassifier():
         print("Confusion Matrix")
         print("TP: ", tp, " FN: ", fn)
         print("FP: ", fp, " TN: ", tn)
-        print("")
+        print("------------------------------------------------------------------")
+        auc_score = sklearn.metrics.roc_auc_score(y_val, out)
+        print("AUC-ROC Score: ", auc_score)
+
+        return acc, precision, recall, f1, auc_score
 
 
 def load_model():
@@ -357,33 +377,28 @@ path_to_val = "part2_validation.csv"
 path_to_test = "part2_test.csv"
 cc = ClaimClassifier()
 #data preprocessing
-X_train = cc._preprocessor(path_to_train)
-X_val = cc._preprocessor(path_to_val)
-#shuffling data to aboid bias
-np.random.shuffle(X_train)
-np.random.shuffle(X_val)
-y_val = X_val[:, X_val.shape[1]-1:]
-X_val = X_val[:, :X_val.shape[1]-2]
+cc.train = cc._preprocessor(path_to_train)
 
+acc = []
+cost_func = nn.BCELoss()
+#Training the model
+cc.fit(cc.train, None, 250)
+
+#Assigning validation set
+cc.val = cc._preprocessor(path_to_val)
+y_val = cc.val[:, cc.val.shape[1]-1:]
+X_val = cc.val[:, :cc.val.shape[1]-2]
 #Test the data
 X_val = Variable(torch.from_numpy(X_val)).float()
 y_val = Variable(torch.from_numpy(y_val)).float()
 
-
-
-acc = []
-cost_func = nn.BCELoss()
-
-
-cc.fit(X_train, None, 250)
-
 #Run through the generated model
-out = cc.model(X_val).float()
-acc = get_accuracy(out, y_val)
-loss = cost_func(out, y_val)
+cc.evaluate_architecture()
+#acc = get_accuracy(out, y_val)
+#loss = cost_func(out, y_val)
 
-print("Acc: ", acc)
-print("Loss(BCE): ", loss)
+#print("Acc: ", acc)
+#print("Loss(BCE): ", loss)
 
 
 
