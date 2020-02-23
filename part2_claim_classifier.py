@@ -14,6 +14,7 @@ from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import roc_auc_score
 
 
+debug = True
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -44,15 +45,11 @@ def get_accuracy(y_out, y_target, test=False):
     else:
         return acc
    
-
 def get_accuracy_zero_tensor(y_out, y_target):
   y_pred = y_out > 1       # a Tensor of 0s 
   num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
   acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
   return acc
-
-
-
 
 class PrepareData(Dataset):
     def __init__(self, X, y):
@@ -75,9 +72,7 @@ class ClaimClassifier():
         necessary.
         """
         super(ClaimClassifier, self).__init__()
-        self.n_H = 7
-        self.activation = nn.ReLU()
-        self.dropout_rate = 0.0
+        self.retrain = False
         self.count_zeros = 0
         self.count_ones = 0
         self.one_indexes = []
@@ -86,13 +81,23 @@ class ClaimClassifier():
         self.val = None
         self.test = None
         self.model = nn.Sequential(
-            nn.Linear(9,self.n_H),
-            #nn.Dropout(self.dropout_rate),
-            self.activation,
-            nn.Linear(self.n_H,self.n_H),
-            #nn.Dropout(self.dropout_rate),
-            self.activation,
-            nn.Linear(self.n_H,1),
+            nn.Linear(9,4),
+            nn.ReLU(),
+            nn.Linear(4,4),
+            nn.ReLU(),
+            nn.Linear(4,1),
+            nn.Sigmoid(),
+        )
+
+    def change_model(self, n_H, act, dr=0.0):
+        self.model = nn.Sequential(
+            nn.Linear(9,n_H),
+            nn.Dropout(dr),
+            act,
+            nn.Linear(n_H,n_H),
+            nn.Dropout(dr),
+            act,
+            nn.Linear(n_H,1),
             nn.Sigmoid(),
         )
 
@@ -129,7 +134,7 @@ class ClaimClassifier():
         np.random.shuffle(self.raw_data)
         return self.raw_data 
 
-    def upsample_ones(self, X, y, w):
+    def upsample_ones(self, X, y, w=0):
         ''' Function to upsample the instances of ones (minority class) in the dataset '''
         #Prevent division by zero
         if (self.count_ones == 0):
@@ -141,20 +146,24 @@ class ClaimClassifier():
                 row = X[self.one_indexes[i], :]
                 X = np.vstack([X, row])
                 y = np.vstack([y, 1.0])
-                if(len(y) == round((w)*original_length)):
+                self.count_ones += 1
+                if(self.count_ones >= self.count_zeros):
                     return (X,y)
         return (X, y)
 
     def downsample_zeros(self, X, y, w):
         original_length = len(X)
+
         for i in range(len(self.zero_indexes)-1, round(len(self.zero_indexes)*w), -1):
             X = np.delete(X, self.zero_indexes[i], 0)
             y = np.delete(y, self.zero_indexes[i], 0)
-            
+            self.count_zeros -= 1
+            if (self.count_ones >= self.count_zeros):
+                return (X,y)
         return (X,y)
                     
 
-    def fit(self, X_raw, y_raw=None, n_epochs=6):
+    def fit(self, X_raw, y_raw=None, n_epochs=6, first_it=False):
         """Classifier training function.
 
         Here you will implement the training function for your classifier.
@@ -187,6 +196,8 @@ class ClaimClassifier():
         accuracies = []
         zero_accuracies = []
 
+        self.count_zeros = 0
+        self.count_ones = 0
         for i in range(len(y)):
             if y[i] == 0.0:
                 self.count_zeros += 1
@@ -194,21 +205,18 @@ class ClaimClassifier():
             elif y[i] == 1.0:
                 self.count_ones += 1
                 self.one_indexes.append(i)
-        print("Original Zeros Counted: ", self.count_zeros)
-        print("Original Ones Counted: ", self.count_ones)
 
-        #Upsampling
-        X_ = self.upsample_ones(X, y, 1.5)
-
-        X = X_[0]
-        y = X_[1]
+        if debug==True:
+            print("Original Zeros Counted: ", self.count_zeros)
+            print("Original Ones Counted: ", self.count_ones)
 
 
         #Downsampling
-        X_ = self.downsample_zeros(X, y, 0.65)
-
-        #Shuffle the array in order to remove bias
-
+        #X_ = self.downsample_zeros(X, y, 0.65)
+        #X = X_[0]
+        #y = X_[1]
+        #Upsampling
+        X_ = self.upsample_ones(X, y)
         X = X_[0]
         y = X_[1]
 
@@ -221,15 +229,12 @@ class ClaimClassifier():
             elif y[i] == 1.0:
                 self.count_ones += 1
                 self.one_indexes.append(i)
-                
-        print("Down/Upsampled Zeros Counted: ", self.count_zeros)
-        print("Down/Upsampled Ones Counted: ", self.count_ones)
-
-        print("Length of X: ", len(X[:, 0]))
-        print("Length of y: ", len(y[:, 0]))
-
-        #assert(False)
-
+        if debug:
+            print("Down/Upsampled Zeros Counted: ", self.count_zeros)
+            print("Down/Upsampled Ones Counted: ", self.count_ones)
+            print("Length of X: ", len(X[:, 0]))
+            print("Length of y: ", len(y[:, 0]))
+        diff = round(self.count_zeros/self.count_ones)
 
         #Shuffle the array in order to remove bias
         # TODO Join the two and then shuffle them       
@@ -281,13 +286,15 @@ class ClaimClassifier():
                 #breakpoint()
 
             if epoch % 1 == 0:
-                print("[{}/{}], loss: {} acc: {}".format(epoch,
-                n_epochs, np.average(losses), np.average(accuracies)))
-                print("[{}/{}],  zero acc: {}".format(epoch,
-                n_epochs, np.average(zero_accuracies)))
-                print("Ones predicted: ", count_ones)
-                print("Zeros predicted: ", count_zeros)
-            
+                if debug:
+                    print("[{}/{}], loss: {} acc: {}".format(epoch,
+                    n_epochs, np.average(losses), np.average(accuracies)))
+                    print("[{}/{}],  zero acc: {}".format(epoch,
+                    n_epochs, np.average(zero_accuracies)))
+                    print("Ones predicted: ", count_ones)
+                    print("Zeros predicted: ", count_zeros)
+                else:
+                    pass
 
         print("Finished Training")
 
@@ -334,14 +341,24 @@ class ClaimClassifier():
 
         acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_val, True)
         print("------------------------------------------------------------------")
+        print("Misclassified ones: ", fn, "/", test_ones)
+        print("------------------------------------------------------------------")
+        print("Misclassified zeros: ", fp, "/", test_zeros)
+        print("------------------------------------------------------------------")
         print("Accuracy: ", acc)
         print("------------------------------------------------------------------")
-        precision = tp/(tp+fp)
-        recall = tp/(tp+fn)
+        precision = 0
+        recall = 0
+        f1 = 0
+        if (tp+fp) != 0:
+            precision = tp/(tp+fp)
+        if  (tp+fn) != 0:
+            recall = tp/(tp+fn)
         print("Precision -> Pr(positive example|example classified as positive): ", precision)
         print("Recall -> Pr(correctly classified|positive example): ", recall)
         print("------------------------------------------------------------------")
-        f1 = 2*(precision*recall)/(precision + recall)
+        if (precision+recall) != 0:
+            f1 = 2*(precision*recall)/(precision + recall)
         print("F1 Score: ", f1)
         print("------------------------------------------------------------------")
         print("Confusion Matrix")
@@ -350,6 +367,7 @@ class ClaimClassifier():
         print("------------------------------------------------------------------")
         auc_score = sklearn.metrics.roc_auc_score(y_val, out)
         print("AUC-ROC Score: ", auc_score)
+        print("------------------------------------------------------------------")
 
         return acc, precision, recall, f1, auc_score
 
@@ -361,7 +379,7 @@ def load_model():
     return trained_model
 
 # ENSURE TO ADD IN WHATEVER INPUTS YOU DEEM NECESSARRY TO THIS FUNCTION
-def ClaimClassifierHyperParameterSearch(cc, X_test, y_test):
+def ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val):
     """Performs a hyper-parameter for fine-tuning the classifier.
 
     Implement a function that performs a hyper-parameter search for your
@@ -369,6 +387,12 @@ def ClaimClassifierHyperParameterSearch(cc, X_test, y_test):
 
     The function should return your optimised hyper-parameters.
     """
+    neurons = [1,5,10,20,50,100]
+    for neuron in neurons:
+        cc.change_model(neuron, nn.ReLU())
+        cc.fit(cc.train, None, 100)
+        cc.evaluate_architecture()
+
     return  # Return the chosen hyper parameters
 
 
@@ -379,10 +403,9 @@ cc = ClaimClassifier()
 #data preprocessing
 cc.train = cc._preprocessor(path_to_train)
 
-acc = []
-cost_func = nn.BCELoss()
 #Training the model
-cc.fit(cc.train, None, 250)
+#cc.fit(cc.train, None, 250)
+
 
 #Assigning validation set
 cc.val = cc._preprocessor(path_to_val)
@@ -392,13 +415,10 @@ X_val = cc.val[:, :cc.val.shape[1]-2]
 X_val = Variable(torch.from_numpy(X_val)).float()
 y_val = Variable(torch.from_numpy(y_val)).float()
 
-#Run through the generated model
-cc.evaluate_architecture()
-#acc = get_accuracy(out, y_val)
-#loss = cost_func(out, y_val)
+#finding optimum hyperparameters
+ClaimClassifierHyperParameterSearch(cc, cc.train, X_val, y_val)
 
-#print("Acc: ", acc)
-#print("Loss(BCE): ", loss)
+
 
 
 
