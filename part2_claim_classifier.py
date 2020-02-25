@@ -5,16 +5,24 @@ import sys
 import time
 import random
 import sklearn
+import keras
 import torch.nn as nn
 import torchvision.datasets as dsets
+import pandas as pd
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
 from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import roc_auc_score
+from keras.wrappers.scikit_learn import KerasClassifier
+from sklearn.model_selection import GridSearchCV
+from keras.models import Sequential
+from keras.layers import Dense,Activation,Embedding,Flatten,LeakyReLU,BatchNormalization
+from keras.activations import relu,sigmoid
 
 
-debug = True
+
+debug = False
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -77,6 +85,10 @@ class ClaimClassifier():
         self.count_ones = 0
         self.one_indexes = []
         self.zero_indexes = []
+        self.loss = 0
+        self.learning_rate = 0.001
+        self.batch_size = 50
+        self.n_epochs = 100
         self.train = None
         self.val = None
         self.test = None
@@ -92,6 +104,9 @@ class ClaimClassifier():
     def change_model(self, n_H, act, dr=0.0):
         self.model = nn.Sequential(
             nn.Linear(9,n_H),
+            nn.Dropout(dr),
+            act,
+            nn.Linear(n_H,n_H),
             nn.Dropout(dr),
             act,
             nn.Linear(n_H,n_H),
@@ -163,7 +178,7 @@ class ClaimClassifier():
         return (X,y)
                     
 
-    def fit(self, X_raw, y_raw=None, n_epochs=6, first_it=False):
+    def fit(self, X_raw, y_raw=None):
         """Classifier training function.
 
         Here you will implement the training function for your classifier.
@@ -190,12 +205,9 @@ class ClaimClassifier():
 
         X = X_raw[:, :self.n_cols - 2]
         y = X_raw[:, self.n_cols-1:]
-        
-        
-        losses = []
-        accuracies = []
-        zero_accuracies = []
 
+        
+        
         self.count_zeros = 0
         self.count_ones = 0
         for i in range(len(y)):
@@ -234,23 +246,24 @@ class ClaimClassifier():
             print("Down/Upsampled Ones Counted: ", self.count_ones)
             print("Length of X: ", len(X[:, 0]))
             print("Length of y: ", len(y[:, 0]))
-        diff = round(self.count_zeros/self.count_ones)
-
-        #Shuffle the array in order to remove bias
-        # TODO Join the two and then shuffle them       
-        #np.random.shuffle(X)
-
+        if self.count_ones != 0:
+            diff = round(self.count_zeros/self.count_ones)
+        
         #Prepare data to be accepted by Pytorch
         ds = PrepareData(X=X, y=y)
-        ds = DataLoader(ds, batch_size=50, shuffle=True)
+        ds = DataLoader(ds, batch_size=self.batch_size, shuffle=True)
 
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001)
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.learning_rate)
         cost_func = nn.BCELoss()
 
         #Training model 
-        for epoch in range(n_epochs):
+        for epoch in range(self.n_epochs):
             count_zeros = 0
             count_ones = 0
+            accuracies = []
+            zero_accuracies = []
+            losses = []
+            
             for ix, (_x, _y) in enumerate(ds):
                 #=========make input differentiable=======================
                 _x = Variable(_x).float()
@@ -261,8 +274,6 @@ class ClaimClassifier():
                 loss = cost_func(yhat, _y)
                 accuracy = get_accuracy(yhat, _y)
                 zero_accuracy = get_accuracy_zero_tensor(yhat, _y)
-                #acc = torch.eq(yhat.round(), _y).float().mean() # accuracy
-
                 #=========iterate to find predicted zeros and ones========
                 for i in range(len(yhat)):
                     if yhat[i] < 0.5:
@@ -278,19 +289,13 @@ class ClaimClassifier():
                 accuracies.append(accuracy)
                 zero_accuracies.append(zero_accuracy)
 
-                '''for n,x in self.model.named_modules():
-                    if isinstance(x, nn.Linear):
-                        print(x.__dict__.keys())
-
-                print(optimizer.__dict__.keys())'''
-                #breakpoint()
-
             if epoch % 1 == 0:
+                self.loss = np.average(losses)
                 if debug:
                     print("[{}/{}], loss: {} acc: {}".format(epoch,
-                    n_epochs, np.average(losses), np.average(accuracies)))
+                    self.n_epochs, np.average(losses), np.average(accuracies)))
                     print("[{}/{}],  zero acc: {}".format(epoch,
-                    n_epochs, np.average(zero_accuracies)))
+                    self.n_epochs, np.average(zero_accuracies)))
                     print("Ones predicted: ", count_ones)
                     print("Zeros predicted: ", count_zeros)
                 else:
@@ -338,7 +343,7 @@ class ClaimClassifier():
         y_val = cc.val[:, cc.val.shape[1]-1:]
         y_val = Variable(torch.from_numpy(y_val)).float()
         out = out.detach()
-
+ 
         acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_val, True)
         print("------------------------------------------------------------------")
         print("Misclassified ones: ", fn, "/", test_ones)
@@ -368,6 +373,9 @@ class ClaimClassifier():
         auc_score = sklearn.metrics.roc_auc_score(y_val, out)
         print("AUC-ROC Score: ", auc_score)
         print("------------------------------------------------------------------")
+        print("Loss: ", self.loss)
+        print("##################################################################")
+
 
         return acc, precision, recall, f1, auc_score
 
@@ -387,13 +395,61 @@ def ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val):
 
     The function should return your optimised hyper-parameters.
     """
-    neurons = [1,5,10,20,50,100]
+
+    '''
+    Hyperparameters to optmize:
+    1. Number of neurons and neuron layers
+    2. Learning rate
+    3. Number of epochs
+    4. Input type
+    5. Leaky Relu parameters
+    6. Batch Size
+    7. Batch Normalization
+    8. Dropout rate
+    '''
+    neurons =[4,6,8,10]
+    hidden_layers = [1,2]
+    epochs = [25,50,75,100]
+    batch_sizes = [10,25,50,100,250,500,1000,2000]
+    learning_rates = [0.1,0.01,0.001]
+    batch_normalization = [False, True]
+    dropout_rates = [0.0,0.1,0.25,0.35,0.5,0.6, 0.75]
+    leak_parameters = [0.0, 0.1, 0.35, 0.5, 0.01, 0.05, 0.001]
+    best_model = []
+    best_auc = 0
+
+    #Only adjusting some of the parameters
     for neuron in neurons:
-        cc.change_model(neuron, nn.ReLU())
-        cc.fit(cc.train, None, 100)
-        cc.evaluate_architecture()
+        for dropout in dropout_rates:
+            for leak in leak_parameters:
+                print("Number of neurons: ", neuron)
+                print("Dropot rate: ", dropout)
+                print("Leak rate: ", leak)
+                cc.change_model(neuron, nn.LeakyReLU(leak), dropout)
+                cc.n_epochs = 50
+                cc.fit(X_train, None)
+                acc, precision, recall, f1, auc_score = cc.evaluate_architecture()
+                if auc_score > best_auc:
+                    best_auc = auc_score
+                    best_model = []
+                    best_model.append(neuron)
+                    best_model.append(dropout)
+                    best_model.append(leak)
+                print("Best model: ", best_model)
+
+
+    #for batch in batch_sizes:
+    #    print("batch size: ", batch)
+    #    cc.batch_size = batch
+    #    cc.change_model(8, nn.LeakyReLU(0.0))
+    #    cc.n_epochs = 50
+    #    cc.fit(X_train, None)
+    #    cc.evaluate_architecture()
 
     return  # Return the chosen hyper parameters
+
+
+#TODO Shuffle in the preprocessing
 
 
 path_to_train = "part2_train_.csv"
@@ -402,11 +458,6 @@ path_to_test = "part2_test.csv"
 cc = ClaimClassifier()
 #data preprocessing
 cc.train = cc._preprocessor(path_to_train)
-
-#Training the model
-#cc.fit(cc.train, None, 250)
-
-
 #Assigning validation set
 cc.val = cc._preprocessor(path_to_val)
 y_val = cc.val[:, cc.val.shape[1]-1:]
@@ -416,7 +467,10 @@ X_val = Variable(torch.from_numpy(X_val)).float()
 y_val = Variable(torch.from_numpy(y_val)).float()
 
 #finding optimum hyperparameters
-ClaimClassifierHyperParameterSearch(cc, cc.train, X_val, y_val)
+X_train = cc.train
+
+ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val)
+
 
 
 

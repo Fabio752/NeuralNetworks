@@ -1,0 +1,3648 @@
+Number of Neurons:  1
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.7385880947113037 acc: 50.0052390307793
+[0/10],  zero acc: 50.0052390307793
+Ones predicted:  0
+Zeros predicted:  25430
+[1/10], loss: 0.7168442010879517 acc: 50.01047806155861
+[1/10],  zero acc: 50.01047806155861
+Ones predicted:  0
+Zeros predicted:  25430
+[2/10], loss: 0.702674925327301 acc: 51.36214800261951
+[2/10],  zero acc: 50.00785854616896
+Ones predicted:  5138
+Zeros predicted:  20292
+[3/10], loss: 0.6933647990226746 acc: 53.516371971185336
+[3/10],  zero acc: 50.00785854616896
+Ones predicted:  13831
+Zeros predicted:  11599
+[4/10], loss: 0.687127411365509 acc: 54.856843483955466
+[4/10],  zero acc: 50.005762933857234
+Ones predicted:  15024
+Zeros predicted:  10406
+[5/10], loss: 0.6828036308288574 acc: 55.74306919886487
+[5/10],  zero acc: 50.00523903077931
+Ones predicted:  15166
+Zeros predicted:  10264
+[6/10], loss: 0.6796445250511169 acc: 56.36935166994106
+[6/10],  zero acc: 50.003367948358125
+Ones predicted:  15514
+Zeros predicted:  9916
+[7/10], loss: 0.6772556900978088 acc: 56.85576293385724
+[7/10],  zero acc: 50.00294695481336
+Ones predicted:  15274
+Zeros predicted:  10156
+[8/10], loss: 0.6753713488578796 acc: 57.23277304809721
+[8/10],  zero acc: 50.00232845812413
+Ones predicted:  15275
+Zeros predicted:  10155
+[9/10], loss: 0.6738560795783997 acc: 57.53163064833006
+[9/10],  zero acc: 50.00235756385069
+Ones predicted:  15186
+Zeros predicted:  10244
+[10/10], loss: 0.6726065874099731 acc: 57.773530987676374
+[10/10],  zero acc: 50.00238137762697
+Ones predicted:  14786
+Zeros predicted:  10644
+[11/10], loss: 0.6715490221977234 acc: 57.9652914210871
+[11/10],  zero acc: 50.00218292949138
+Ones predicted:  14770
+Zeros predicted:  10660
+[12/10], loss: 0.6706443428993225 acc: 58.12593823988716
+[12/10],  zero acc: 50.00181351065437
+Ones predicted:  14646
+Zeros predicted:  10784
+[13/10], loss: 0.6698670387268066 acc: 58.26260641781271
+[13/10],  zero acc: 50.00243240714753
+Ones predicted:  14859
+Zeros predicted:  10571
+[14/10], loss: 0.6691840291023254 acc: 58.38349705304519
+[14/10],  zero acc: 50.002619515389654
+Ones predicted:  14607
+Zeros predicted:  10823
+[15/10], loss: 0.6685788631439209 acc: 58.49566142763589
+[15/10],  zero acc: 50.0024557956778
+Ones predicted:  14567
+Zeros predicted:  10863
+[16/10], loss: 0.6680354475975037 acc: 58.59385954774837
+[16/10],  zero acc: 50.002619515389654
+Ones predicted:  14743
+Zeros predicted:  10687
+[17/10], loss: 0.667549729347229 acc: 58.6855126246089
+[17/10],  zero acc: 50.002182929491376
+Ones predicted:  14433
+Zeros predicted:  10997
+[18/10], loss: 0.667116105556488 acc: 58.767724813014866
+[18/10],  zero acc: 50.00206803846552
+Ones predicted:  14554
+Zeros predicted:  10876
+[19/10], loss: 0.6667282581329346 acc: 58.83647675180092
+[19/10],  zero acc: 50.00183366077275
+Ones predicted:  14488
+Zeros predicted:  10942
+[20/10], loss: 0.6663694381713867 acc: 58.90398228708642
+[20/10],  zero acc: 50.00199582124926
+Ones predicted:  14555
+Zeros predicted:  10875
+[21/10], loss: 0.6660364270210266 acc: 58.96666071322261
+[21/10],  zero acc: 50.00154789545753
+Ones predicted:  14525
+Zeros predicted:  10905
+[22/10], loss: 0.6657368540763855 acc: 59.02138321801771
+[22/10],  zero acc: 50.00125281170809
+Ones predicted:  14609
+Zeros predicted:  10821
+[23/10], loss: 0.6654642820358276 acc: 59.06805282689369
+[23/10],  zero acc: 50.001200611220256
+Ones predicted:  14475
+Zeros predicted:  10955
+[24/10], loss: 0.6652075052261353 acc: 59.11240340537
+[24/10],  zero acc: 50.00136214800261
+Ones predicted:  14514
+Zeros predicted:  10916
+[25/10], loss: 0.6649692058563232 acc: 59.15601229157222
+[25/10],  zero acc: 50.001209007102915
+Ones predicted:  14551
+Zeros predicted:  10879
+[26/10], loss: 0.6647486686706543 acc: 59.19503262266851
+[26/10],  zero acc: 50.00126124815057
+Ones predicted:  14459
+Zeros predicted:  10971
+[27/10], loss: 0.6645499467849731 acc: 59.232014220226404
+[27/10],  zero acc: 50.00149686593695
+Ones predicted:  14523
+Zeros predicted:  10907
+[28/10], loss: 0.6643524169921875 acc: 59.26843258135176
+[28/10],  zero acc: 50.00126459363638
+Ones predicted:  14359
+Zeros predicted:  11071
+[29/10], loss: 0.6641725897789001 acc: 59.29971621916613
+[29/10],  zero acc: 50.000960488976204
+Ones predicted:  14553
+Zeros predicted:  10877
+[30/10], loss: 0.664007842540741 acc: 59.3280520523058
+[30/10],  zero acc: 50.0008450049644
+Ones predicted:  14405
+Zeros predicted:  11025
+[31/10], loss: 0.6638488173484802 acc: 59.359323837590054
+[31/10],  zero acc: 50.00081859855926
+Ones predicted:  14510
+Zeros predicted:  10920
+[32/10], loss: 0.6636983156204224 acc: 59.386596812922946
+[32/10],  zero acc: 50.00047627552539
+Ones predicted:  14539
+Zeros predicted:  10891
+[33/10], loss: 0.6635583639144897 acc: 59.409183712777846
+[33/10],  zero acc: 50.00038522285142
+Ones predicted:  14499
+Zeros predicted:  10931
+[34/10], loss: 0.6634241938591003 acc: 59.43107867901581
+[34/10],  zero acc: 50.00074843296847
+Ones predicted:  14373
+Zeros predicted:  11057
+[35/10], loss: 0.6633005738258362 acc: 59.4558320599578
+[35/10],  zero acc: 50.0003638215819
+Ones predicted:  14405
+Zeros predicted:  11025
+[36/10], loss: 0.6631802320480347 acc: 59.47691109577161
+[36/10],  zero acc: 50.000212393139705
+Ones predicted:  14477
+Zeros predicted:  10953
+[37/10], loss: 0.6630662083625793 acc: 59.49505394133665
+[37/10],  zero acc: 50.000482542308625
+Ones predicted:  14422
+Zeros predicted:  11008
+[38/10], loss: 0.6629562377929688 acc: 59.51589340587376
+[38/10],  zero acc: 50.00060450355146
+Ones predicted:  14612
+Zeros predicted:  10818
+[39/10], loss: 0.6628504991531372 acc: 59.535854616895875
+[39/10],  zero acc: 50.000523903077934
+Ones predicted:  14421
+Zeros predicted:  11009
+[40/10], loss: 0.6627496480941772 acc: 59.55465043844937
+[40/10],  zero acc: 50.00057501557334
+Ones predicted:  14507
+Zeros predicted:  10923
+[41/10], loss: 0.6626547574996948 acc: 59.572831883244454
+[41/10],  zero acc: 50.00024947765616
+Ones predicted:  14428
+Zeros predicted:  11002
+[42/10], loss: 0.6625646352767944 acc: 59.59062457166355
+[42/10],  zero acc: 50.000182756887654
+Ones predicted:  14561
+Zeros predicted:  10869
+[43/10], loss: 0.6624769568443298 acc: 59.60769780317914
+[43/10],  zero acc: 50.00035720664405
+Ones predicted:  14406
+Zeros predicted:  11024
+[44/10], loss: 0.6623947024345398 acc: 59.62156734337481
+[44/10],  zero acc: 50.00017463435931
+Ones predicted:  14564
+Zeros predicted:  10866
+[45/10], loss: 0.6623137593269348 acc: 59.635716522878056
+[45/10],  zero acc: 50.0001708379602
+Ones predicted:  14547
+Zeros predicted:  10883
+[46/10], loss: 0.6622350215911865 acc: 59.648817734676534
+[46/10],  zero acc: 50.000445874959944
+Ones predicted:  14655
+Zeros predicted:  10775
+[47/10], loss: 0.6621635556221008 acc: 59.65850796769265
+[47/10],  zero acc: 50.00049115913556
+Ones predicted:  14306
+Zeros predicted:  11124
+[48/10], loss: 0.662091076374054 acc: 59.668417465217914
+[48/10],  zero acc: 50.00069497347072
+Ones predicted:  14485
+Zeros predicted:  10945
+[49/10], loss: 0.6620177626609802 acc: 59.67958087753766
+[49/10],  zero acc: 50.00073346430911
+Ones predicted:  14542
+Zeros predicted:  10888
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  83 / 291
+------------------------------------------------------------------
+Misclassified zeros:  1358 / 2708
+------------------------------------------------------------------
+Accuracy:  51.950650216738914
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.13282247765006386
+Recall -> Pr(correctly classified|positive example):  0.7147766323024055
+------------------------------------------------------------------
+F1 Score:  0.22401723209477653
+------------------------------------------------------------------
+Confusion Matrix
+TP:  208  FN:  83
+FP:  1358  TN:  1350
+------------------------------------------------------------------
+AUC-ROC Score:  0.6427937839772191
+------------------------------------------------------------------
+Loss:  0.66201776
+##################################################################
+Number of Neurons:  2
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6929352879524231 acc: 51.917485265225935
+[0/10],  zero acc: 49.99214145383104
+Ones predicted:  6614
+Zeros predicted:  18816
+[1/10], loss: 0.6916345357894897 acc: 53.59135559921415
+[1/10],  zero acc: 50.00130975769483
+Ones predicted:  22726
+Zeros predicted:  2704
+[2/10], loss: 0.6878882050514221 acc: 55.45601397074874
+[2/10],  zero acc: 50.00349268718621
+Ones predicted:  18911
+Zeros predicted:  6519
+[3/10], loss: 0.6835491061210632 acc: 56.68434839554683
+[3/10],  zero acc: 50.006548788474134
+Ones predicted:  15987
+Zeros predicted:  9443
+[4/10], loss: 0.6801173090934753 acc: 57.41244269810085
+[4/10],  zero acc: 50.0052390307793
+Ones predicted:  15061
+Zeros predicted:  10369
+[5/10], loss: 0.6774885654449463 acc: 57.895219384413885
+[5/10],  zero acc: 50.00392927308448
+Ones predicted:  14549
+Zeros predicted:  10881
+[6/10], loss: 0.6754587292671204 acc: 58.23538216858453
+[6/10],  zero acc: 50.003367948358125
+Ones predicted:  14502
+Zeros predicted:  10928
+[7/10], loss: 0.6738258600234985 acc: 58.49590700720367
+[7/10],  zero acc: 50.00294695481336
+Ones predicted:  14431
+Zeros predicted:  10999
+[8/10], loss: 0.6725147366523743 acc: 58.6946081641563
+[8/10],  zero acc: 50.00203740085862
+Ones predicted:  14160
+Zeros predicted:  11270
+[9/10], loss: 0.6713992357254028 acc: 58.85396201702685
+[9/10],  zero acc: 50.00209561231172
+Ones predicted:  14279
+Zeros predicted:  11151
+[10/10], loss: 0.6704661846160889 acc: 58.98386616657736
+[10/10],  zero acc: 50.00214323986426
+Ones predicted:  14245
+Zeros predicted:  11185
+[11/10], loss: 0.6696617603302002 acc: 59.08611656843484
+[11/10],  zero acc: 50.00218292949138
+Ones predicted:  14148
+Zeros predicted:  11282
+[12/10], loss: 0.6689699292182922 acc: 59.1755579064027
+[12/10],  zero acc: 50.0020150118382
+Ones predicted:  14291
+Zeros predicted:  11139
+[13/10], loss: 0.6683670878410339 acc: 59.25764804939658
+[13/10],  zero acc: 50.00168397417906
+Ones predicted:  14143
+Zeros predicted:  11287
+[14/10], loss: 0.6678332686424255 acc: 59.32949137742851
+[14/10],  zero acc: 50.001397074874475
+Ones predicted:  14323
+Zeros predicted:  11107
+[15/10], loss: 0.6673566102981567 acc: 59.38998035363458
+[15/10],  zero acc: 50.00049115913556
+Ones predicted:  14216
+Zeros predicted:  11214
+[16/10], loss: 0.6669291853904724 acc: 59.44420046997188
+[16/10],  zero acc: 50.0
+Ones predicted:  14271
+Zeros predicted:  11159
+[17/10], loss: 0.6665400266647339 acc: 59.49319653641854
+[17/10],  zero acc: 49.99970894273448
+Ones predicted:  14320
+Zeros predicted:  11110
+[18/10], loss: 0.6661811470985413 acc: 59.53007272601938
+[18/10],  zero acc: 50.000413607693105
+Ones predicted:  14123
+Zeros predicted:  11307
+[19/10], loss: 0.6658567190170288 acc: 59.572560576293384
+[19/10],  zero acc: 50.00013097576949
+Ones predicted:  14443
+Zeros predicted:  10987
+[20/10], loss: 0.6655601263046265 acc: 59.61636573424392
+[20/10],  zero acc: 50.00049895531232
+Ones predicted:  14255
+Zeros predicted:  11175
+[21/10], loss: 0.6652823686599731 acc: 59.64523426802405
+[21/10],  zero acc: 50.00047627552539
+Ones predicted:  14361
+Zeros predicted:  11069
+[22/10], loss: 0.6650253534317017 acc: 59.67535092964323
+[22/10],  zero acc: 50.00079724381425
+Ones predicted:  14313
+Zeros predicted:  11117
+[23/10], loss: 0.6647921800613403 acc: 59.70448592010478
+[23/10],  zero acc: 50.000873171796556
+Ones predicted:  14283
+Zeros predicted:  11147
+[24/10], loss: 0.6645714044570923 acc: 59.728984937786514
+[24/10],  zero acc: 50.00062868369351
+Ones predicted:  14327
+Zeros predicted:  11103
+[25/10], loss: 0.6643670201301575 acc: 59.75240542038184
+[25/10],  zero acc: 50.00040300236764
+Ones predicted:  14343
+Zeros predicted:  11087
+[26/10], loss: 0.6641778349876404 acc: 59.7738485046933
+[26/10],  zero acc: 50.00048509544253
+Ones predicted:  14394
+Zeros predicted:  11036
+[27/10], loss: 0.6640020608901978 acc: 59.792917953035825
+[27/10],  zero acc: 50.0
+Ones predicted:  14346
+Zeros predicted:  11084
+[28/10], loss: 0.663830041885376 acc: 59.808639884380014
+[28/10],  zero acc: 49.99954835941557
+Ones predicted:  14315
+Zeros predicted:  11115
+[29/10], loss: 0.6636741161346436 acc: 59.82776686313032
+[29/10],  zero acc: 49.999476096922066
+Ones predicted:  14363
+Zeros predicted:  11067
+[30/10], loss: 0.6635260581970215 acc: 59.848913112364535
+[30/10],  zero acc: 49.99940849652492
+Ones predicted:  14406
+Zeros predicted:  11024
+[31/10], loss: 0.6633827686309814 acc: 59.865135887360836
+[31/10],  zero acc: 49.99918140144074
+Ones predicted:  14376
+Zeros predicted:  11054
+[32/10], loss: 0.6632431745529175 acc: 59.88192335933004
+[32/10],  zero acc: 49.99960310372884
+Ones predicted:  14373
+Zeros predicted:  11057
+[33/10], loss: 0.6631146669387817 acc: 59.896066874687
+[33/10],  zero acc: 49.99922955429716
+Ones predicted:  14386
+Zeros predicted:  11044
+[34/10], loss: 0.6629891395568848 acc: 59.9076059500421
+[34/10],  zero acc: 49.99917672373468
+Ones predicted:  14398
+Zeros predicted:  11032
+[35/10], loss: 0.6628737449645996 acc: 59.921014334570316
+[35/10],  zero acc: 49.99934512115259
+Ones predicted:  14433
+Zeros predicted:  10997
+[36/10], loss: 0.6627622842788696 acc: 59.93599886723658
+[36/10],  zero acc: 49.999646011433825
+Ones predicted:  14552
+Zeros predicted:  10878
+[37/10], loss: 0.6626567840576172 acc: 59.94767862682246
+[37/10],  zero acc: 49.99965532692241
+Ones predicted:  14293
+Zeros predicted:  11137
+[38/10], loss: 0.662555456161499 acc: 59.95815492082682
+[38/10],  zero acc: 49.99939549644854
+Ones predicted:  14441
+Zeros predicted:  10989
+[39/10], loss: 0.662456750869751 acc: 59.96869679109364
+[39/10],  zero acc: 49.99927963326784
+Ones predicted:  14379
+Zeros predicted:  11051
+[40/10], loss: 0.6623625159263611 acc: 59.97626463494497
+[40/10],  zero acc: 49.999041640711106
+Ones predicted:  14446
+Zeros predicted:  10984
+[41/10], loss: 0.6622735857963562 acc: 59.983129073502354
+[41/10],  zero acc: 49.99906445878941
+Ones predicted:  14487
+Zeros predicted:  10943
+[42/10], loss: 0.6621869802474976 acc: 59.995065564033446
+[42/10],  zero acc: 49.99914713452429
+Ones predicted:  14526
+Zeros predicted:  10904
+[43/10], loss: 0.6620995402336121 acc: 60.00580460796571
+[43/10],  zero acc: 49.99898791450854
+Ones predicted:  14486
+Zeros predicted:  10944
+[44/10], loss: 0.6620211601257324 acc: 60.01461107472895
+[44/10],  zero acc: 49.99901040529724
+Ones predicted:  14440
+Zeros predicted:  10990
+[45/10], loss: 0.6619433760643005 acc: 60.02448677429458
+[45/10],  zero acc: 49.99903191822556
+Ones predicted:  14487
+Zeros predicted:  10943
+[46/10], loss: 0.6618688702583313 acc: 60.032966879850626
+[46/10],  zero acc: 49.999163984450114
+Ones predicted:  14490
+Zeros predicted:  10940
+[47/10], loss: 0.6617929935455322 acc: 60.03891071818379
+[47/10],  zero acc: 49.999235974678015
+Ones predicted:  14438
+Zeros predicted:  10992
+[48/10], loss: 0.6617216467857361 acc: 60.04683052002726
+[48/10],  zero acc: 49.99909118853828
+Ones predicted:  14473
+Zeros predicted:  10957
+[49/10], loss: 0.661652684211731 acc: 60.05472167648984
+[49/10],  zero acc: 49.99905697445973
+Ones predicted:  14498
+Zeros predicted:  10932
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  164 / 291
+------------------------------------------------------------------
+Misclassified zeros:  765 / 2708
+------------------------------------------------------------------
+Accuracy:  69.02300766922308
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.14237668161434977
+Recall -> Pr(correctly classified|positive example):  0.436426116838488
+------------------------------------------------------------------
+F1 Score:  0.21470836855452238
+------------------------------------------------------------------
+Confusion Matrix
+TP:  127  FN:  164
+FP:  765  TN:  1943
+------------------------------------------------------------------
+AUC-ROC Score:  0.6444422025613303
+------------------------------------------------------------------
+Loss:  0.6616527
+##################################################################
+Number of Neurons:  3
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6893680095672607 acc: 55.349050425671244
+[0/10],  zero acc: 49.9947609692207
+Ones predicted:  8540
+Zeros predicted:  16890
+[1/10], loss: 0.6821267604827881 acc: 57.45841519318926
+[1/10],  zero acc: 49.99607072691552
+Ones predicted:  15305
+Zeros predicted:  10125
+[2/10], loss: 0.6764146089553833 acc: 58.34359310194281
+[2/10],  zero acc: 49.998253656406895
+Ones predicted:  14510
+Zeros predicted:  10920
+[3/10], loss: 0.6726745963096619 acc: 58.72658808120497
+[3/10],  zero acc: 49.99934512115258
+Ones predicted:  14616
+Zeros predicted:  10814
+[4/10], loss: 0.6701435446739197 acc: 59.00196463654224
+[4/10],  zero acc: 49.99895219384414
+Ones predicted:  14278
+Zeros predicted:  11152
+[5/10], loss: 0.6684154868125916 acc: 59.191879502292075
+[5/10],  zero acc: 49.997817070508624
+Ones predicted:  14477
+Zeros predicted:  10953
+[6/10], loss: 0.6671350002288818 acc: 59.33370754981757
+[6/10],  zero acc: 49.996257835157635
+Ones predicted:  14692
+Zeros predicted:  10738
+[7/10], loss: 0.6661584973335266 acc: 59.43009168303863
+[7/10],  zero acc: 49.99607072691552
+Ones predicted:  14553
+Zeros predicted:  10877
+[8/10], loss: 0.6653851270675659 acc: 59.51931892599869
+[8/10],  zero acc: 49.99708942734483
+Ones predicted:  14739
+Zeros predicted:  10691
+[9/10], loss: 0.6647459864616394 acc: 59.58061558611658
+[9/10],  zero acc: 49.996332678454486
+Ones predicted:  14800
+Zeros predicted:  10630
+[10/10], loss: 0.6642190217971802 acc: 59.6275525391439
+[10/10],  zero acc: 49.996427933559566
+Ones predicted:  14685
+Zeros predicted:  10745
+[11/10], loss: 0.6637630462646484 acc: 59.662409954158484
+[11/10],  zero acc: 49.99672560576293
+Ones predicted:  14830
+Zeros predicted:  10600
+[12/10], loss: 0.6633655428886414 acc: 59.712054808322
+[12/10],  zero acc: 49.99738048461034
+Ones predicted:  14854
+Zeros predicted:  10576
+[13/10], loss: 0.6630160212516785 acc: 59.75666573112546
+[13/10],  zero acc: 49.99700626812611
+Ones predicted:  14578
+Zeros predicted:  10852
+[14/10], loss: 0.6627254486083984 acc: 59.78519973804846
+[14/10],  zero acc: 49.99668194717311
+Ones predicted:  14792
+Zeros predicted:  10638
+[15/10], loss: 0.6624530553817749 acc: 59.80943025540275
+[15/10],  zero acc: 49.99705304518664
+Ones predicted:  14759
+Zeros predicted:  10671
+[16/10], loss: 0.6622001528739929 acc: 59.83897684810663
+[16/10],  zero acc: 49.99676412804808
+Ones predicted:  14919
+Zeros predicted:  10511
+[17/10], loss: 0.6619778275489807 acc: 59.8660408935458
+[17/10],  zero acc: 49.99810812777414
+Ones predicted:  14858
+Zeros predicted:  10572
+[18/10], loss: 0.6617832183837891 acc: 59.88715403439837
+[18/10],  zero acc: 49.998207699996556
+Ones predicted:  14651
+Zeros predicted:  10779
+[19/10], loss: 0.6615980267524719 acc: 59.91126391617551
+[19/10],  zero acc: 49.99908316961362
+Ones predicted:  14809
+Zeros predicted:  10621
+[20/10], loss: 0.6614334583282471 acc: 59.9279009573705
+[20/10],  zero acc: 49.99887735054729
+Ones predicted:  14720
+Zeros predicted:  10710
+[21/10], loss: 0.6612777709960938 acc: 59.9522533785795
+[21/10],  zero acc: 49.999166517830574
+Ones predicted:  14891
+Zeros predicted:  10539
+[22/10], loss: 0.6611423492431641 acc: 59.961048945075596
+[22/10],  zero acc: 49.998974972238834
+Ones predicted:  14679
+Zeros predicted:  10751
+[23/10], loss: 0.6610159277915955 acc: 59.97194935603579
+[23/10],  zero acc: 49.99869024230517
+Ones predicted:  14777
+Zeros predicted:  10653
+[24/10], loss: 0.6608946919441223 acc: 59.98318271119843
+[24/10],  zero acc: 49.99863785199739
+Ones predicted:  14692
+Zeros predicted:  10738
+[25/10], loss: 0.6607822775840759 acc: 59.993854213893506
+[25/10],  zero acc: 49.998790992897085
+Ones predicted:  14808
+Zeros predicted:  10622
+[26/10], loss: 0.6606751680374146 acc: 60.00572412622183
+[26/10],  zero acc: 49.99883577093793
+Ones predicted:  14913
+Zeros predicted:  10517
+[27/10], loss: 0.6605773568153381 acc: 60.01478155112733
+[27/10],  zero acc: 49.998970904668354
+Ones predicted:  14753
+Zeros predicted:  10677
+[28/10], loss: 0.6604828238487244 acc: 60.02574351331211
+[28/10],  zero acc: 49.998825734480505
+Ones predicted:  14769
+Zeros predicted:  10661
+[29/10], loss: 0.6603949069976807 acc: 60.04034053700065
+[29/10],  zero acc: 49.999126828203444
+Ones predicted:  14875
+Zeros predicted:  10555
+[30/10], loss: 0.6603091359138489 acc: 60.05141855208399
+[30/10],  zero acc: 49.99890149354628
+Ones predicted:  14816
+Zeros predicted:  10614
+[31/10], loss: 0.6602306962013245 acc: 60.06286836935167
+[31/10],  zero acc: 49.9987721021611
+Ones predicted:  14856
+Zeros predicted:  10574
+[32/10], loss: 0.6601575016975403 acc: 60.06528943660574
+[32/10],  zero acc: 49.99888869044076
+Ones predicted:  14728
+Zeros predicted:  10702
+[33/10], loss: 0.6600843667984009 acc: 60.06718286528756
+[33/10],  zero acc: 49.99884433144574
+Ones predicted:  14754
+Zeros predicted:  10676
+[34/10], loss: 0.660014808177948 acc: 60.07551688651885
+[34/10],  zero acc: 49.999176723734685
+Ones predicted:  14839
+Zeros predicted:  10591
+[35/10], loss: 0.6599488258361816 acc: 60.08433384268354
+[35/10],  zero acc: 49.99927235683621
+Ones predicted:  14773
+Zeros predicted:  10657
+[36/10], loss: 0.6598882079124451 acc: 60.093240588328996
+[36/10],  zero acc: 49.99936282058089
+Ones predicted:  14879
+Zeros predicted:  10551
+[37/10], loss: 0.6598293781280518 acc: 60.099644986730084
+[37/10],  zero acc: 49.99937958846034
+Ones predicted:  14870
+Zeros predicted:  10560
+[38/10], loss: 0.6597751975059509 acc: 60.10951589340588
+[38/10],  zero acc: 49.99952983057109
+Ones predicted:  14779
+Zeros predicted:  10651
+[39/10], loss: 0.6597182154655457 acc: 60.11538965291421
+[39/10],  zero acc: 49.999476096922066
+Ones predicted:  14930
+Zeros predicted:  10500
+[40/10], loss: 0.6596647500991821 acc: 60.12174357499959
+[40/10],  zero acc: 49.999680546903704
+Ones predicted:  14898
+Zeros predicted:  10532
+[41/10], loss: 0.6596145033836365 acc: 60.126422802257764
+[41/10],  zero acc: 49.999812891757884
+Ones predicted:  14818
+Zeros predicted:  10612
+[42/10], loss: 0.659568727016449 acc: 60.13243782458385
+[42/10],  zero acc: 49.999817243112346
+Ones predicted:  14969
+Zeros predicted:  10461
+[43/10], loss: 0.6595191955566406 acc: 60.13547061975353
+[43/10],  zero acc: 49.999880931118646
+Ones predicted:  15022
+Zeros predicted:  10408
+[44/10], loss: 0.6594716310501099 acc: 60.14084261078367
+[44/10],  zero acc: 49.99982536564069
+Ones predicted:  15005
+Zeros predicted:  10425
+[45/10], loss: 0.6594292521476746 acc: 60.14549699609919
+[45/10],  zero acc: 49.999886108026544
+Ones predicted:  14846
+Zeros predicted:  10584
+[46/10], loss: 0.6593871712684631 acc: 60.15042706461007
+[46/10],  zero acc: 49.99988853126002
+Ones predicted:  14883
+Zeros predicted:  10547
+[47/10], loss: 0.659347653388977 acc: 60.15528814669286
+[47/10],  zero acc: 49.99972713381357
+Ones predicted:  14726
+Zeros predicted:  10704
+[48/10], loss: 0.6593090295791626 acc: 60.159015276051484
+[48/10],  zero acc: 49.999786162009
+Ones predicted:  14875
+Zeros predicted:  10555
+[49/10], loss: 0.6592745184898376 acc: 60.163117223313684
+[49/10],  zero acc: 49.99973804846103
+Ones predicted:  14925
+Zeros predicted:  10505
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  148 / 291
+------------------------------------------------------------------
+Misclassified zeros:  863 / 2708
+------------------------------------------------------------------
+Accuracy:  66.28876292097365
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.14214711729622267
+Recall -> Pr(correctly classified|positive example):  0.49140893470790376
+------------------------------------------------------------------
+F1 Score:  0.220508866615266
+------------------------------------------------------------------
+Confusion Matrix
+TP:  143  FN:  148
+FP:  863  TN:  1845
+------------------------------------------------------------------
+AUC-ROC Score:  0.6428845167938195
+------------------------------------------------------------------
+Loss:  0.6592745
+##################################################################
+Number of Neurons:  4
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6935102939605713 acc: 49.84282907662082
+[0/10],  zero acc: 50.00785854616896
+Ones predicted:  23786
+Zeros predicted:  1644
+[1/10], loss: 0.6933425068855286 acc: 49.858546168958746
+[1/10],  zero acc: 50.00654878847413
+Ones predicted:  14872
+Zeros predicted:  10558
+[2/10], loss: 0.6928865909576416 acc: 51.21589172669723
+[2/10],  zero acc: 50.00523903077931
+Ones predicted:  17779
+Zeros predicted:  7651
+[3/10], loss: 0.6906495094299316 acc: 53.16077275703994
+[3/10],  zero acc: 50.00392927308448
+Ones predicted:  19046
+Zeros predicted:  6384
+[4/10], loss: 0.6876339912414551 acc: 54.54354944335299
+[4/10],  zero acc: 50.00576293385724
+Ones predicted:  16382
+Zeros predicted:  9048
+[5/10], loss: 0.6847567558288574 acc: 55.50709452084698
+[5/10],  zero acc: 50.00436585898275
+Ones predicted:  15337
+Zeros predicted:  10093
+[6/10], loss: 0.6822497248649597 acc: 56.189914865749834
+[6/10],  zero acc: 50.004490597810836
+Ones predicted:  15060
+Zeros predicted:  10370
+[7/10], loss: 0.6801314353942871 acc: 56.698919449901766
+[7/10],  zero acc: 50.0049115913556
+Ones predicted:  14917
+Zeros predicted:  10513
+[8/10], loss: 0.6783431172370911 acc: 57.09510296150768
+[8/10],  zero acc: 50.00640325984138
+Ones predicted:  14801
+Zeros predicted:  10629
+[9/10], loss: 0.6768208146095276 acc: 57.40851342501638
+[9/10],  zero acc: 50.0052390307793
+Ones predicted:  14706
+Zeros predicted:  10724
+[10/10], loss: 0.6755102276802063 acc: 57.671012680835865
+[10/10],  zero acc: 50.005239030779315
+Ones predicted:  14831
+Zeros predicted:  10599
+[11/10], loss: 0.6743872165679932 acc: 57.87524557956778
+[11/10],  zero acc: 50.00480244488104
+Ones predicted:  14670
+Zeros predicted:  10760
+[12/10], loss: 0.6733988523483276 acc: 58.06226386580021
+[12/10],  zero acc: 50.00463452722784
+Ones predicted:  14663
+Zeros predicted:  10767
+[13/10], loss: 0.6725342869758606 acc: 58.22602675647862
+[13/10],  zero acc: 50.004116381326604
+Ones predicted:  14658
+Zeros predicted:  10772
+[14/10], loss: 0.6717687249183655 acc: 58.36210434402968
+[14/10],  zero acc: 50.00436585898275
+Ones predicted:  14699
+Zeros predicted:  10731
+[15/10], loss: 0.6710797548294067 acc: 58.47323182711198
+[15/10],  zero acc: 50.00376555337263
+Ones predicted:  14708
+Zeros predicted:  10722
+[16/10], loss: 0.6704641580581665 acc: 58.57721792056705
+[16/10],  zero acc: 50.003698139373626
+Ones predicted:  14629
+Zeros predicted:  10801
+[17/10], loss: 0.6698996424674988 acc: 58.67568944189769
+[17/10],  zero acc: 50.0034926871862
+Ones predicted:  14460
+Zeros predicted:  10970
+[18/10], loss: 0.6693874001502991 acc: 58.761107089925204
+[18/10],  zero acc: 50.00317099231379
+Ones predicted:  14445
+Zeros predicted:  10985
+[19/10], loss: 0.6689291000366211 acc: 58.833464309102816
+[19/10],  zero acc: 50.0030124426981
+Ones predicted:  14498
+Zeros predicted:  10932
+[20/10], loss: 0.6685037612915039 acc: 58.89986590575981
+[20/10],  zero acc: 50.00274425421774
+Ones predicted:  14579
+Zeros predicted:  10851
+[21/10], loss: 0.6681147813796997 acc: 58.95451568732513
+[21/10],  zero acc: 50.00273858427101
+Ones predicted:  14285
+Zeros predicted:  11145
+[22/10], loss: 0.6677595973014832 acc: 59.01363856382222
+[22/10],  zero acc: 50.00250562341619
+Ones predicted:  14513
+Zeros predicted:  10917
+[23/10], loss: 0.667428195476532 acc: 59.072091246452736
+[23/10],  zero acc: 50.00305610128793
+Ones predicted:  14619
+Zeros predicted:  10811
+[24/10], loss: 0.6671250462532043 acc: 59.11748526522593
+[24/10],  zero acc: 50.003038637852
+Ones predicted:  14427
+Zeros predicted:  11003
+[25/10], loss: 0.6668405532836914 acc: 59.16427384010881
+[25/10],  zero acc: 50.00282101657348
+Ones predicted:  14470
+Zeros predicted:  10960
+[26/10], loss: 0.6665710210800171 acc: 59.21142884862597
+[26/10],  zero acc: 50.00281355356667
+Ones predicted:  14719
+Zeros predicted:  10711
+[27/10], loss: 0.6663171648979187 acc: 59.25128636916457
+[27/10],  zero acc: 50.00233885302647
+Ones predicted:  14437
+Zeros predicted:  10993
+[28/10], loss: 0.6660819053649902 acc: 59.28889189982612
+[28/10],  zero acc: 50.001896890454574
+Ones predicted:  14618
+Zeros predicted:  10812
+[29/10], loss: 0.6658593416213989 acc: 59.322025758568
+[29/10],  zero acc: 50.00165902641345
+Ones predicted:  14649
+Zeros predicted:  10781
+[30/10], loss: 0.6656479835510254 acc: 59.358007478293935
+[30/10],  zero acc: 50.001859010921685
+Ones predicted:  14363
+Zeros predicted:  11067
+[31/10], loss: 0.6654495000839233 acc: 59.38699246889325
+[31/10],  zero acc: 50.00139161755076
+Ones predicted:  14527
+Zeros predicted:  10903
+[32/10], loss: 0.665263295173645 acc: 59.418308824988586
+[32/10],  zero acc: 50.00119068881349
+Ones predicted:  14634
+Zeros predicted:  10796
+[33/10], loss: 0.6650855541229248 acc: 59.446781463076384
+[33/10],  zero acc: 50.0014638468354
+Ones predicted:  14590
+Zeros predicted:  10840
+[34/10], loss: 0.6649172306060791 acc: 59.468163532603604
+[34/10],  zero acc: 50.0014220226401
+Ones predicted:  14492
+Zeros predicted:  10938
+[35/10], loss: 0.6647554039955139 acc: 59.49003128865604
+[35/10],  zero acc: 50.001382522011205
+Ones predicted:  14514
+Zeros predicted:  10916
+[36/10], loss: 0.6646003127098083 acc: 59.509761234712116
+[36/10],  zero acc: 50.00169914511762
+Ones predicted:  14387
+Zeros predicted:  11043
+[37/10], loss: 0.6644551753997803 acc: 59.53448454141247
+[37/10],  zero acc: 50.0015854961569
+Ones predicted:  14590
+Zeros predicted:  10840
+[38/10], loss: 0.6643157601356506 acc: 59.55649589441338
+[38/10],  zero acc: 50.001343341225464
+Ones predicted:  14417
+Zeros predicted:  11013
+[39/10], loss: 0.6641817688941956 acc: 59.575343811394895
+[39/10],  zero acc: 50.00124426981009
+Ones predicted:  14592
+Zeros predicted:  10838
+[40/10], loss: 0.6640502214431763 acc: 59.59065280240228
+[40/10],  zero acc: 50.001213921765945
+Ones predicted:  14332
+Zeros predicted:  11098
+[41/10], loss: 0.6639293432235718 acc: 59.60959865282066
+[41/10],  zero acc: 50.00099791062463
+Ones predicted:  14694
+Zeros predicted:  10736
+[42/10], loss: 0.6638092994689941 acc: 59.62745008452506
+[42/10],  zero acc: 50.00097470340081
+Ones predicted:  14587
+Zeros predicted:  10843
+[43/10], loss: 0.663698136806488 acc: 59.643388700363154
+[43/10],  zero acc: 50.00083348216944
+Ones predicted:  14364
+Zeros predicted:  11066
+[44/10], loss: 0.6635923385620117 acc: 59.65716364694753
+[44/10],  zero acc: 50.00081496034345
+Ones predicted:  14590
+Zeros predicted:  10840
+[45/10], loss: 0.6634879112243652 acc: 59.6678055864013
+[45/10],  zero acc: 50.000854189800975
+Ones predicted:  14559
+Zeros predicted:  10871
+[46/10], loss: 0.6633839011192322 acc: 59.68189608326715
+[46/10],  zero acc: 50.0007802811799
+Ones predicted:  14663
+Zeros predicted:  10767
+[47/10], loss: 0.6632859706878662 acc: 59.69460816415629
+[47/10],  zero acc: 50.00054573237285
+Ones predicted:  14384
+Zeros predicted:  11046
+[48/10], loss: 0.6631949543952942 acc: 59.70840516953343
+[48/10],  zero acc: 50.00053459497749
+Ones predicted:  14668
+Zeros predicted:  10762
+[49/10], loss: 0.6631044149398804 acc: 59.72332678454485
+[49/10],  zero acc: 50.00041912246235
+Ones predicted:  14496
+Zeros predicted:  10934
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  80 / 291
+------------------------------------------------------------------
+Misclassified zeros:  1388 / 2708
+------------------------------------------------------------------
+Accuracy:  51.050350116705566
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.13195747342088807
+Recall -> Pr(correctly classified|positive example):  0.7250859106529209
+------------------------------------------------------------------
+F1 Score:  0.2232804232804233
+------------------------------------------------------------------
+Confusion Matrix
+TP:  211  FN:  80
+FP:  1388  TN:  1320
+------------------------------------------------------------------
+AUC-ROC Score:  0.6436535250016497
+------------------------------------------------------------------
+Loss:  0.6631044
+##################################################################
+Number of Neurons:  5
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6915888786315918 acc: 53.004584151931894
+[0/10],  zero acc: 50.010478061558615
+Ones predicted:  15968
+Zeros predicted:  9462
+[1/10], loss: 0.6821111440658569 acc: 55.66994106090373
+[1/10],  zero acc: 50.011787819253435
+Ones predicted:  10634
+Zeros predicted:  14796
+[2/10], loss: 0.6752135753631592 acc: 57.2128356254093
+[2/10],  zero acc: 50.00785854616896
+Ones predicted:  15089
+Zeros predicted:  10341
+[3/10], loss: 0.6714377999305725 acc: 57.99934512115259
+[3/10],  zero acc: 50.0052390307793
+Ones predicted:  15377
+Zeros predicted:  10053
+[4/10], loss: 0.6691120266914368 acc: 58.45867714472823
+[4/10],  zero acc: 50.0068107400131
+Ones predicted:  15533
+Zeros predicted:  9897
+[5/10], loss: 0.667502224445343 acc: 58.79043876882777
+[5/10],  zero acc: 50.00436585898276
+Ones predicted:  15546
+Zeros predicted:  9884
+[6/10], loss: 0.6663441061973572 acc: 58.996725605762926
+[6/10],  zero acc: 50.002245298905414
+Ones predicted:  15434
+Zeros predicted:  9996
+[7/10], loss: 0.6654348969459534 acc: 59.17910936476751
+[7/10],  zero acc: 50.002619515389654
+Ones predicted:  15563
+Zeros predicted:  9867
+[8/10], loss: 0.6647374629974365 acc: 59.299134104635094
+[8/10],  zero acc: 50.001746343593105
+Ones predicted:  15537
+Zeros predicted:  9893
+[9/10], loss: 0.6641655564308167 acc: 59.40327439423707
+[9/10],  zero acc: 50.00078585461689
+Ones predicted:  15475
+Zeros predicted:  9955
+[10/10], loss: 0.6636806726455688 acc: 59.491337738881946
+[10/10],  zero acc: 50.00047627552539
+Ones predicted:  15431
+Zeros predicted:  9999
+[11/10], loss: 0.6632773876190186 acc: 59.56352324819908
+[11/10],  zero acc: 50.00021829294914
+Ones predicted:  15466
+Zeros predicted:  9964
+[12/10], loss: 0.662932276725769 acc: 59.62087552264369
+[12/10],  zero acc: 49.99899249408091
+Ones predicted:  15417
+Zeros predicted:  10013
+[13/10], loss: 0.6626286506652832 acc: 59.66947329029844
+[13/10],  zero acc: 49.999064458789405
+Ones predicted:  15431
+Zeros predicted:  9999
+[14/10], loss: 0.6623594760894775 acc: 59.717528923815756
+[14/10],  zero acc: 49.999126828203444
+Ones predicted:  15467
+Zeros predicted:  9963
+[15/10], loss: 0.6621301770210266 acc: 59.76530779305828
+[15/10],  zero acc: 49.99967256057629
+Ones predicted:  15561
+Zeros predicted:  9869
+[16/10], loss: 0.6619206070899963 acc: 59.79945298355098
+[16/10],  zero acc: 49.9995377325783
+Ones predicted:  15415
+Zeros predicted:  10015
+[17/10], loss: 0.6617286205291748 acc: 59.819690024012225
+[17/10],  zero acc: 49.999417885468965
+Ones predicted:  15562
+Zeros predicted:  9868
+[18/10], loss: 0.6615543365478516 acc: 59.84489711508634
+[18/10],  zero acc: 50.0
+Ones predicted:  15461
+Zeros predicted:  9969
+[19/10], loss: 0.661396324634552 acc: 59.86142763588735
+[19/10],  zero acc: 49.99960707269155
+Ones predicted:  15481
+Zeros predicted:  9949
+[20/10], loss: 0.661248505115509 acc: 59.87794305672497
+[20/10],  zero acc: 49.99925156703153
+Ones predicted:  15426
+Zeros predicted:  10004
+[21/10], loss: 0.6611148118972778 acc: 59.89932726082038
+[21/10],  zero acc: 49.99940465559325
+Ones predicted:  15479
+Zeros predicted:  9951
+[22/10], loss: 0.6609885096549988 acc: 59.91782694114632
+[22/10],  zero acc: 49.99954443210614
+Ones predicted:  15449
+Zeros predicted:  9981
+[23/10], loss: 0.6608744263648987 acc: 59.93423924907225
+[23/10],  zero acc: 49.99945426762715
+Ones predicted:  15395
+Zeros predicted:  10035
+[24/10], loss: 0.6607668399810791 acc: 59.949810085134246
+[24/10],  zero acc: 49.999476096922066
+Ones predicted:  15406
+Zeros predicted:  10024
+[25/10], loss: 0.6606645584106445 acc: 59.96519067049518
+[25/10],  zero acc: 49.99919399526472
+Ones predicted:  15356
+Zeros predicted:  10074
+[26/10], loss: 0.6605682969093323 acc: 59.97501758470979
+[26/10],  zero acc: 49.999514904557465
+Ones predicted:  15487
+Zeros predicted:  9943
+[27/10], loss: 0.6604782938957214 acc: 59.987323416596496
+[27/10],  zero acc: 49.99925156703152
+Ones predicted:  15495
+Zeros predicted:  9935
+[28/10], loss: 0.6603936553001404 acc: 59.99859991418828
+[28/10],  zero acc: 49.999096718831154
+Ones predicted:  15303
+Zeros predicted:  10127
+[29/10], loss: 0.6603166460990906 acc: 60.01226806374154
+[29/10],  zero acc: 49.99921414538311
+Ones predicted:  15543
+Zeros predicted:  9887
+[30/10], loss: 0.6602392792701721 acc: 60.024167141981955
+[30/10],  zero acc: 49.99907049453915
+Ones predicted:  15362
+Zeros predicted:  10068
+[31/10], loss: 0.6601653099060059 acc: 60.036182056319575
+[31/10],  zero acc: 49.99901768172888
+Ones predicted:  15423
+Zeros predicted:  10007
+[32/10], loss: 0.6600971221923828 acc: 60.04727034589509
+[32/10],  zero acc: 49.99904744894922
+Ones predicted:  15458
+Zeros predicted:  9972
+[33/10], loss: 0.6600284576416016 acc: 60.0569359374398
+[33/10],  zero acc: 49.99946068800801
+Ones predicted:  15430
+Zeros predicted:  10000
+[34/10], loss: 0.6599640250205994 acc: 60.06627373935821
+[34/10],  zero acc: 49.999476096922066
+Ones predicted:  15296
+Zeros predicted:  10134
+[35/10], loss: 0.6599063873291016 acc: 60.0736011060176
+[35/10],  zero acc: 49.99963617841811
+Ones predicted:  15507
+Zeros predicted:  9923
+[36/10], loss: 0.6598516702651978 acc: 60.08208994849466
+[36/10],  zero acc: 49.99964601143383
+Ones predicted:  15371
+Zeros predicted:  10059
+[37/10], loss: 0.659796953201294 acc: 60.08958053286457
+[37/10],  zero acc: 49.99965532692241
+Ones predicted:  15391
+Zeros predicted:  10039
+[38/10], loss: 0.659745454788208 acc: 60.09897066478598
+[38/10],  zero acc: 49.99946266350981
+Ones predicted:  15283
+Zeros predicted:  10147
+[39/10], loss: 0.6596959829330444 acc: 60.10540275049116
+[39/10],  zero acc: 49.99927963326785
+Ones predicted:  15433
+Zeros predicted:  9997
+[40/10], loss: 0.6596481800079346 acc: 60.10979602919801
+[40/10],  zero acc: 49.999169421949624
+Ones predicted:  15419
+Zeros predicted:  10011
+[41/10], loss: 0.6596039533615112 acc: 60.11288863941123
+[41/10],  zero acc: 49.999438675273645
+Ones predicted:  15344
+Zeros predicted:  10086
+[42/10], loss: 0.6595604419708252 acc: 60.11781727357182
+[42/10],  zero acc: 49.99920805348684
+Ones predicted:  15421
+Zeros predicted:  10009
+[43/10], loss: 0.6595155000686646 acc: 60.12356373161874
+[43/10],  zero acc: 49.99916651783056
+Ones predicted:  15386
+Zeros predicted:  10044
+[44/10], loss: 0.6594744920730591 acc: 60.12823983118678
+[44/10],  zero acc: 49.999068616750336
+Ones predicted:  15546
+Zeros predicted:  9884
+[45/10], loss: 0.6594319343566895 acc: 60.13339597391874
+[45/10],  zero acc: 49.99891802625209
+Ones predicted:  15342
+Zeros predicted:  10088
+[46/10], loss: 0.6593952178955078 acc: 60.137691761066755
+[46/10],  zero acc: 49.99894104697013
+Ones predicted:  15379
+Zeros predicted:  10051
+[47/10], loss: 0.6593610048294067 acc: 60.139325474787164
+[47/10],  zero acc: 49.99901768172888
+Ones predicted:  15438
+Zeros predicted:  9992
+[48/10], loss: 0.6593258380889893 acc: 60.14535637437686
+[48/10],  zero acc: 49.99893081004504
+Ones predicted:  15449
+Zeros predicted:  9981
+[49/10], loss: 0.6592890620231628 acc: 60.15151277013752
+[49/10],  zero acc: 49.99879502292076
+Ones predicted:  15451
+Zeros predicted:  9979
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  111 / 291
+------------------------------------------------------------------
+Misclassified zeros:  1143 / 2708
+------------------------------------------------------------------
+Accuracy:  58.18606202067356
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.1360544217687075
+Recall -> Pr(correctly classified|positive example):  0.6185567010309279
+------------------------------------------------------------------
+F1 Score:  0.22304832713754646
+------------------------------------------------------------------
+Confusion Matrix
+TP:  180  FN:  111
+FP:  1143  TN:  1565
+------------------------------------------------------------------
+AUC-ROC Score:  0.6434219342459911
+------------------------------------------------------------------
+Loss:  0.65928906
+##################################################################
+Number of Neurons:  6
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6804161071777344 acc: 55.075311067452525
+[0/10],  zero acc: 50.00261951538966
+Ones predicted:  6397
+Zeros predicted:  19033
+[1/10], loss: 0.6709007024765015 acc: 57.721021611001966
+[1/10],  zero acc: 49.997380484610346
+Ones predicted:  14979
+Zeros predicted:  10451
+[2/10], loss: 0.6672932505607605 acc: 58.58327876009604
+[2/10],  zero acc: 49.9982536564069
+Ones predicted:  15212
+Zeros predicted:  10218
+[3/10], loss: 0.6653993129730225 acc: 59.02554027504912
+[3/10],  zero acc: 49.99803536345776
+Ones predicted:  15174
+Zeros predicted:  10256
+[4/10], loss: 0.6642013788223267 acc: 59.290635232481996
+[4/10],  zero acc: 49.99895219384414
+Ones predicted:  15303
+Zeros predicted:  10127
+[5/10], loss: 0.6633425354957581 acc: 59.46190788037546
+[5/10],  zero acc: 50.00043658589828
+Ones predicted:  15510
+Zeros predicted:  9920
+[6/10], loss: 0.6626896858215332 acc: 59.58761343437178
+[6/10],  zero acc: 50.0
+Ones predicted:  15372
+Zeros predicted:  10058
+[7/10], loss: 0.6621617078781128 acc: 59.69335297969875
+[7/10],  zero acc: 50.00098231827112
+Ones predicted:  15440
+Zeros predicted:  9990
+[8/10], loss: 0.6617342829704285 acc: 59.77253874699847
+[8/10],  zero acc: 50.00116422906206
+Ones predicted:  15449
+Zeros predicted:  9981
+[9/10], loss: 0.661385178565979 acc: 59.84309102815978
+[9/10],  zero acc: 50.00235756385069
+Ones predicted:  15416
+Zeros predicted:  10014
+[10/10], loss: 0.6610745191574097 acc: 59.904625826040366
+[10/10],  zero acc: 50.00238137762697
+Ones predicted:  15436
+Zeros predicted:  9994
+[11/10], loss: 0.6608242988586426 acc: 59.94608164156297
+[11/10],  zero acc: 50.002619515389654
+Ones predicted:  15460
+Zeros predicted:  9970
+[12/10], loss: 0.6605809926986694 acc: 59.982670898191536
+[12/10],  zero acc: 50.00261951538966
+Ones predicted:  15423
+Zeros predicted:  10007
+[13/10], loss: 0.6603641510009766 acc: 60.00944896622697
+[13/10],  zero acc: 50.00243240714753
+Ones predicted:  15312
+Zeros predicted:  10118
+[14/10], loss: 0.6601687669754028 acc: 60.03143418467584
+[14/10],  zero acc: 50.00209561231172
+Ones predicted:  15518
+Zeros predicted:  9912
+[15/10], loss: 0.6599854230880737 acc: 60.05001637197118
+[15/10],  zero acc: 50.00147347740668
+Ones predicted:  15294
+Zeros predicted:  10136
+[16/10], loss: 0.6598042845726013 acc: 60.085288339304284
+[16/10],  zero acc: 50.00107862398397
+Ones predicted:  15333
+Zeros predicted:  10097
+[17/10], loss: 0.6596360802650452 acc: 60.10696354507749
+[17/10],  zero acc: 50.000582114531035
+Ones predicted:  15406
+Zeros predicted:  10024
+[18/10], loss: 0.6594759821891785 acc: 60.11656843483955
+[18/10],  zero acc: 50.00082721538621
+Ones predicted:  15372
+Zeros predicted:  10058
+[19/10], loss: 0.6593322157859802 acc: 60.132351015062206
+[19/10],  zero acc: 50.000654878847406
+Ones predicted:  15219
+Zeros predicted:  10211
+[20/10], loss: 0.6591768264770508 acc: 60.15274269498238
+[20/10],  zero acc: 50.00049895531232
+Ones predicted:  15337
+Zeros predicted:  10093
+[21/10], loss: 0.6590461134910583 acc: 60.16580341727689
+[21/10],  zero acc: 50.00047627552539
+Ones predicted:  15599
+Zeros predicted:  9831
+[22/10], loss: 0.6589141488075256 acc: 60.18906067594886
+[22/10],  zero acc: 49.99988610802653
+Ones predicted:  15584
+Zeros predicted:  9846
+[23/10], loss: 0.6587850451469421 acc: 60.20099323291857
+[23/10],  zero acc: 50.00032743942371
+Ones predicted:  15692
+Zeros predicted:  9738
+[24/10], loss: 0.6586597561836243 acc: 60.21548133595285
+[24/10],  zero acc: 49.99979043876882
+Ones predicted:  15665
+Zeros predicted:  9765
+[25/10], loss: 0.6585395336151123 acc: 60.22547982469397
+[25/10],  zero acc: 49.99969774822427
+Ones predicted:  15826
+Zeros predicted:  9604
+[26/10], loss: 0.658424973487854 acc: 60.234640665550955
+[26/10],  zero acc: 49.99990298091149
+Ones predicted:  15760
+Zeros predicted:  9670
+[27/10], loss: 0.6583127379417419 acc: 60.24394237066142
+[27/10],  zero acc: 49.999719337636826
+Ones predicted:  15791
+Zeros predicted:  9639
+[28/10], loss: 0.6582032442092896 acc: 60.25720931282885
+[28/10],  zero acc: 49.999367703181804
+Ones predicted:  15731
+Zeros predicted:  9699
+[29/10], loss: 0.6581098437309265 acc: 60.26382885832788
+[29/10],  zero acc: 49.99965073128138
+Ones predicted:  15841
+Zeros predicted:  9589
+[30/10], loss: 0.6580138206481934 acc: 60.26735957073748
+[30/10],  zero acc: 49.99966199801423
+Ones predicted:  15728
+Zeros predicted:  9702
+[31/10], loss: 0.6579163074493408 acc: 60.275622134905035
+[31/10],  zero acc: 50.000081859855925
+Ones predicted:  15651
+Zeros predicted:  9779
+[32/10], loss: 0.6578150391578674 acc: 60.28433648865868
+[32/10],  zero acc: 50.00007937925423
+Ones predicted:  15709
+Zeros predicted:  9721
+[33/10], loss: 0.6577258110046387 acc: 60.28918679456065
+[33/10],  zero acc: 49.99992295542972
+Ones predicted:  15844
+Zeros predicted:  9586
+[34/10], loss: 0.6576391458511353 acc: 60.29155206286837
+[34/10],  zero acc: 50.000224529890545
+Ones predicted:  15707
+Zeros predicted:  9723
+[35/10], loss: 0.6575509309768677 acc: 60.29898857600232
+[35/10],  zero acc: 49.99992723568362
+Ones predicted:  15818
+Zeros predicted:  9612
+[36/10], loss: 0.6574686169624329 acc: 60.30145666294978
+[36/10],  zero acc: 49.99971680914707
+Ones predicted:  15667
+Zeros predicted:  9763
+[37/10], loss: 0.6573894023895264 acc: 60.30727604866784
+[37/10],  zero acc: 49.99993106538449
+Ones predicted:  15598
+Zeros predicted:  9832
+[38/10], loss: 0.6573078036308289 acc: 60.312226084328245
+[38/10],  zero acc: 50.0
+Ones predicted:  15645
+Zeros predicted:  9785
+[39/10], loss: 0.6572292447090149 acc: 60.317354289456446
+[39/10],  zero acc: 50.00006548788474
+Ones predicted:  15682
+Zeros predicted:  9748
+[40/10], loss: 0.6571561098098755 acc: 60.3182391745332
+[40/10],  zero acc: 50.000255562477044
+Ones predicted:  15667
+Zeros predicted:  9763
+[41/10], loss: 0.6570795774459839 acc: 60.320609972869306
+[41/10],  zero acc: 50.0
+Ones predicted:  15578
+Zeros predicted:  9852
+[42/10], loss: 0.6570044755935669 acc: 60.326799774599834
+[42/10],  zero acc: 50.00012183792511
+Ones predicted:  15491
+Zeros predicted:  9939
+[43/10], loss: 0.6569334268569946 acc: 60.329969637435255
+[43/10],  zero acc: 50.000119068881354
+Ones predicted:  15651
+Zeros predicted:  9779
+[44/10], loss: 0.6568666100502014 acc: 60.33043731354143
+[44/10],  zero acc: 49.9999417885469
+Ones predicted:  15383
+Zeros predicted:  10047
+[45/10], loss: 0.6567981839179993 acc: 60.33128327781099
+[45/10],  zero acc: 49.9998291620398
+Ones predicted:  15549
+Zeros predicted:  9881
+[46/10], loss: 0.6567286252975464 acc: 60.332734188855916
+[46/10],  zero acc: 49.99988853126002
+Ones predicted:  15472
+Zeros predicted:  9958
+[47/10], loss: 0.6566615104675293 acc: 60.337317179655095
+[47/10],  zero acc: 49.999890853525436
+Ones predicted:  15281
+Zeros predicted:  10149
+[48/10], loss: 0.6565982699394226 acc: 60.34021624366839
+[48/10],  zero acc: 49.99973270251127
+Ones predicted:  15393
+Zeros predicted:  10037
+[49/10], loss: 0.6565317511558533 acc: 60.34221349050426
+[49/10],  zero acc: 49.99984282907663
+Ones predicted:  15287
+Zeros predicted:  10143
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  159 / 291
+------------------------------------------------------------------
+Misclassified zeros:  767 / 2708
+------------------------------------------------------------------
+Accuracy:  69.12304101367123
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.1468298109010011
+Recall -> Pr(correctly classified|positive example):  0.4536082474226804
+------------------------------------------------------------------
+F1 Score:  0.22184873949579834
+------------------------------------------------------------------
+Confusion Matrix
+TP:  132  FN:  159
+FP:  767  TN:  1941
+------------------------------------------------------------------
+AUC-ROC Score:  0.6318614313196993
+------------------------------------------------------------------
+Loss:  0.65653175
+##################################################################
+Number of Neurons:  7
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6847649216651917 acc: 56.26326129666012
+[0/10],  zero acc: 49.9947609692207
+Ones predicted:  9656
+Zeros predicted:  15774
+[1/10], loss: 0.6727659702301025 acc: 58.32220039292731
+[1/10],  zero acc: 50.0
+Ones predicted:  14988
+Zeros predicted:  10442
+[2/10], loss: 0.6680862903594971 acc: 59.022484173761185
+[2/10],  zero acc: 49.9965073128138
+Ones predicted:  15154
+Zeros predicted:  10276
+[3/10], loss: 0.6656644344329834 acc: 59.37524557956778
+[3/10],  zero acc: 49.9947609692207
+Ones predicted:  15384
+Zeros predicted:  10046
+[4/10], loss: 0.6641896963119507 acc: 59.563326784544856
+[4/10],  zero acc: 49.99580877537655
+Ones predicted:  15594
+Zeros predicted:  9836
+[5/10], loss: 0.663168728351593 acc: 59.72058502510369
+[5/10],  zero acc: 49.99607072691552
+Ones predicted:  15464
+Zeros predicted:  9966
+[6/10], loss: 0.662395715713501 acc: 59.80840116007111
+[6/10],  zero acc: 49.994760969220685
+Ones predicted:  15451
+Zeros predicted:  9979
+[7/10], loss: 0.6618247628211975 acc: 59.86411263916175
+[7/10],  zero acc: 49.99639816633922
+Ones predicted:  15447
+Zeros predicted:  9983
+[8/10], loss: 0.6613668203353882 acc: 59.91413810667249
+[8/10],  zero acc: 49.99679837007931
+Ones predicted:  15369
+Zeros predicted:  10061
+[9/10], loss: 0.6609798073768616 acc: 59.968172888015715
+[9/10],  zero acc: 49.996594629993446
+Ones predicted:  15394
+Zeros predicted:  10036
+[10/10], loss: 0.6606491208076477 acc: 60.01476454128713
+[10/10],  zero acc: 49.99857117342383
+Ones predicted:  15352
+Zeros predicted:  10078
+[11/10], loss: 0.6603676080703735 acc: 60.039838463217635
+[11/10],  zero acc: 49.99956341410172
+Ones predicted:  15392
+Zeros predicted:  10038
+[12/10], loss: 0.6601185202598572 acc: 60.07153292025591
+[12/10],  zero acc: 50.0
+Ones predicted:  15150
+Zeros predicted:  10280
+[13/10], loss: 0.6599005460739136 acc: 60.095612311722334
+[13/10],  zero acc: 50.0
+Ones predicted:  15489
+Zeros predicted:  9941
+[14/10], loss: 0.6596958041191101 acc: 60.11840209561231
+[14/10],  zero acc: 49.99982536564068
+Ones predicted:  15231
+Zeros predicted:  10199
+[15/10], loss: 0.6594954133033752 acc: 60.147757039947614
+[15/10],  zero acc: 49.99950884086444
+Ones predicted:  15258
+Zeros predicted:  10172
+[16/10], loss: 0.6593130230903625 acc: 60.175045263685035
+[16/10],  zero acc: 49.999075465156594
+Ones predicted:  15162
+Zeros predicted:  10268
+[17/10], loss: 0.6591425538063049 acc: 60.19806446918431
+[17/10],  zero acc: 49.99869024230517
+Ones predicted:  15247
+Zeros predicted:  10183
+[18/10], loss: 0.6589856147766113 acc: 60.206045565780855
+[18/10],  zero acc: 49.99848343845862
+Ones predicted:  15158
+Zeros predicted:  10272
+[19/10], loss: 0.6588270664215088 acc: 60.22717747216765
+[19/10],  zero acc: 49.99895219384414
+Ones predicted:  15109
+Zeros predicted:  10321
+[20/10], loss: 0.6586739420890808 acc: 60.24211806530078
+[20/10],  zero acc: 49.997754701094586
+Ones predicted:  15066
+Zeros predicted:  10364
+[21/10], loss: 0.6585259437561035 acc: 60.25939155801631
+[21/10],  zero acc: 49.997261415729
+Ones predicted:  15024
+Zeros predicted:  10406
+[22/10], loss: 0.6583774089813232 acc: 60.27795336123687
+[22/10],  zero acc: 49.99760826855727
+Ones predicted:  15073
+Zeros predicted:  10357
+[23/10], loss: 0.6582424640655518 acc: 60.29109364767518
+[23/10],  zero acc: 49.997926216983196
+Ones predicted:  14890
+Zeros predicted:  10540
+[24/10], loss: 0.658102810382843 acc: 60.304387688277664
+[24/10],  zero acc: 49.99769482645711
+Ones predicted:  14851
+Zeros predicted:  10579
+[25/10], loss: 0.6579712629318237 acc: 60.31524860208554
+[25/10],  zero acc: 49.998085738753716
+Ones predicted:  15021
+Zeros predicted:  10409
+[26/10], loss: 0.6578415036201477 acc: 60.324674379684204
+[26/10],  zero acc: 49.99805961822988
+Ones predicted:  14766
+Zeros predicted:  10664
+[27/10], loss: 0.6577136516571045 acc: 60.33885302647581
+[27/10],  zero acc: 49.99840957994199
+Ones predicted:  14794
+Zeros predicted:  10636
+[28/10], loss: 0.6575932502746582 acc: 60.35720253822008
+[28/10],  zero acc: 49.99873540636361
+Ones predicted:  14768
+Zeros predicted:  10662
+[29/10], loss: 0.657469630241394 acc: 60.369002401222446
+[29/10],  zero acc: 49.99869024230517
+Ones predicted:  14774
+Zeros predicted:  10656
+[30/10], loss: 0.6573441028594971 acc: 60.384688510044995
+[30/10],  zero acc: 49.998732492553394
+Ones predicted:  14868
+Zeros predicted:  10562
+[31/10], loss: 0.6572221517562866 acc: 60.39980353634578
+[31/10],  zero acc: 49.998362802881466
+Ones predicted:  14682
+Zeros predicted:  10748
+[32/10], loss: 0.6571071743965149 acc: 60.42182135698835
+[32/10],  zero acc: 49.99817427715267
+Ones predicted:  14679
+Zeros predicted:  10751
+[33/10], loss: 0.6570039987564087 acc: 60.43160368273046
+[33/10],  zero acc: 49.998382064024035
+Ones predicted:  14745
+Zeros predicted:  10685
+[34/10], loss: 0.6568922996520996 acc: 60.444756291514636
+[34/10],  zero acc: 49.99865282065675
+Ones predicted:  14666
+Zeros predicted:  10764
+[35/10], loss: 0.6567789316177368 acc: 60.4621625554828
+[35/10],  zero acc: 49.998544713672416
+Ones predicted:  14561
+Zeros predicted:  10869
+[36/10], loss: 0.6566667556762695 acc: 60.4781677551815
+[36/10],  zero acc: 49.99858404573533
+Ones predicted:  14612
+Zeros predicted:  10818
+[37/10], loss: 0.6565699577331543 acc: 60.487988143246135
+[37/10],  zero acc: 49.99848343845863
+Ones predicted:  14539
+Zeros predicted:  10891
+[38/10], loss: 0.6564670205116272 acc: 60.4978422581566
+[38/10],  zero acc: 49.998656658774536
+Ones predicted:  14505
+Zeros predicted:  10925
+[39/10], loss: 0.6563646793365479 acc: 60.51008513425016
+[39/10],  zero acc: 49.9988867059594
+Ones predicted:  14469
+Zeros predicted:  10961
+[40/10], loss: 0.6562663912773132 acc: 60.518664047151276
+[40/10],  zero acc: 49.99891385947259
+Ones predicted:  14577
+Zeros predicted:  10853
+[41/10], loss: 0.6561708450317383 acc: 60.523840708516545
+[41/10],  zero acc: 49.999002089375374
+Ones predicted:  14473
+Zeros predicted:  10957
+[42/10], loss: 0.6560764312744141 acc: 60.53550814029637
+[42/10],  zero acc: 49.99884253971155
+Ones predicted:  14436
+Zeros predicted:  10994
+[43/10], loss: 0.6559908390045166 acc: 60.54182294457344
+[43/10],  zero acc: 49.998928380067866
+Ones predicted:  14320
+Zeros predicted:  11110
+[44/10], loss: 0.6558994650840759 acc: 60.554522302262974
+[44/10],  zero acc: 49.99901040529725
+Ones predicted:  14433
+Zeros predicted:  10997
+[45/10], loss: 0.6558131575584412 acc: 60.56020614447197
+[45/10],  zero acc: 49.99903191822557
+Ones predicted:  14370
+Zeros predicted:  11060
+[46/10], loss: 0.6557326316833496 acc: 60.56729228496984
+[46/10],  zero acc: 49.998941046970145
+Ones predicted:  14283
+Zeros predicted:  11147
+[47/10], loss: 0.6556521058082581 acc: 60.57593865968129
+[47/10],  zero acc: 49.99907225496617
+Ones predicted:  14425
+Zeros predicted:  11005
+[48/10], loss: 0.6555703282356262 acc: 60.585060743354326
+[48/10],  zero acc: 49.99930502652928
+Ones predicted:  14284
+Zeros predicted:  11146
+[49/10], loss: 0.6554931402206421 acc: 60.58994106090374
+[49/10],  zero acc: 49.99916175507531
+Ones predicted:  14348
+Zeros predicted:  11082
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  180 / 291
+------------------------------------------------------------------
+Misclassified zeros:  605 / 2708
+------------------------------------------------------------------
+Accuracy:  73.82460820273424
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.15502793296089384
+Recall -> Pr(correctly classified|positive example):  0.38144329896907214
+------------------------------------------------------------------
+F1 Score:  0.22045680238331675
+------------------------------------------------------------------
+Confusion Matrix
+TP:  111  FN:  180
+FP:  605  TN:  2103
+------------------------------------------------------------------
+AUC-ROC Score:  0.6453533376986604
+------------------------------------------------------------------
+Loss:  0.65549314
+##################################################################
+Number of Neurons:  8
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6799508929252625 acc: 58.474132285527176
+[0/10],  zero acc: 49.99738048461034
+Ones predicted:  17568
+Zeros predicted:  7862
+[1/10], loss: 0.6702598929405212 acc: 59.377865094957436
+[1/10],  zero acc: 49.99214145383104
+Ones predicted:  14734
+Zeros predicted:  10696
+[2/10], loss: 0.666542649269104 acc: 59.71054354944335
+[2/10],  zero acc: 49.99301462562759
+Ones predicted:  15112
+Zeros predicted:  10318
+[3/10], loss: 0.6645588874816895 acc: 59.8762278978389
+[3/10],  zero acc: 49.99214145383104
+Ones predicted:  15230
+Zeros predicted:  10200
+[4/10], loss: 0.6633144617080688 acc: 59.96568434839554
+[4/10],  zero acc: 49.99371316306483
+Ones predicted:  15376
+Zeros predicted:  10054
+[5/10], loss: 0.662480354309082 acc: 60.01790002182929
+[5/10],  zero acc: 49.99388779742414
+Ones predicted:  15494
+Zeros predicted:  9936
+[6/10], loss: 0.6618488430976868 acc: 60.073346430910284
+[6/10],  zero acc: 49.9947609692207
+Ones predicted:  15515
+Zeros predicted:  9915
+[7/10], loss: 0.6613703370094299 acc: 60.102815979043875
+[7/10],  zero acc: 49.99410609037328
+Ones predicted:  15599
+Zeros predicted:  9831
+[8/10], loss: 0.6609830260276794 acc: 60.147857090882624
+[8/10],  zero acc: 49.99476096922069
+Ones predicted:  15467
+Zeros predicted:  9963
+[9/10], loss: 0.6606959700584412 acc: 60.16031434184676
+[9/10],  zero acc: 49.99554682383759
+Ones predicted:  15591
+Zeros predicted:  9839
+[10/10], loss: 0.6604402661323547 acc: 60.170863844734185
+[10/10],  zero acc: 49.99690420908496
+Ones predicted:  15420
+Zeros predicted:  10010
+[11/10], loss: 0.6602048873901367 acc: 60.19613621480026
+[11/10],  zero acc: 49.99694389871207
+Ones predicted:  15479
+Zeros predicted:  9951
+[12/10], loss: 0.6600028872489929 acc: 60.22265880812051
+[12/10],  zero acc: 49.99758198579416
+Ones predicted:  15458
+Zeros predicted:  9972
+[13/10], loss: 0.6598129868507385 acc: 60.2434278229956
+[13/10],  zero acc: 49.99906445878941
+Ones predicted:  15327
+Zeros predicted:  10103
+[14/10], loss: 0.6596535444259644 acc: 60.25793494870116
+[14/10],  zero acc: 49.99877755948483
+Ones predicted:  15319
+Zeros predicted:  10111
+[15/10], loss: 0.6594975590705872 acc: 60.26882776686313
+[15/10],  zero acc: 49.99885396201703
+Ones predicted:  15439
+Zeros predicted:  9991
+[16/10], loss: 0.6593522429466248 acc: 60.28552717747217
+[16/10],  zero acc: 49.998459108594325
+Ones predicted:  15353
+Zeros predicted:  10077
+[17/10], loss: 0.6592267751693726 acc: 60.305537364476464
+[17/10],  zero acc: 49.998253656406895
+Ones predicted:  15472
+Zeros predicted:  9958
+[18/10], loss: 0.6591147184371948 acc: 60.31992555061524
+[18/10],  zero acc: 49.99917278461379
+Ones predicted:  15321
+Zeros predicted:  10109
+[19/10], loss: 0.6590061783790588 acc: 60.327242960052395
+[19/10],  zero acc: 49.99869024230517
+Ones predicted:  15255
+Zeros predicted:  10175
+[20/10], loss: 0.6588944792747498 acc: 60.33511086163345
+[20/10],  zero acc: 49.998627872891134
+Ones predicted:  15293
+Zeros predicted:  10137
+[21/10], loss: 0.6588011980056763 acc: 60.34339465380723
+[21/10],  zero acc: 49.99869024230518
+Ones predicted:  15458
+Zeros predicted:  9972
+[22/10], loss: 0.658703088760376 acc: 60.35334984766949
+[22/10],  zero acc: 49.99886108026538
+Ones predicted:  15502
+Zeros predicted:  9928
+[23/10], loss: 0.6586058139801025 acc: 60.366131848941286
+[23/10],  zero acc: 49.998799388779744
+Ones predicted:  15321
+Zeros predicted:  10109
+[24/10], loss: 0.6585090756416321 acc: 60.372599869024235
+[24/10],  zero acc: 49.99884741322855
+Ones predicted:  15416
+Zeros predicted:  10014
+[25/10], loss: 0.6584226489067078 acc: 60.38280187396101
+[25/10],  zero acc: 49.99869024230518
+Ones predicted:  15366
+Zeros predicted:  10064
+[26/10], loss: 0.6583387851715088 acc: 60.392151155739896
+[26/10],  zero acc: 49.998544713672416
+Ones predicted:  15362
+Zeros predicted:  10068
+[27/10], loss: 0.6582566499710083 acc: 60.40083263167743
+[27/10],  zero acc: 49.998970904668354
+Ones predicted:  15344
+Zeros predicted:  10086
+[28/10], loss: 0.6581759452819824 acc: 60.415464173610644
+[28/10],  zero acc: 49.99900639071427
+Ones predicted:  15257
+Zeros predicted:  10173
+[29/10], loss: 0.6581041216850281 acc: 60.42702466710326
+[29/10],  zero acc: 49.999039511023796
+Ones predicted:  15319
+Zeros predicted:  10111
+[30/10], loss: 0.6580343842506409 acc: 60.43167078606587
+[30/10],  zero acc: 49.99856349156052
+Ones predicted:  15351
+Zeros predicted:  10079
+[31/10], loss: 0.6579587459564209 acc: 60.44314833005894
+[31/10],  zero acc: 49.99869024230518
+Ones predicted:  15305
+Zeros predicted:  10125
+[32/10], loss: 0.6578873991966248 acc: 60.44984223373221
+[32/10],  zero acc: 49.99912682820345
+Ones predicted:  15450
+Zeros predicted:  9980
+[33/10], loss: 0.6578205823898315 acc: 60.45417774182364
+[33/10],  zero acc: 49.99899842058631
+Ones predicted:  15063
+Zeros predicted:  10367
+[34/10], loss: 0.6577503085136414 acc: 60.456843483955474
+[34/10],  zero acc: 49.999251567031536
+Ones predicted:  15319
+Zeros predicted:  10111
+[35/10], loss: 0.6576826572418213 acc: 60.46121661936986
+[35/10],  zero acc: 49.99919959251983
+Ones predicted:  15322
+Zeros predicted:  10108
+[36/10], loss: 0.6576159596443176 acc: 60.46917644560081
+[36/10],  zero acc: 49.998796438875026
+Ones predicted:  15220
+Zeros predicted:  10210
+[37/10], loss: 0.6575530171394348 acc: 60.471030227828905
+[37/10],  zero acc: 49.99882811153621
+Ones predicted:  15325
+Zeros predicted:  10105
+[38/10], loss: 0.6574875116348267 acc: 60.475542793813915
+[38/10],  zero acc: 49.998925327019634
+Ones predicted:  15313
+Zeros predicted:  10117
+[39/10], loss: 0.6574236750602722 acc: 60.4784544859201
+[39/10],  zero acc: 49.99882121807466
+Ones predicted:  15181
+Zeros predicted:  10249
+[40/10], loss: 0.6573671698570251 acc: 60.48349226124874
+[40/10],  zero acc: 49.998977750091846
+Ones predicted:  15332
+Zeros predicted:  10098
+[41/10], loss: 0.6573126912117004 acc: 60.488789097826434
+[41/10],  zero acc: 49.998627872891134
+Ones predicted:  15152
+Zeros predicted:  10278
+[42/10], loss: 0.6572588086128235 acc: 60.49414416472488
+[42/10],  zero acc: 49.99847702593625
+Ones predicted:  15292
+Zeros predicted:  10138
+[43/10], loss: 0.6572060585021973 acc: 60.49964279335595
+[43/10],  zero acc: 49.99851163898315
+Ones predicted:  15151
+Zeros predicted:  10279
+[44/10], loss: 0.6571540832519531 acc: 60.50649785345267
+[44/10],  zero acc: 49.998661136578626
+Ones predicted:  15150
+Zeros predicted:  10280
+[45/10], loss: 0.6571018695831299 acc: 60.51217220466388
+[45/10],  zero acc: 49.99851940434498
+Ones predicted:  15157
+Zeros predicted:  10273
+[46/10], loss: 0.6570472121238708 acc: 60.515515055246695
+[46/10],  zero acc: 49.99827223453023
+Ones predicted:  15014
+Zeros predicted:  10416
+[47/10], loss: 0.6569895148277283 acc: 60.52720475878628
+[47/10],  zero acc: 49.998362802881466
+Ones predicted:  15315
+Zeros predicted:  10115
+[48/10], loss: 0.6569381952285767 acc: 60.532483327319135
+[48/10],  zero acc: 49.99861005305855
+Ones predicted:  15149
+Zeros predicted:  10281
+[49/10], loss: 0.6568828821182251 acc: 60.540327439423706
+[49/10],  zero acc: 49.9985330713818
+Ones predicted:  15063
+Zeros predicted:  10367
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  182 / 291
+------------------------------------------------------------------
+Misclassified zeros:  577 / 2708
+------------------------------------------------------------------
+Accuracy:  74.69156385461821
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.1588921282798834
+Recall -> Pr(correctly classified|positive example):  0.3745704467353952
+------------------------------------------------------------------
+F1 Score:  0.22313203684749233
+------------------------------------------------------------------
+Confusion Matrix
+TP:  109  FN:  182
+FP:  577  TN:  2131
+------------------------------------------------------------------
+AUC-ROC Score:  0.6404537656022374
+------------------------------------------------------------------
+Loss:  0.6568829
+##################################################################
+Number of Neurons:  9
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6809201836585999 acc: 58.986247544204325
+[0/10],  zero acc: 49.99738048461034
+Ones predicted:  16059
+Zeros predicted:  9371
+[1/10], loss: 0.670794665813446 acc: 59.62213490504257
+[1/10],  zero acc: 50.00130975769482
+Ones predicted:  14626
+Zeros predicted:  10804
+[2/10], loss: 0.6670352816581726 acc: 59.787382667539845
+[2/10],  zero acc: 49.998253656406895
+Ones predicted:  14697
+Zeros predicted:  10733
+[3/10], loss: 0.6651400327682495 acc: 59.845448592010484
+[3/10],  zero acc: 49.99672560576293
+Ones predicted:  14902
+Zeros predicted:  10528
+[4/10], loss: 0.663938581943512 acc: 59.90360183366078
+[4/10],  zero acc: 49.997380484610346
+Ones predicted:  14885
+Zeros predicted:  10545
+[5/10], loss: 0.6630774736404419 acc: 59.96900240122245
+[5/10],  zero acc: 49.99869024230517
+Ones predicted:  15297
+Zeros predicted:  10133
+[6/10], loss: 0.6624578237533569 acc: 60.01702685003275
+[6/10],  zero acc: 49.997754701094586
+Ones predicted:  15404
+Zeros predicted:  10026
+[7/10], loss: 0.6619888544082642 acc: 60.049934512115264
+[7/10],  zero acc: 49.99672560576293
+Ones predicted:  15615
+Zeros predicted:  9815
+[8/10], loss: 0.6615956425666809 acc: 60.07174561594994
+[8/10],  zero acc: 49.99854471367241
+Ones predicted:  15713
+Zeros predicted:  9717
+[9/10], loss: 0.6612621545791626 acc: 60.092468893254754
+[9/10],  zero acc: 49.99816633922725
+Ones predicted:  15690
+Zeros predicted:  9740
+[10/10], loss: 0.6609851717948914 acc: 60.11252009287373
+[10/10],  zero acc: 49.99833303566113
+Ones predicted:  15734
+Zeros predicted:  9696
+[11/10], loss: 0.6607705950737 acc: 60.125627592228774
+[11/10],  zero acc: 49.999126828203444
+Ones predicted:  15887
+Zeros predicted:  9543
+[12/10], loss: 0.6605650782585144 acc: 60.14276358873608
+[12/10],  zero acc: 49.99979849881618
+Ones predicted:  15715
+Zeros predicted:  9715
+[13/10], loss: 0.6603853106498718 acc: 60.16184862943213
+[13/10],  zero acc: 49.999438675273645
+Ones predicted:  15778
+Zeros predicted:  9652
+[14/10], loss: 0.6602151393890381 acc: 60.175944117005024
+[14/10],  zero acc: 49.99860292512552
+Ones predicted:  15662
+Zeros predicted:  9768
+[15/10], loss: 0.6600661277770996 acc: 60.19302554027505
+[15/10],  zero acc: 49.99869024230518
+Ones predicted:  15734
+Zeros predicted:  9696
+[16/10], loss: 0.6599240303039551 acc: 60.21387572710813
+[16/10],  zero acc: 49.998459108594325
+Ones predicted:  15805
+Zeros predicted:  9625
+[17/10], loss: 0.6597855687141418 acc: 60.22826166048171
+[17/10],  zero acc: 49.998544713672416
+Ones predicted:  15662
+Zeros predicted:  9768
+[18/10], loss: 0.6596721410751343 acc: 60.23610105814635
+[18/10],  zero acc: 49.99889704615173
+Ones predicted:  15673
+Zeros predicted:  9757
+[19/10], loss: 0.6595563292503357 acc: 60.25278323510151
+[19/10],  zero acc: 49.99921414538311
+Ones predicted:  15498
+Zeros predicted:  9932
+[20/10], loss: 0.6594540476799011 acc: 60.26313655783205
+[20/10],  zero acc: 49.99912682820346
+Ones predicted:  15658
+Zeros predicted:  9772
+[21/10], loss: 0.6593420505523682 acc: 60.27290587604929
+[21/10],  zero acc: 49.99904744894922
+Ones predicted:  15438
+Zeros predicted:  9992
+[22/10], loss: 0.6592423319816589 acc: 60.282565986162126
+[22/10],  zero acc: 49.99851940434498
+Ones predicted:  15673
+Zeros predicted:  9757
+[23/10], loss: 0.6591536998748779 acc: 60.293876882776686
+[23/10],  zero acc: 49.998908535254316
+Ones predicted:  15350
+Zeros predicted:  10080
+[24/10], loss: 0.6590622067451477 acc: 60.303968565815325
+[24/10],  zero acc: 49.9985330713818
+Ones predicted:  15550
+Zeros predicted:  9880
+[25/10], loss: 0.6589739322662354 acc: 60.3107148254496
+[25/10],  zero acc: 49.99899249408091
+Ones predicted:  15423
+Zeros predicted:  10007
+[26/10], loss: 0.6588876843452454 acc: 60.31992044434743
+[26/10],  zero acc: 49.99893279002644
+Ones predicted:  15426
+Zeros predicted:  10004
+[27/10], loss: 0.6588017344474792 acc: 60.33047993264103
+[27/10],  zero acc: 49.99869024230517
+Ones predicted:  15461
+Zeros predicted:  9969
+[28/10], loss: 0.658722460269928 acc: 60.339498227310706
+[28/10],  zero acc: 49.99900639071427
+Ones predicted:  15435
+Zeros predicted:  9995
+[29/10], loss: 0.6586422920227051 acc: 60.34372407771229
+[29/10],  zero acc: 49.99886487666449
+Ones predicted:  15387
+Zeros predicted:  10043
+[30/10], loss: 0.6585671901702881 acc: 60.354564083063984
+[30/10],  zero acc: 49.99923949553204
+Ones predicted:  15356
+Zeros predicted:  10074
+[31/10], loss: 0.658492386341095 acc: 60.3619433529797
+[31/10],  zero acc: 49.99934512115259
+Ones predicted:  15360
+Zeros predicted:  10070
+[32/10], loss: 0.6584196090698242 acc: 60.370145462483386
+[32/10],  zero acc: 49.999364965966144
+Ones predicted:  15386
+Zeros predicted:  10044
+[33/10], loss: 0.658349335193634 acc: 60.37763396124658
+[33/10],  zero acc: 49.99961477714858
+Ones predicted:  15366
+Zeros predicted:  10064
+[34/10], loss: 0.6582788228988647 acc: 60.39195434558893
+[34/10],  zero acc: 49.99962578351577
+Ones predicted:  15292
+Zeros predicted:  10138
+[35/10], loss: 0.6582101583480835 acc: 60.39554682383759
+[35/10],  zero acc: 49.99963617841811
+Ones predicted:  15135
+Zeros predicted:  10295
+[36/10], loss: 0.6581453680992126 acc: 60.40414874599551
+[36/10],  zero acc: 49.99971680914707
+Ones predicted:  15286
+Zeros predicted:  10144
+[37/10], loss: 0.6580787301063538 acc: 60.41050563540482
+[37/10],  zero acc: 49.999655326922415
+Ones predicted:  15090
+Zeros predicted:  10340
+[38/10], loss: 0.6580199599266052 acc: 60.419626215304014
+[38/10],  zero acc: 49.99979849881618
+Ones predicted:  15206
+Zeros predicted:  10224
+[39/10], loss: 0.6579582095146179 acc: 60.4256712508186
+[39/10],  zero acc: 49.99980353634577
+Ones predicted:  15366
+Zeros predicted:  10064
+[40/10], loss: 0.6578984260559082 acc: 60.429057453639366
+[40/10],  zero acc: 49.999680546903704
+Ones predicted:  15202
+Zeros predicted:  10228
+[41/10], loss: 0.6578433513641357 acc: 60.437178407708856
+[41/10],  zero acc: 49.99962578351576
+Ones predicted:  15135
+Zeros predicted:  10295
+[42/10], loss: 0.6577883958816528 acc: 60.443276830995565
+[42/10],  zero acc: 49.9996344862247
+Ones predicted:  15221
+Zeros predicted:  10209
+[43/10], loss: 0.6577378511428833 acc: 60.44606179674942
+[43/10],  zero acc: 49.99988093111866
+Ones predicted:  15191
+Zeros predicted:  10239
+[44/10], loss: 0.6576844453811646 acc: 60.45140071309031
+[44/10],  zero acc: 49.999592519828276
+Ones predicted:  15205
+Zeros predicted:  10225
+[45/10], loss: 0.657632052898407 acc: 60.45744711141483
+[45/10],  zero acc: 49.999772216053074
+Ones predicted:  15130
+Zeros predicted:  10300
+[46/10], loss: 0.657578706741333 acc: 60.46301327871365
+[46/10],  zero acc: 49.99977706252003
+Ones predicted:  15160
+Zeros predicted:  10270
+[47/10], loss: 0.6575327515602112 acc: 60.46810194280725
+[47/10],  zero acc: 49.999727133813586
+Ones predicted:  15153
+Zeros predicted:  10277
+[48/10], loss: 0.6574829816818237 acc: 60.47188698662177
+[48/10],  zero acc: 49.99994654050226
+Ones predicted:  15058
+Zeros predicted:  10372
+[49/10], loss: 0.6574326753616333 acc: 60.47724950884086
+[49/10],  zero acc: 49.99989521938442
+Ones predicted:  15150
+Zeros predicted:  10280
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  116 / 291
+------------------------------------------------------------------
+Misclassified zeros:  1138 / 2708
+------------------------------------------------------------------
+Accuracy:  58.18606202067356
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.13328255902513328
+Recall -> Pr(correctly classified|positive example):  0.6013745704467354
+------------------------------------------------------------------
+F1 Score:  0.21820448877805484
+------------------------------------------------------------------
+Confusion Matrix
+TP:  175  FN:  116
+FP:  1138  TN:  1570
+------------------------------------------------------------------
+AUC-ROC Score:  0.6380464907338317
+------------------------------------------------------------------
+Loss:  0.6574327
+##################################################################
+Number of Neurons:  10
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.681901216506958 acc: 57.20235756385069
+[0/10],  zero acc: 50.00261951538966
+Ones predicted:  18333
+Zeros predicted:  7097
+[1/10], loss: 0.6714511513710022 acc: 58.67583497053045
+[1/10],  zero acc: 50.0
+Ones predicted:  14663
+Zeros predicted:  10767
+[2/10], loss: 0.6673583388328552 acc: 59.17397948046278
+[2/10],  zero acc: 50.000873171796556
+Ones predicted:  14693
+Zeros predicted:  10737
+[3/10], loss: 0.6651891469955444 acc: 59.47347740667976
+[3/10],  zero acc: 50.00196463654224
+Ones predicted:  14773
+Zeros predicted:  10657
+[4/10], loss: 0.663849413394928 acc: 59.65370006548788
+[4/10],  zero acc: 50.00366732154552
+Ones predicted:  15159
+Zeros predicted:  10271
+[5/10], loss: 0.6628975868225098 acc: 59.76293385723641
+[5/10],  zero acc: 50.00480244488104
+Ones predicted:  15275
+Zeros predicted:  10155
+[6/10], loss: 0.6622021794319153 acc: 59.8561137618112
+[6/10],  zero acc: 50.00486481429506
+Ones predicted:  15566
+Zeros predicted:  9864
+[7/10], loss: 0.6616578102111816 acc: 59.9081532416503
+[7/10],  zero acc: 50.004584151931894
+Ones predicted:  15677
+Zeros predicted:  9753
+[8/10], loss: 0.6612198948860168 acc: 59.95459506657935
+[8/10],  zero acc: 50.00553008804482
+Ones predicted:  15748
+Zeros predicted:  9682
+[9/10], loss: 0.6608669757843018 acc: 59.99187950229208
+[9/10],  zero acc: 50.00445317616241
+Ones predicted:  15737
+Zeros predicted:  9693
+[10/10], loss: 0.6605672836303711 acc: 60.011787819253435
+[10/10],  zero acc: 50.00381020420314
+Ones predicted:  15536
+Zeros predicted:  9894
+[11/10], loss: 0.660301923751831 acc: 60.02706832569309
+[11/10],  zero acc: 50.00349268718621
+Ones predicted:  15816
+Zeros predicted:  9614
+[12/10], loss: 0.6600775718688965 acc: 60.052088056017325
+[12/10],  zero acc: 50.00403002367639
+Ones predicted:  15652
+Zeros predicted:  9778
+[13/10], loss: 0.659874439239502 acc: 60.07708859575264
+[13/10],  zero acc: 50.003367948358125
+Ones predicted:  15732
+Zeros predicted:  9698
+[14/10], loss: 0.6596787571907043 acc: 60.097533289674736
+[14/10],  zero acc: 50.00296878410827
+Ones predicted:  15710
+Zeros predicted:  9720
+[15/10], loss: 0.6595245003700256 acc: 60.11034708578913
+[15/10],  zero acc: 50.00311067452522
+Ones predicted:  15670
+Zeros predicted:  9760
+[16/10], loss: 0.6593697667121887 acc: 60.12704649639817
+[16/10],  zero acc: 50.002773604530226
+Ones predicted:  15670
+Zeros predicted:  9760
+[17/10], loss: 0.6592385768890381 acc: 60.13883431565161
+[17/10],  zero acc: 50.00261951538966
+Ones predicted:  15788
+Zeros predicted:  9642
+[18/10], loss: 0.6591084599494934 acc: 60.15117361182918
+[18/10],  zero acc: 50.002619515389654
+Ones predicted:  15714
+Zeros predicted:  9716
+[19/10], loss: 0.6589825749397278 acc: 60.16895874263261
+[19/10],  zero acc: 50.003405370006554
+Ones predicted:  15626
+Zeros predicted:  9804
+[20/10], loss: 0.6588602066040039 acc: 60.190289082234074
+[20/10],  zero acc: 50.00311847070197
+Ones predicted:  15586
+Zeros predicted:  9844
+[21/10], loss: 0.6587598919868469 acc: 60.19807108412216
+[21/10],  zero acc: 50.003572066440434
+Ones predicted:  15787
+Zeros predicted:  9643
+[22/10], loss: 0.6586586833000183 acc: 60.20620141795507
+[22/10],  zero acc: 50.003075083283505
+Ones predicted:  15591
+Zeros predicted:  9839
+[23/10], loss: 0.658560037612915 acc: 60.2103798297315
+[23/10],  zero acc: 50.00382012660992
+Ones predicted:  15627
+Zeros predicted:  9803
+[24/10], loss: 0.6584588885307312 acc: 60.216581532416505
+[24/10],  zero acc: 50.00345776031434
+Ones predicted:  15566
+Zeros predicted:  9864
+[25/10], loss: 0.6583755612373352 acc: 60.223112185784096
+[25/10],  zero acc: 50.00282101657348
+Ones predicted:  15696
+Zeros predicted:  9734
+[26/10], loss: 0.6582823395729065 acc: 60.231244997453246
+[26/10],  zero acc: 50.00242547721265
+Ones predicted:  15623
+Zeros predicted:  9807
+[27/10], loss: 0.6581899523735046 acc: 60.239498549911126
+[27/10],  zero acc: 50.002900177752835
+Ones predicted:  15726
+Zeros predicted:  9704
+[28/10], loss: 0.6581131219863892 acc: 60.24772486055598
+[28/10],  zero acc: 50.00270984350654
+Ones predicted:  15440
+Zeros predicted:  9990
+[29/10], loss: 0.658032238483429 acc: 60.25191006330496
+[29/10],  zero acc: 50.002619515389654
+Ones predicted:  15470
+Zeros predicted:  9960
+[30/10], loss: 0.657956600189209 acc: 60.26174028772419
+[30/10],  zero acc: 50.002619515389654
+Ones predicted:  15512
+Zeros predicted:  9918
+[31/10], loss: 0.6578783988952637 acc: 60.26657662082515
+[31/10],  zero acc: 50.00278323510151
+Ones predicted:  15617
+Zeros predicted:  9813
+[32/10], loss: 0.6578046679496765 acc: 60.2724296005239
+[32/10],  zero acc: 50.002698894643885
+Ones predicted:  15378
+Zeros predicted:  10052
+[33/10], loss: 0.657733678817749 acc: 60.2795947455603
+[33/10],  zero acc: 50.002696559959944
+Ones predicted:  15459
+Zeros predicted:  9971
+[34/10], loss: 0.657661497592926 acc: 60.28238375900459
+[34/10],  zero acc: 50.00246982879596
+Ones predicted:  15497
+Zeros predicted:  9933
+[35/10], loss: 0.6575903296470642 acc: 60.29011132940406
+[35/10],  zero acc: 50.00225569380776
+Ones predicted:  15509
+Zeros predicted:  9921
+[36/10], loss: 0.657524049282074 acc: 60.29359811678082
+[36/10],  zero acc: 50.002265526823486
+Ones predicted:  15443
+Zeros predicted:  9987
+[37/10], loss: 0.6574591398239136 acc: 60.29397166787302
+[37/10],  zero acc: 50.001999103850004
+Ones predicted:  15242
+Zeros predicted:  10188
+[38/10], loss: 0.6573945879936218 acc: 60.301781606300274
+[38/10],  zero acc: 50.002015011838196
+Ones predicted:  15524
+Zeros predicted:  9906
+[39/10], loss: 0.6573236584663391 acc: 60.30556647020301
+[39/10],  zero acc: 50.00203012442698
+Ones predicted:  15335
+Zeros predicted:  10095
+[40/10], loss: 0.6572588086128235 acc: 60.31022090181609
+[40/10],  zero acc: 50.001980609197055
+Ones predicted:  15252
+Zeros predicted:  10178
+[41/10], loss: 0.6572052836418152 acc: 60.315215018554895
+[41/10],  zero acc: 50.00168397417906
+Ones predicted:  15376
+Zeros predicted:  10054
+[42/10], loss: 0.6571434140205383 acc: 60.31875847154322
+[42/10],  zero acc: 50.00170573095141
+Ones predicted:  15288
+Zeros predicted:  10142
+[43/10], loss: 0.6570836305618286 acc: 60.3246115377746
+[43/10],  zero acc: 50.001666964338874
+Ones predicted:  15367
+Zeros predicted:  10063
+[44/10], loss: 0.657021164894104 acc: 60.333464309102816
+[44/10],  zero acc: 50.00151349778069
+Ones predicted:  15283
+Zeros predicted:  10147
+[45/10], loss: 0.6569615602493286 acc: 60.3347000370149
+[45/10],  zero acc: 50.00170837960195
+Ones predicted:  15231
+Zeros predicted:  10199
+[46/10], loss: 0.6568999290466309 acc: 60.33800108682021
+[46/10],  zero acc: 50.00178349983977
+Ones predicted:  15263
+Zeros predicted:  10167
+[47/10], loss: 0.6568417549133301 acc: 60.34116459288364
+[47/10],  zero acc: 50.00212835625409
+Ones predicted:  15235
+Zeros predicted:  10195
+[48/10], loss: 0.6567800045013428 acc: 60.34502759846571
+[48/10],  zero acc: 50.00219183940767
+Ones predicted:  15150
+Zeros predicted:  10280
+[49/10], loss: 0.656727135181427 acc: 60.34582842174198
+[49/10],  zero acc: 50.00235756385069
+Ones predicted:  15175
+Zeros predicted:  10255
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  191 / 291
+------------------------------------------------------------------
+Misclassified zeros:  593 / 2708
+------------------------------------------------------------------
+Accuracy:  73.85795265088363
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.1443001443001443
+Recall -> Pr(correctly classified|positive example):  0.3436426116838488
+------------------------------------------------------------------
+F1 Score:  0.2032520325203252
+------------------------------------------------------------------
+Confusion Matrix
+TP:  100  FN:  191
+FP:  593  TN:  2115
+------------------------------------------------------------------
+AUC-ROC Score:  0.636457714700493
+------------------------------------------------------------------
+Loss:  0.65672714
+##################################################################
+Number of Neurons:  15
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6738232970237732 acc: 58.94957432874918
+[0/10],  zero acc: 50.0
+Ones predicted:  13881
+Zeros predicted:  11549
+[1/10], loss: 0.666712760925293 acc: 59.66797642436149
+[1/10],  zero acc: 49.99607072691552
+Ones predicted:  14998
+Zeros predicted:  10432
+[2/10], loss: 0.6641651391983032 acc: 59.96114385505348
+[2/10],  zero acc: 49.99563414101724
+Ones predicted:  15219
+Zeros predicted:  10211
+[3/10], loss: 0.6627116799354553 acc: 60.07694826457105
+[3/10],  zero acc: 49.99345121152587
+Ones predicted:  15481
+Zeros predicted:  9949
+[4/10], loss: 0.6618489623069763 acc: 60.145383104125735
+[4/10],  zero acc: 49.99371316306483
+Ones predicted:  15739
+Zeros predicted:  9691
+[5/10], loss: 0.6612002849578857 acc: 60.20868805937569
+[5/10],  zero acc: 49.99563414101725
+Ones predicted:  15882
+Zeros predicted:  9548
+[6/10], loss: 0.6607092618942261 acc: 60.24211806530077
+[6/10],  zero acc: 49.99513518570494
+Ones predicted:  15713
+Zeros predicted:  9717
+[7/10], loss: 0.6603366136550903 acc: 60.262278978389
+[7/10],  zero acc: 49.99672560576294
+Ones predicted:  15785
+Zeros predicted:  9645
+[8/10], loss: 0.6600472927093506 acc: 60.25496616459289
+[8/10],  zero acc: 49.9965073128138
+Ones predicted:  15651
+Zeros predicted:  9779
+[9/10], loss: 0.659807026386261 acc: 60.257236411263925
+[9/10],  zero acc: 49.99633267845448
+Ones predicted:  15825
+Zeros predicted:  9605
+[10/10], loss: 0.6595972776412964 acc: 60.27064356730368
+[10/10],  zero acc: 49.99785676013574
+Ones predicted:  15662
+Zeros predicted:  9768
+[11/10], loss: 0.6593981385231018 acc: 60.274612530015276
+[11/10],  zero acc: 49.99869024230517
+Ones predicted:  15672
+Zeros predicted:  9758
+[12/10], loss: 0.6592397689819336 acc: 60.28361291622588
+[12/10],  zero acc: 49.99899249408091
+Ones predicted:  15692
+Zeros predicted:  9738
+[13/10], loss: 0.6590896248817444 acc: 60.28936289643559
+[13/10],  zero acc: 49.999438675273645
+Ones predicted:  15715
+Zeros predicted:  9715
+[14/10], loss: 0.658943772315979 acc: 60.29137742850905
+[14/10],  zero acc: 50.0
+Ones predicted:  15539
+Zeros predicted:  9891
+[15/10], loss: 0.6588028073310852 acc: 60.29240340537
+[15/10],  zero acc: 49.99934512115259
+Ones predicted:  15628
+Zeros predicted:  9802
+[16/10], loss: 0.6586898565292358 acc: 60.29500365961709
+[16/10],  zero acc: 49.999075465156594
+Ones predicted:  15774
+Zeros predicted:  9656
+[17/10], loss: 0.6585637927055359 acc: 60.30524630721095
+[17/10],  zero acc: 49.99956341410172
+Ones predicted:  15545
+Zeros predicted:  9885
+[18/10], loss: 0.658438503742218 acc: 60.3081377313618
+[18/10],  zero acc: 49.999724261537935
+Ones predicted:  15544
+Zeros predicted:  9886
+[19/10], loss: 0.6583241820335388 acc: 60.31493123772102
+[19/10],  zero acc: 50.00026195153897
+Ones predicted:  15248
+Zeros predicted:  10182
+[20/10], loss: 0.6582169532775879 acc: 60.31702373156205
+[20/10],  zero acc: 50.00037421648424
+Ones predicted:  15421
+Zeros predicted:  10009
+[21/10], loss: 0.6580964922904968 acc: 60.32791569923201
+[21/10],  zero acc: 50.00035720664405
+Ones predicted:  15436
+Zeros predicted:  9994
+[22/10], loss: 0.6579786539077759 acc: 60.33222288659207
+[22/10],  zero acc: 50.00011389197347
+Ones predicted:  15221
+Zeros predicted:  10209
+[23/10], loss: 0.6578634977340698 acc: 60.330768391180975
+[23/10],  zero acc: 50.00043658589828
+Ones predicted:  15420
+Zeros predicted:  10010
+[24/10], loss: 0.6577629446983337 acc: 60.33042567125082
+[24/10],  zero acc: 50.00041912246235
+Ones predicted:  15241
+Zeros predicted:  10189
+[25/10], loss: 0.6576572060585022 acc: 60.33615434990681
+[25/10],  zero acc: 50.00010075059191
+Ones predicted:  15323
+Zeros predicted:  10107
+[26/10], loss: 0.6575567126274109 acc: 60.33942128113707
+[26/10],  zero acc: 49.9999029809115
+Ones predicted:  15201
+Zeros predicted:  10229
+[27/10], loss: 0.6574517488479614 acc: 60.34816166152119
+[27/10],  zero acc: 50.0
+Ones predicted:  15255
+Zeros predicted:  10175
+[28/10], loss: 0.657345175743103 acc: 60.35340875731094
+[28/10],  zero acc: 49.99963868753247
+Ones predicted:  15307
+Zeros predicted:  10123
+[29/10], loss: 0.6572424173355103 acc: 60.359790438768826
+[29/10],  zero acc: 49.999650731281385
+Ones predicted:  15215
+Zeros predicted:  10215
+[30/10], loss: 0.6571422219276428 acc: 60.363140883452694
+[30/10],  zero acc: 49.999492997021356
+Ones predicted:  15133
+Zeros predicted:  10297
+[31/10], loss: 0.6570454239845276 acc: 60.36992468893255
+[31/10],  zero acc: 49.99950884086444
+Ones predicted:  15130
+Zeros predicted:  10300
+[32/10], loss: 0.6569424271583557 acc: 60.37621797543213
+[32/10],  zero acc: 49.99952372447461
+Ones predicted:  15128
+Zeros predicted:  10302
+[33/10], loss: 0.6568557024002075 acc: 60.38291151431103
+[33/10],  zero acc: 50.00007704457028
+Ones predicted:  15142
+Zeros predicted:  10288
+[34/10], loss: 0.6567609906196594 acc: 60.392141453831044
+[34/10],  zero acc: 50.0
+Ones predicted:  15056
+Zeros predicted:  10374
+[35/10], loss: 0.6566647887229919 acc: 60.39954886123846
+[35/10],  zero acc: 49.99970894273448
+Ones predicted:  15062
+Zeros predicted:  10368
+[36/10], loss: 0.6565690636634827 acc: 60.41246747730048
+[36/10],  zero acc: 49.99971680914706
+Ones predicted:  15175
+Zeros predicted:  10255
+[37/10], loss: 0.6564752459526062 acc: 60.42108709888671
+[37/10],  zero acc: 49.99972426153793
+Ones predicted:  15040
+Zeros predicted:  10390
+[38/10], loss: 0.6563862562179565 acc: 60.42647725555388
+[38/10],  zero acc: 50.0
+Ones predicted:  15007
+Zeros predicted:  10423
+[39/10], loss: 0.6562934517860413 acc: 60.42815979043878
+[39/10],  zero acc: 50.0
+Ones predicted:  15084
+Zeros predicted:  10346
+[40/10], loss: 0.656210720539093 acc: 60.4334659063683
+[40/10],  zero acc: 50.00006389061926
+Ones predicted:  14886
+Zeros predicted:  10544
+[41/10], loss: 0.6561256647109985 acc: 60.438706458352826
+[41/10],  zero acc: 49.999875261171915
+Ones predicted:  14930
+Zeros predicted:  10500
+[42/10], loss: 0.6560414433479309 acc: 60.4475106988928
+[42/10],  zero acc: 50.00006091896256
+Ones predicted:  14839
+Zeros predicted:  10591
+[43/10], loss: 0.6559560298919678 acc: 60.460469131392514
+[43/10],  zero acc: 50.000119068881354
+Ones predicted:  14942
+Zeros predicted:  10488
+[44/10], loss: 0.6558727622032166 acc: 60.469941060903736
+[44/10],  zero acc: 50.0
+Ones predicted:  14964
+Zeros predicted:  10466
+[45/10], loss: 0.6557914018630981 acc: 60.4767802739102
+[45/10],  zero acc: 50.0
+Ones predicted:  14908
+Zeros predicted:  10522
+[46/10], loss: 0.6557050347328186 acc: 60.49054605749001
+[46/10],  zero acc: 49.99977706252003
+Ones predicted:  14861
+Zeros predicted:  10569
+[47/10], loss: 0.6556244492530823 acc: 60.499317834533954
+[47/10],  zero acc: 50.0
+Ones predicted:  14835
+Zeros predicted:  10595
+[48/10], loss: 0.6555433869361877 acc: 60.50746428237307
+[48/10],  zero acc: 49.9998930810045
+Ones predicted:  14969
+Zeros predicted:  10461
+[49/10], loss: 0.6554625630378723 acc: 60.5155206286837
+[49/10],  zero acc: 49.99984282907662
+Ones predicted:  14888
+Zeros predicted:  10542
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  157 / 291
+------------------------------------------------------------------
+Misclassified zeros:  755 / 2708
+------------------------------------------------------------------
+Accuracy:  69.58986328776258
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.15073115860517436
+Recall -> Pr(correctly classified|positive example):  0.46048109965635736
+------------------------------------------------------------------
+F1 Score:  0.2271186440677966
+------------------------------------------------------------------
+Confusion Matrix
+TP:  134  FN:  157
+FP:  755  TN:  1953
+------------------------------------------------------------------
+AUC-ROC Score:  0.6449510677285579
+------------------------------------------------------------------
+Loss:  0.65546256
+##################################################################
+Number of Neurons:  20
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6700905561447144 acc: 58.669286182056325
+[0/10],  zero acc: 50.0
+Ones predicted:  16543
+Zeros predicted:  8887
+[1/10], loss: 0.6647387742996216 acc: 59.445317616241
+[1/10],  zero acc: 50.0
+Ones predicted:  14864
+Zeros predicted:  10566
+[2/10], loss: 0.6627656817436218 acc: 59.668631303208905
+[2/10],  zero acc: 50.0034926871862
+Ones predicted:  14939
+Zeros predicted:  10491
+[3/10], loss: 0.6618001461029053 acc: 59.843483955468244
+[3/10],  zero acc: 50.00130975769483
+Ones predicted:  15006
+Zeros predicted:  10424
+[4/10], loss: 0.6611163020133972 acc: 59.92874918140145
+[4/10],  zero acc: 50.00209561231173
+Ones predicted:  15121
+Zeros predicted:  10309
+[5/10], loss: 0.6606497168540955 acc: 59.95655970312159
+[5/10],  zero acc: 50.00043658589828
+Ones predicted:  15052
+Zeros predicted:  10378
+[6/10], loss: 0.6602922081947327 acc: 60.01309757694827
+[6/10],  zero acc: 50.00074843296848
+Ones predicted:  15120
+Zeros predicted:  10310
+[7/10], loss: 0.6600139141082764 acc: 60.034872298624755
+[7/10],  zero acc: 50.00065487884742
+Ones predicted:  15056
+Zeros predicted:  10374
+[8/10], loss: 0.65981525182724 acc: 60.05355453685514
+[8/10],  zero acc: 50.000582114531035
+Ones predicted:  15132
+Zeros predicted:  10298
+[9/10], loss: 0.6596291065216064 acc: 60.08880157170923
+[9/10],  zero acc: 50.00104780615586
+Ones predicted:  15203
+Zeros predicted:  10227
+[10/10], loss: 0.6594826579093933 acc: 60.103113651247256
+[10/10],  zero acc: 50.00166696433887
+Ones predicted:  15333
+Zeros predicted:  10097
+[11/10], loss: 0.6593246459960938 acc: 60.130539183584375
+[11/10],  zero acc: 50.00196463654224
+Ones predicted:  15325
+Zeros predicted:  10105
+[12/10], loss: 0.6591687798500061 acc: 60.148002619515395
+[12/10],  zero acc: 50.00322401894112
+Ones predicted:  15316
+Zeros predicted:  10114
+[13/10], loss: 0.6590203642845154 acc: 60.163532603611195
+[13/10],  zero acc: 50.003367948358125
+Ones predicted:  15194
+Zeros predicted:  10236
+[14/10], loss: 0.6588723063468933 acc: 60.174896310849164
+[14/10],  zero acc: 50.002968784108276
+Ones predicted:  15226
+Zeros predicted:  10204
+[15/10], loss: 0.6587343811988831 acc: 60.18352979698756
+[15/10],  zero acc: 50.00311067452522
+Ones predicted:  15186
+Zeros predicted:  10244
+[16/10], loss: 0.6585979461669922 acc: 60.19361300512347
+[16/10],  zero acc: 50.00184906968682
+Ones predicted:  15042
+Zeros predicted:  10388
+[17/10], loss: 0.6584517955780029 acc: 60.21538237648258
+[17/10],  zero acc: 50.00116422906207
+Ones predicted:  15032
+Zeros predicted:  10398
+[18/10], loss: 0.6583465933799744 acc: 60.225416192741186
+[18/10],  zero acc: 50.00096508461724
+Ones predicted:  15109
+Zeros predicted:  10321
+[19/10], loss: 0.6582189202308655 acc: 60.253307138179444
+[19/10],  zero acc: 50.00078585461689
+Ones predicted:  15123
+Zeros predicted:  10307
+[20/10], loss: 0.6580914855003357 acc: 60.26182680013722
+[20/10],  zero acc: 50.00024947765616
+Ones predicted:  14931
+Zeros predicted:  10499
+[21/10], loss: 0.6579718589782715 acc: 60.27028636065965
+[21/10],  zero acc: 50.00047627552539
+Ones predicted:  15133
+Zeros predicted:  10297
+[22/10], loss: 0.6578441858291626 acc: 60.28911477463627
+[22/10],  zero acc: 50.00045556789386
+Ones predicted:  14998
+Zeros predicted:  10432
+[23/10], loss: 0.6577174663543701 acc: 60.302062868369354
+[23/10],  zero acc: 50.00054573237285
+Ones predicted:  14931
+Zeros predicted:  10499
+[24/10], loss: 0.6576025485992432 acc: 60.31827111984283
+[24/10],  zero acc: 50.00125736738703
+Ones predicted:  15131
+Zeros predicted:  10299
+[25/10], loss: 0.6574844717979431 acc: 60.32784242607426
+[25/10],  zero acc: 50.001209007102915
+Ones predicted:  14880
+Zeros predicted:  10550
+[26/10], loss: 0.6573755145072937 acc: 60.33597710349512
+[26/10],  zero acc: 50.00116422906207
+Ones predicted:  14887
+Zeros predicted:  10543
+[27/10], loss: 0.6572530269622803 acc: 60.34965852745814
+[27/10],  zero acc: 50.00102909533165
+Ones predicted:  14978
+Zeros predicted:  10452
+[28/10], loss: 0.6571507453918457 acc: 60.356118600817474
+[28/10],  zero acc: 50.000993609285736
+Ones predicted:  14859
+Zeros predicted:  10571
+[29/10], loss: 0.6570351719856262 acc: 60.36323946736521
+[29/10],  zero acc: 50.00139707487448
+Ones predicted:  14932
+Zeros predicted:  10498
+[30/10], loss: 0.6569279432296753 acc: 60.37045017639478
+[30/10],  zero acc: 50.00143650843949
+Ones predicted:  14729
+Zeros predicted:  10701
+[31/10], loss: 0.6568194031715393 acc: 60.37905206286837
+[31/10],  zero acc: 50.00114603798298
+Ones predicted:  14882
+Zeros predicted:  10548
+[32/10], loss: 0.6567121148109436 acc: 60.39253041217678
+[32/10],  zero acc: 50.00127006806771
+Ones predicted:  14780
+Zeros predicted:  10650
+[33/10], loss: 0.6566042304039001 acc: 60.39724180438383
+[33/10],  zero acc: 50.001232713124544
+Ones predicted:  14775
+Zeros predicted:  10655
+[34/10], loss: 0.6564999222755432 acc: 60.40340537000655
+[34/10],  zero acc: 50.00112264945272
+Ones predicted:  14729
+Zeros predicted:  10701
+[35/10], loss: 0.6563909649848938 acc: 60.41060903732809
+[35/10],  zero acc: 50.00123699337845
+Ones predicted:  14647
+Zeros predicted:  10783
+[36/10], loss: 0.6562804579734802 acc: 60.41880387263491
+[36/10],  zero acc: 50.00155754969115
+Ones predicted:  14546
+Zeros predicted:  10884
+[37/10], loss: 0.6561829447746277 acc: 60.42701547582118
+[37/10],  zero acc: 50.00144762692587
+Ones predicted:  14523
+Zeros predicted:  10907
+[38/10], loss: 0.65607750415802 acc: 60.433832048763286
+[38/10],  zero acc: 50.001343341225464
+Ones predicted:  14498
+Zeros predicted:  10932
+[39/10], loss: 0.6559690833091736 acc: 60.44449901768173
+[39/10],  zero acc: 50.00130975769483
+Ones predicted:  14552
+Zeros predicted:  10878
+[40/10], loss: 0.6558794975280762 acc: 60.45224974843069
+[40/10],  zero acc: 50.00146948424298
+Ones predicted:  14501
+Zeros predicted:  10929
+[41/10], loss: 0.6557754874229431 acc: 60.46343593101943
+[41/10],  zero acc: 50.00143449652291
+Ones predicted:  14483
+Zeros predicted:  10947
+[42/10], loss: 0.6556876301765442 acc: 60.46895417371042
+[42/10],  zero acc: 50.00134021717611
+Ones predicted:  14628
+Zeros predicted:  10802
+[43/10], loss: 0.6555918455123901 acc: 60.47413228552717
+[43/10],  zero acc: 50.001250223254154
+Ones predicted:  14555
+Zeros predicted:  10875
+[44/10], loss: 0.6554905772209167 acc: 60.48178709161027
+[44/10],  zero acc: 50.00098959470276
+Ones predicted:  14398
+Zeros predicted:  11032
+[45/10], loss: 0.6553938388824463 acc: 60.48586315879388
+[45/10],  zero acc: 50.000854189800975
+Ones predicted:  14454
+Zeros predicted:  10976
+[46/10], loss: 0.6552997827529907 acc: 60.492162354219786
+[46/10],  zero acc: 50.001114687399856
+Ones predicted:  14580
+Zeros predicted:  10850
+[47/10], loss: 0.6552111506462097 acc: 60.49746234446627
+[47/10],  zero acc: 50.00125518445755
+Ones predicted:  14391
+Zeros predicted:  11039
+[48/10], loss: 0.6551267504692078 acc: 60.50219852184488
+[48/10],  zero acc: 50.00112264945271
+Ones predicted:  14390
+Zeros predicted:  11040
+[49/10], loss: 0.6550306081771851 acc: 60.50674525212836
+[49/10],  zero acc: 50.001414538310414
+Ones predicted:  14504
+Zeros predicted:  10926
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  194 / 291
+------------------------------------------------------------------
+Misclassified zeros:  526 / 2708
+------------------------------------------------------------------
+Accuracy:  75.99199733244414
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.15569823434991975
+Recall -> Pr(correctly classified|positive example):  0.3333333333333333
+------------------------------------------------------------------
+F1 Score:  0.212253829321663
+------------------------------------------------------------------
+Confusion Matrix
+TP:  97  FN:  194
+FP:  526  TN:  2182
+------------------------------------------------------------------
+AUC-ROC Score:  0.6423369474181121
+------------------------------------------------------------------
+Loss:  0.6550306
+##################################################################
+Number of Neurons:  30
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6694551110267639 acc: 58.950884086444006
+[0/10],  zero acc: 50.0
+Ones predicted:  13268
+Zeros predicted:  12162
+[1/10], loss: 0.6641396284103394 acc: 59.74328749181401
+[1/10],  zero acc: 49.997380484610346
+Ones predicted:  15134
+Zeros predicted:  10296
+[2/10], loss: 0.6622731685638428 acc: 59.96987557301899
+[2/10],  zero acc: 49.99650731281379
+Ones predicted:  15416
+Zeros predicted:  10014
+[3/10], loss: 0.6613065004348755 acc: 60.06090373280943
+[3/10],  zero acc: 49.9947609692207
+Ones predicted:  15500
+Zeros predicted:  9930
+[4/10], loss: 0.6606967449188232 acc: 60.125474787164364
+[4/10],  zero acc: 49.99423706614276
+Ones predicted:  15630
+Zeros predicted:  9800
+[5/10], loss: 0.6602600812911987 acc: 60.17332460161536
+[5/10],  zero acc: 49.99519755511896
+Ones predicted:  15574
+Zeros predicted:  9856
+[6/10], loss: 0.6599182486534119 acc: 60.19010197399196
+[6/10],  zero acc: 49.997754701094586
+Ones predicted:  15447
+Zeros predicted:  9983
+[7/10], loss: 0.6596608757972717 acc: 60.223968565815326
+[7/10],  zero acc: 49.99738048461034
+Ones predicted:  15447
+Zeros predicted:  9983
+[8/10], loss: 0.6594089269638062 acc: 60.23401004147566
+[8/10],  zero acc: 49.99767154187587
+Ones predicted:  15469
+Zeros predicted:  9961
+[9/10], loss: 0.6591842174530029 acc: 60.27190569744597
+[9/10],  zero acc: 49.99816633922725
+Ones predicted:  15359
+Zeros predicted:  10071
+[10/10], loss: 0.6589668393135071 acc: 60.286003452997555
+[10/10],  zero acc: 49.99785676013574
+Ones predicted:  15407
+Zeros predicted:  10023
+[11/10], loss: 0.6587654948234558 acc: 60.30986684130102
+[11/10],  zero acc: 49.99847194935603
+Ones predicted:  15582
+Zeros predicted:  9848
+[12/10], loss: 0.6585702896118164 acc: 60.33187244975064
+[12/10],  zero acc: 49.99899249408091
+Ones predicted:  15626
+Zeros predicted:  9804
+[13/10], loss: 0.6583778262138367 acc: 60.359154270745634
+[13/10],  zero acc: 49.99850313406305
+Ones predicted:  15524
+Zeros predicted:  9906
+[14/10], loss: 0.658218264579773 acc: 60.36769264352761
+[14/10],  zero acc: 49.99877755948482
+Ones predicted:  15451
+Zeros predicted:  9979
+[15/10], loss: 0.658054530620575 acc: 60.390717092337916
+[15/10],  zero acc: 49.99836280288146
+Ones predicted:  15465
+Zeros predicted:  9965
+[16/10], loss: 0.6578704714775085 acc: 60.40741168766131
+[16/10],  zero acc: 49.997688662891484
+Ones predicted:  15368
+Zeros predicted:  10062
+[17/10], loss: 0.6576837301254272 acc: 60.43462126173325
+[17/10],  zero acc: 49.998544713672416
+Ones predicted:  15484
+Zeros predicted:  9946
+[18/10], loss: 0.6575088500976562 acc: 60.45855306242029
+[18/10],  zero acc: 49.99834556922759
+Ones predicted:  15280
+Zeros predicted:  10150
+[19/10], loss: 0.657332181930542 acc: 60.466011787819255
+[19/10],  zero acc: 49.998428290766206
+Ones predicted:  15231
+Zeros predicted:  10199
+[20/10], loss: 0.6571648120880127 acc: 60.47905946923628
+[20/10],  zero acc: 49.99875261171922
+Ones predicted:  15334
+Zeros predicted:  10096
+[21/10], loss: 0.6569945216178894 acc: 60.494433529796986
+[21/10],  zero acc: 49.99845210454249
+Ones predicted:  15243
+Zeros predicted:  10187
+[22/10], loss: 0.6568123698234558 acc: 60.50949574328749
+[22/10],  zero acc: 49.99851940434498
+Ones predicted:  15329
+Zeros predicted:  10101
+[23/10], loss: 0.6566405892372131 acc: 60.5266317397948
+[23/10],  zero acc: 49.998362802881466
+Ones predicted:  14996
+Zeros predicted:  10434
+[24/10], loss: 0.656470775604248 acc: 60.539934512115266
+[24/10],  zero acc: 49.99905697445973
+Ones predicted:  15141
+Zeros predicted:  10289
+[25/10], loss: 0.6562981009483337 acc: 60.549544103571606
+[25/10],  zero acc: 49.99899249408091
+Ones predicted:  14868
+Zeros predicted:  10562
+[26/10], loss: 0.6561161279678345 acc: 60.56727061049261
+[26/10],  zero acc: 49.99893279002643
+Ones predicted:  14938
+Zeros predicted:  10492
+[27/10], loss: 0.6559429168701172 acc: 60.583871269529425
+[27/10],  zero acc: 49.998503134063064
+Ones predicted:  14805
+Zeros predicted:  10625
+[28/10], loss: 0.6557730436325073 acc: 60.595352618386286
+[28/10],  zero acc: 49.99864507824673
+Ones predicted:  14983
+Zeros predicted:  10447
+[29/10], loss: 0.6556010246276855 acc: 60.6077712289893
+[29/10],  zero acc: 49.99869024230517
+Ones predicted:  14868
+Zeros predicted:  10562
+[30/10], loss: 0.6554327011108398 acc: 60.62365591397849
+[30/10],  zero acc: 49.998478991064076
+Ones predicted:  14763
+Zeros predicted:  10667
+[31/10], loss: 0.6552704572677612 acc: 60.63294040602488
+[31/10],  zero acc: 49.9987721021611
+Ones predicted:  14790
+Zeros predicted:  10640
+[32/10], loss: 0.6551000475883484 acc: 60.63848703141434
+[32/10],  zero acc: 49.99849179416959
+Ones predicted:  14642
+Zeros predicted:  10788
+[33/10], loss: 0.6549461483955383 acc: 60.64844562579452
+[33/10],  zero acc: 49.99861319773489
+Ones predicted:  14713
+Zeros predicted:  10717
+[34/10], loss: 0.6547933220863342 acc: 60.661203105996826
+[34/10],  zero acc: 49.998353447469356
+Ones predicted:  14651
+Zeros predicted:  10779
+[35/10], loss: 0.6546333432197571 acc: 60.678090664338214
+[35/10],  zero acc: 49.99847194935604
+Ones predicted:  14868
+Zeros predicted:  10562
+[36/10], loss: 0.6544915437698364 acc: 60.687198003504484
+[36/10],  zero acc: 49.99872564116179
+Ones predicted:  14644
+Zeros predicted:  10786
+[37/10], loss: 0.6543373465538025 acc: 60.703305414814054
+[37/10],  zero acc: 49.99903491538276
+Ones predicted:  14795
+Zeros predicted:  10635
+[38/10], loss: 0.6541919708251953 acc: 60.71281043776132
+[38/10],  zero acc: 49.99892532701963
+Ones predicted:  14779
+Zeros predicted:  10651
+[39/10], loss: 0.6540469527244568 acc: 60.72518009168304
+[39/10],  zero acc: 49.99862475442043
+Ones predicted:  14653
+Zeros predicted:  10777
+[40/10], loss: 0.6539027094841003 acc: 60.73975753509991
+[40/10],  zero acc: 49.99884996885332
+Ones predicted:  14751
+Zeros predicted:  10679
+[41/10], loss: 0.6537653207778931 acc: 60.74992983440921
+[41/10],  zero acc: 49.999002089375374
+Ones predicted:  14690
+Zeros predicted:  10740
+[42/10], loss: 0.6536360383033752 acc: 60.75615662265272
+[42/10],  zero acc: 49.999329891411946
+Ones predicted:  14572
+Zeros predicted:  10858
+[43/10], loss: 0.6535086631774902 acc: 60.76361850330416
+[43/10],  zero acc: 49.99916651783056
+Ones predicted:  14785
+Zeros predicted:  10645
+[44/10], loss: 0.6533794403076172 acc: 60.771942079604166
+[44/10],  zero acc: 49.99930146256276
+Ones predicted:  14610
+Zeros predicted:  10820
+[45/10], loss: 0.6532493233680725 acc: 60.782751060619006
+[45/10],  zero acc: 49.99925970217248
+Ones predicted:  14680
+Zeros predicted:  10750
+[46/10], loss: 0.6531252861022949 acc: 60.794632780169714
+[46/10],  zero acc: 49.99949839067007
+Ones predicted:  14705
+Zeros predicted:  10725
+[47/10], loss: 0.6530038118362427 acc: 60.80042567125082
+[47/10],  zero acc: 49.999617987339
+Ones predicted:  14584
+Zeros predicted:  10846
+[48/10], loss: 0.6528787016868591 acc: 60.81004503962685
+[48/10],  zero acc: 49.99951886452026
+Ones predicted:  14572
+Zeros predicted:  10858
+[49/10], loss: 0.652757465839386 acc: 60.82428290766208
+[49/10],  zero acc: 49.99963326784544
+Ones predicted:  14823
+Zeros predicted:  10607
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  195 / 291
+------------------------------------------------------------------
+Misclassified zeros:  488 / 2708
+------------------------------------------------------------------
+Accuracy:  77.22574191397132
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.1643835616438356
+Recall -> Pr(correctly classified|positive example):  0.32989690721649484
+------------------------------------------------------------------
+F1 Score:  0.21942857142857142
+------------------------------------------------------------------
+Confusion Matrix
+TP:  96  FN:  195
+FP:  488  TN:  2220
+------------------------------------------------------------------
+AUC-ROC Score:  0.6371125137685463
+------------------------------------------------------------------
+Loss:  0.65275747
+##################################################################
+Number of Neurons:  40
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6709877848625183 acc: 58.9259986902423
+[0/10],  zero acc: 49.9947609692207
+Ones predicted:  15877
+Zeros predicted:  9553
+[1/10], loss: 0.6650800704956055 acc: 59.585461689587426
+[1/10],  zero acc: 49.997380484610346
+Ones predicted:  14644
+Zeros predicted:  10786
+[2/10], loss: 0.6629839539527893 acc: 59.82754857018118
+[2/10],  zero acc: 49.999126828203444
+Ones predicted:  14847
+Zeros predicted:  10583
+[3/10], loss: 0.6618204116821289 acc: 59.95546823837591
+[3/10],  zero acc: 49.99672560576294
+Ones predicted:  14918
+Zeros predicted:  10512
+[4/10], loss: 0.661064624786377 acc: 60.057891290111336
+[4/10],  zero acc: 49.99738048461035
+Ones predicted:  15014
+Zeros predicted:  10416
+[5/10], loss: 0.6604734063148499 acc: 60.12180746561886
+[5/10],  zero acc: 49.997817070508624
+Ones predicted:  15092
+Zeros predicted:  10338
+[6/10], loss: 0.6599978804588318 acc: 60.17307512395921
+[6/10],  zero acc: 49.99962578351576
+Ones predicted:  15210
+Zeros predicted:  10220
+[7/10], loss: 0.6596474051475525 acc: 60.21692861820563
+[7/10],  zero acc: 50.0003274394237
+Ones predicted:  15083
+Zeros predicted:  10347
+[8/10], loss: 0.6592864990234375 acc: 60.286836935166995
+[8/10],  zero acc: 50.00145528632759
+Ones predicted:  15245
+Zeros predicted:  10185
+[9/10], loss: 0.6589643955230713 acc: 60.33490504256713
+[9/10],  zero acc: 50.000523903077934
+Ones predicted:  15179
+Zeros predicted:  10251
+[10/10], loss: 0.6586676836013794 acc: 60.36697029231411
+[10/10],  zero acc: 50.00119068881347
+Ones predicted:  15170
+Zeros predicted:  10260
+[11/10], loss: 0.6584014296531677 acc: 60.392709015498795
+[11/10],  zero acc: 50.00152805064397
+Ones predicted:  15065
+Zeros predicted:  10365
+[12/10], loss: 0.6581452488899231 acc: 60.423253236612766
+[12/10],  zero acc: 50.0010075059191
+Ones predicted:  15192
+Zeros predicted:  10238
+[13/10], loss: 0.6578693985939026 acc: 60.45551501543643
+[13/10],  zero acc: 50.00037421648423
+Ones predicted:  15107
+Zeros predicted:  10323
+[14/10], loss: 0.6576116681098938 acc: 60.4890635232482
+[14/10],  zero acc: 49.99982536564069
+Ones predicted:  15045
+Zeros predicted:  10385
+[15/10], loss: 0.6573658585548401 acc: 60.52586771447282
+[15/10],  zero acc: 49.99950884086444
+Ones predicted:  15048
+Zeros predicted:  10382
+[16/10], loss: 0.6571359634399414 acc: 60.54424284448553
+[16/10],  zero acc: 49.99969182171886
+Ones predicted:  15027
+Zeros predicted:  10403
+[17/10], loss: 0.6569020748138428 acc: 60.56043076475296
+[17/10],  zero acc: 49.99927235683621
+Ones predicted:  15041
+Zeros predicted:  10389
+[18/10], loss: 0.6566827893257141 acc: 60.5753283011064
+[18/10],  zero acc: 50.0
+Ones predicted:  15011
+Zeros predicted:  10419
+[19/10], loss: 0.6564734578132629 acc: 60.59358218729535
+[19/10],  zero acc: 50.00026195153896
+Ones predicted:  14971
+Zeros predicted:  10459
+[20/10], loss: 0.6562616229057312 acc: 60.60198958430785
+[20/10],  zero acc: 49.99962578351576
+Ones predicted:  14745
+Zeros predicted:  10685
+[21/10], loss: 0.6560441851615906 acc: 60.607668035958795
+[21/10],  zero acc: 49.998928380067866
+Ones predicted:  14794
+Zeros predicted:  10636
+[22/10], loss: 0.6558240056037903 acc: 60.622932148856805
+[22/10],  zero acc: 49.99840551237151
+Ones predicted:  14727
+Zeros predicted:  10703
+[23/10], loss: 0.655654788017273 acc: 60.63512333551626
+[23/10],  zero acc: 49.99869024230517
+Ones predicted:  14818
+Zeros predicted:  10612
+[24/10], loss: 0.6554572582244873 acc: 60.65016371971185
+[24/10],  zero acc: 49.999161755075306
+Ones predicted:  14781
+Zeros predicted:  10649
+[25/10], loss: 0.6552797555923462 acc: 60.65961412523298
+[25/10],  zero acc: 49.9989924940809
+Ones predicted:  14707
+Zeros predicted:  10723
+[26/10], loss: 0.6551033854484558 acc: 60.670692958839645
+[26/10],  zero acc: 49.99883577093793
+Ones predicted:  14811
+Zeros predicted:  10619
+[27/10], loss: 0.6549229025840759 acc: 60.67868837122275
+[27/10],  zero acc: 49.99925156703153
+Ones predicted:  14694
+Zeros predicted:  10736
+[28/10], loss: 0.6547590494155884 acc: 60.68134498566041
+[28/10],  zero acc: 49.99954835941558
+Ones predicted:  14816
+Zeros predicted:  10614
+[29/10], loss: 0.6545920968055725 acc: 60.69443352979699
+[29/10],  zero acc: 49.99973804846103
+Ones predicted:  14637
+Zeros predicted:  10793
+[30/10], loss: 0.6544159650802612 acc: 60.70469189006485
+[30/10],  zero acc: 49.99966199801423
+Ones predicted:  14656
+Zeros predicted:  10774
+[31/10], loss: 0.6542611122131348 acc: 60.70833333333333
+[31/10],  zero acc: 50.0
+Ones predicted:  14760
+Zeros predicted:  10670
+[32/10], loss: 0.6541101932525635 acc: 60.71492925323966
+[32/10],  zero acc: 50.000396896271155
+Ones predicted:  14662
+Zeros predicted:  10768
+[33/10], loss: 0.6539591550827026 acc: 60.72726222119496
+[33/10],  zero acc: 50.00061635656227
+Ones predicted:  14577
+Zeros predicted:  10853
+[34/10], loss: 0.653805673122406 acc: 60.740948638787536
+[34/10],  zero acc: 50.00074843296847
+Ones predicted:  14608
+Zeros predicted:  10822
+[35/10], loss: 0.6536728143692017 acc: 60.75165538819763
+[35/10],  zero acc: 50.000582114531035
+Ones predicted:  14689
+Zeros predicted:  10741
+[36/10], loss: 0.6535289883613586 acc: 60.75962406414273
+[36/10],  zero acc: 50.00049558399264
+Ones predicted:  14652
+Zeros predicted:  10778
+[37/10], loss: 0.6533809304237366 acc: 60.76300279185193
+[37/10],  zero acc: 50.000482542308625
+Ones predicted:  14561
+Zeros predicted:  10869
+[38/10], loss: 0.6532474160194397 acc: 60.766409752657296
+[38/10],  zero acc: 50.00013433412254
+Ones predicted:  14681
+Zeros predicted:  10749
+[39/10], loss: 0.6531181335449219 acc: 60.76722331368696
+[39/10],  zero acc: 50.0
+Ones predicted:  14655
+Zeros predicted:  10775
+[40/10], loss: 0.6529837846755981 acc: 60.77333205552094
+[40/10],  zero acc: 50.00006389061926
+Ones predicted:  14734
+Zeros predicted:  10696
+[41/10], loss: 0.6528680920600891 acc: 60.777278822465455
+[41/10],  zero acc: 49.999875261171915
+Ones predicted:  14520
+Zeros predicted:  10910
+[42/10], loss: 0.6527443528175354 acc: 60.782504073955614
+[42/10],  zero acc: 49.99987816207489
+Ones predicted:  14740
+Zeros predicted:  10690
+[43/10], loss: 0.6526088118553162 acc: 60.790915044353156
+[43/10],  zero acc: 49.99946419003393
+Ones predicted:  14515
+Zeros predicted:  10915
+[44/10], loss: 0.6524786353111267 acc: 60.80305610128793
+[44/10],  zero acc: 49.99965073128138
+Ones predicted:  14696
+Zeros predicted:  10734
+[45/10], loss: 0.6523557901382446 acc: 60.8079781327411
+[45/10],  zero acc: 49.999544432106156
+Ones predicted:  14617
+Zeros predicted:  10813
+[46/10], loss: 0.6522326469421387 acc: 60.81742813749669
+[46/10],  zero acc: 49.99949839067007
+Ones predicted:  14655
+Zeros predicted:  10775
+[47/10], loss: 0.6521104574203491 acc: 60.82288255839336
+[47/10],  zero acc: 49.99907225496617
+Ones predicted:  14617
+Zeros predicted:  10813
+[48/10], loss: 0.6519895195960999 acc: 60.82800743087019
+[48/10],  zero acc: 49.999037729040545
+Ones predicted:  14583
+Zeros predicted:  10847
+[49/10], loss: 0.6518798470497131 acc: 60.83415848068107
+[49/10],  zero acc: 49.9992665356909
+Ones predicted:  14630
+Zeros predicted:  10800
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  141 / 291
+------------------------------------------------------------------
+Misclassified zeros:  826 / 2708
+------------------------------------------------------------------
+Accuracy:  67.75591863954652
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.15368852459016394
+Recall -> Pr(correctly classified|positive example):  0.5154639175257731
+------------------------------------------------------------------
+F1 Score:  0.23677979479084452
+------------------------------------------------------------------
+Confusion Matrix
+TP:  150  FN:  141
+FP:  826  TN:  1882
+------------------------------------------------------------------
+AUC-ROC Score:  0.6385896186429925
+------------------------------------------------------------------
+Loss:  0.65187985
+##################################################################
+Number of Neurons:  50
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6663287281990051 acc: 59.4210870988867
+[0/10],  zero acc: 49.989521938441385
+Ones predicted:  13879
+Zeros predicted:  11551
+[1/10], loss: 0.6625730991363525 acc: 59.82383759004584
+[1/10],  zero acc: 49.99607072691552
+Ones predicted:  15534
+Zeros predicted:  9896
+[2/10], loss: 0.6609659194946289 acc: 60.0231390526086
+[2/10],  zero acc: 49.99476096922069
+Ones predicted:  15467
+Zeros predicted:  9963
+[3/10], loss: 0.6600639820098877 acc: 60.15094957432875
+[3/10],  zero acc: 49.9947609692207
+Ones predicted:  15439
+Zeros predicted:  9991
+[4/10], loss: 0.6594224572181702 acc: 60.20353634577603
+[4/10],  zero acc: 49.99423706614276
+Ones predicted:  15503
+Zeros predicted:  9927
+[5/10], loss: 0.6588677763938904 acc: 60.24885396201703
+[5/10],  zero acc: 49.99388779742414
+Ones predicted:  15144
+Zeros predicted:  10286
+[6/10], loss: 0.6584822535514832 acc: 60.287211151651235
+[6/10],  zero acc: 49.99438675273646
+Ones predicted:  15278
+Zeros predicted:  10152
+[7/10], loss: 0.6580936312675476 acc: 60.31270464963981
+[7/10],  zero acc: 49.99443352979699
+Ones predicted:  15284
+Zeros predicted:  10146
+[8/10], loss: 0.6577152609825134 acc: 60.35101506221349
+[8/10],  zero acc: 49.99563414101725
+Ones predicted:  15203
+Zeros predicted:  10227
+[9/10], loss: 0.6573753356933594 acc: 60.39122462344466
+[9/10],  zero acc: 49.99607072691552
+Ones predicted:  15016
+Zeros predicted:  10414
+[10/10], loss: 0.6569983959197998 acc: 60.41316901827708
+[10/10],  zero acc: 49.996427933559566
+Ones predicted:  15216
+Zeros predicted:  10214
+[11/10], loss: 0.6566579341888428 acc: 60.44411700502073
+[11/10],  zero acc: 49.996289019864655
+Ones predicted:  15034
+Zeros predicted:  10396
+[12/10], loss: 0.6562705039978027 acc: 60.49005087904891
+[12/10],  zero acc: 49.99657447987507
+Ones predicted:  14822
+Zeros predicted:  10608
+[13/10], loss: 0.6559628248214722 acc: 60.49303021798111
+[13/10],  zero acc: 49.99700626812611
+Ones predicted:  14723
+Zeros predicted:  10707
+[14/10], loss: 0.6556400060653687 acc: 60.5215455140799
+[14/10],  zero acc: 49.99703121589173
+Ones predicted:  14890
+Zeros predicted:  10540
+[15/10], loss: 0.6553427577018738 acc: 60.55255402750491
+[15/10],  zero acc: 49.997216764898496
+Ones predicted:  14882
+Zeros predicted:  10548
+[16/10], loss: 0.6550593376159668 acc: 60.576216341153355
+[16/10],  zero acc: 49.99753457375092
+Ones predicted:  14690
+Zeros predicted:  10740
+[17/10], loss: 0.6547828912734985 acc: 60.5992141453831
+[17/10],  zero acc: 49.99781707050863
+Ones predicted:  14573
+Zeros predicted:  10857
+[18/10], loss: 0.6544912457466125 acc: 60.62578843966498
+[18/10],  zero acc: 49.99751835384138
+Ones predicted:  14592
+Zeros predicted:  10838
+[19/10], loss: 0.6542426943778992 acc: 60.64669286182057
+[19/10],  zero acc: 49.99803536345777
+Ones predicted:  14656
+Zeros predicted:  10774
+[20/10], loss: 0.6540068984031677 acc: 60.66685377490879
+[20/10],  zero acc: 49.99812891757882
+Ones predicted:  14664
+Zeros predicted:  10766
+[21/10], loss: 0.6537582278251648 acc: 60.684705602190874
+[21/10],  zero acc: 49.9977376912544
+Ones predicted:  14706
+Zeros predicted:  10724
+[22/10], loss: 0.6535088419914246 acc: 60.701232880612736
+[22/10],  zero acc: 49.99794994447766
+Ones predicted:  14560
+Zeros predicted:  10870
+[23/10], loss: 0.6532624363899231 acc: 60.724514298188176
+[23/10],  zero acc: 49.99858109583061
+Ones predicted:  14609
+Zeros predicted:  10821
+[24/10], loss: 0.653003454208374 acc: 60.75279633267846
+[24/10],  zero acc: 49.998428290766206
+Ones predicted:  14722
+Zeros predicted:  10708
+[25/10], loss: 0.6527658104896545 acc: 60.77703894010378
+[25/10],  zero acc: 49.998891743489
+Ones predicted:  14655
+Zeros predicted:  10775
+[26/10], loss: 0.6525270938873291 acc: 60.79769094569356
+[26/10],  zero acc: 49.99883577093793
+Ones predicted:  14594
+Zeros predicted:  10836
+[27/10], loss: 0.6523035764694214 acc: 60.81611937505848
+[27/10],  zero acc: 49.99887735054729
+Ones predicted:  14552
+Zeros predicted:  10878
+[28/10], loss: 0.6520706415176392 acc: 60.84330329923447
+[28/10],  zero acc: 49.99891606259739
+Ones predicted:  14750
+Zeros predicted:  10680
+[29/10], loss: 0.6518464684486389 acc: 60.86203885614495
+[29/10],  zero acc: 49.99851560794587
+Ones predicted:  14558
+Zeros predicted:  10872
+[30/10], loss: 0.6516295671463013 acc: 60.87948116695185
+[30/10],  zero acc: 49.998478991064076
+Ones predicted:  14600
+Zeros predicted:  10830
+[31/10], loss: 0.6514007449150085 acc: 60.90880812049771
+[31/10],  zero acc: 49.9984446627374
+Ones predicted:  14659
+Zeros predicted:  10771
+[32/10], loss: 0.6511755585670471 acc: 60.93012641146237
+[32/10],  zero acc: 49.998491794169595
+Ones predicted:  14468
+Zeros predicted:  10962
+[33/10], loss: 0.6509533524513245 acc: 60.952270888709116
+[33/10],  zero acc: 49.99838206402404
+Ones predicted:  14570
+Zeros predicted:  10860
+[34/10], loss: 0.6507309675216675 acc: 60.973973243521385
+[34/10],  zero acc: 49.99842829076621
+Ones predicted:  14614
+Zeros predicted:  10816
+[35/10], loss: 0.6505112648010254 acc: 60.98664774794442
+[35/10],  zero acc: 49.99876300662155
+Ones predicted:  14623
+Zeros predicted:  10807
+[36/10], loss: 0.6502878665924072 acc: 61.01074355298325
+[36/10],  zero acc: 49.99837165259562
+Ones predicted:  14585
+Zeros predicted:  10845
+[37/10], loss: 0.6500771045684814 acc: 61.03367455968015
+[37/10],  zero acc: 49.99862130768967
+Ones predicted:  14786
+Zeros predicted:  10644
+[38/10], loss: 0.6498437523841858 acc: 61.054757946702935
+[38/10],  zero acc: 49.998790992897085
+Ones predicted:  14648
+Zeros predicted:  10782
+[39/10], loss: 0.6496076583862305 acc: 61.08107400130976
+[39/10],  zero acc: 49.9988867059594
+Ones predicted:  14684
+Zeros predicted:  10746
+[40/10], loss: 0.6493708491325378 acc: 61.10629801779354
+[40/10],  zero acc: 49.99891385947259
+Ones predicted:  14546
+Zeros predicted:  10884
+[41/10], loss: 0.64913409948349 acc: 61.12520659868401
+[41/10],  zero acc: 49.9985655034771
+Ones predicted:  14538
+Zeros predicted:  10892
+[42/10], loss: 0.6489012837409973 acc: 61.14338800810223
+[42/10],  zero acc: 49.99859886386135
+Ones predicted:  14705
+Zeros predicted:  10725
+[43/10], loss: 0.6486812829971313 acc: 61.16035601595524
+[43/10],  zero acc: 49.998749776745846
+Ones predicted:  14484
+Zeros predicted:  10946
+[44/10], loss: 0.6484469771385193 acc: 61.181168594921054
+[44/10],  zero acc: 49.99883577093794
+Ones predicted:  14586
+Zeros predicted:  10844
+[45/10], loss: 0.6482203006744385 acc: 61.20423678141283
+[45/10],  zero acc: 49.998804134278636
+Ones predicted:  14541
+Zeros predicted:  10889
+[46/10], loss: 0.6479876637458801 acc: 61.22702002257242
+[46/10],  zero acc: 49.99871810949018
+Ones predicted:  14630
+Zeros predicted:  10800
+[47/10], loss: 0.6477499008178711 acc: 61.250709452084706
+[47/10],  zero acc: 49.99885396201703
+Ones predicted:  14572
+Zeros predicted:  10858
+[48/10], loss: 0.6475287675857544 acc: 61.27153415393663
+[48/10],  zero acc: 49.99882389104955
+Ones predicted:  14571
+Zeros predicted:  10859
+[49/10], loss: 0.6472868919372559 acc: 61.291368696791096
+[49/10],  zero acc: 49.99905697445973
+Ones predicted:  14639
+Zeros predicted:  10791
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  159 / 291
+------------------------------------------------------------------
+Misclassified zeros:  785 / 2708
+------------------------------------------------------------------
+Accuracy:  68.52284094698233
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.14394765539803708
+Recall -> Pr(correctly classified|positive example):  0.4536082474226804
+------------------------------------------------------------------
+F1 Score:  0.2185430463576159
+------------------------------------------------------------------
+Confusion Matrix
+TP:  132  FN:  159
+FP:  785  TN:  1923
+------------------------------------------------------------------
+AUC-ROC Score:  0.6256167293547945
+------------------------------------------------------------------
+Loss:  0.6472869
+##################################################################
+Number of Neurons:  65
+Original Zeros Counted:  12715
+Original Ones Counted:  1284
+Down/Upsampled Zeros Counted:  12715
+Down/Upsampled Ones Counted:  12715
+Length of X:  25430
+Length of y:  25430
+[0/10], loss: 0.6660420298576355 acc: 59.49705304518664
+[0/10],  zero acc: 50.00785854616896
+Ones predicted:  14353
+Zeros predicted:  11077
+[1/10], loss: 0.6621986031532288 acc: 60.01113294040603
+[1/10],  zero acc: 50.00130975769483
+Ones predicted:  15618
+Zeros predicted:  9812
+[2/10], loss: 0.660752534866333 acc: 60.03580004365859
+[2/10],  zero acc: 50.00087317179655
+Ones predicted:  15532
+Zeros predicted:  9898
+[3/10], loss: 0.6598472595214844 acc: 60.11624099541585
+[3/10],  zero acc: 50.0
+Ones predicted:  15494
+Zeros predicted:  9936
+[4/10], loss: 0.6592333912849426 acc: 60.17105435494434
+[4/10],  zero acc: 49.99685658153242
+Ones predicted:  15369
+Zeros predicted:  10061
+[5/10], loss: 0.6585797071456909 acc: 60.26740886269374
+[5/10],  zero acc: 49.99607072691552
+Ones predicted:  15373
+Zeros predicted:  10057
+[6/10], loss: 0.6580878496170044 acc: 60.29956029563102
+[6/10],  zero acc: 49.99625783515764
+Ones predicted:  15489
+Zeros predicted:  9941
+[7/10], loss: 0.657630443572998 acc: 60.31254092992797
+[7/10],  zero acc: 49.99639816633923
+Ones predicted:  15191
+Zeros predicted:  10239
+[8/10], loss: 0.6571921110153198 acc: 60.34228334424798
+[8/10],  zero acc: 49.997380484610346
+Ones predicted:  15180
+Zeros predicted:  10250
+[9/10], loss: 0.6567556262016296 acc: 60.37459070072037
+[9/10],  zero acc: 49.998428290766206
+Ones predicted:  15145
+Zeros predicted:  10285
+[10/10], loss: 0.656373143196106 acc: 60.4112639161755
+[10/10],  zero acc: 49.99833303566113
+Ones predicted:  15219
+Zeros predicted:  10211
+[11/10], loss: 0.6560081839561462 acc: 60.42643527614058
+[11/10],  zero acc: 50.0
+Ones predicted:  14918
+Zeros predicted:  10512
+[12/10], loss: 0.6556599736213684 acc: 60.46365422396857
+[12/10],  zero acc: 49.9989924940809
+Ones predicted:  15144
+Zeros predicted:  10286
+[13/10], loss: 0.6553463935852051 acc: 60.50116942651324
+[13/10],  zero acc: 49.999438675273645
+Ones predicted:  15096
+Zeros predicted:  10334
+[14/10], loss: 0.6550114750862122 acc: 60.530975769482644
+[14/10],  zero acc: 49.99895219384414
+Ones predicted:  14971
+Zeros predicted:  10459
+[15/10], loss: 0.6547131538391113 acc: 60.57580222658809
+[15/10],  zero acc: 49.99836280288146
+Ones predicted:  14880
+Zeros predicted:  10550
+[16/10], loss: 0.6544090509414673 acc: 60.603875341885285
+[16/10],  zero acc: 49.997996841172615
+Ones predicted:  15109
+Zeros predicted:  10321
+[17/10], loss: 0.6541091203689575 acc: 60.6392345193917
+[17/10],  zero acc: 49.99767154187586
+Ones predicted:  14888
+Zeros predicted:  10542
+[18/10], loss: 0.6538196802139282 acc: 60.66266845896668
+[18/10],  zero acc: 49.99862130768965
+Ones predicted:  14963
+Zeros predicted:  10467
+[19/10], loss: 0.6535345315933228 acc: 60.706810740013104
+[19/10],  zero acc: 49.99895219384413
+Ones predicted:  14995
+Zeros predicted:  10435
+[20/10], loss: 0.6532315015792847 acc: 60.72560576293386
+[20/10],  zero acc: 49.99825365640689
+Ones predicted:  14914
+Zeros predicted:  10516
+[21/10], loss: 0.6529239416122437 acc: 60.75834970530452
+[21/10],  zero acc: 49.997737691254386
+Ones predicted:  14863
+Zeros predicted:  10567
+[22/10], loss: 0.6526325345039368 acc: 60.789328322086504
+[22/10],  zero acc: 49.99829162039805
+Ones predicted:  14976
+Zeros predicted:  10454
+[23/10], loss: 0.6523367762565613 acc: 60.808502510368925
+[23/10],  zero acc: 49.99792621698319
+Ones predicted:  14865
+Zeros predicted:  10565
+[24/10], loss: 0.6520722508430481 acc: 60.82499017681729
+[24/10],  zero acc: 49.998533071381786
+Ones predicted:  14757
+Zeros predicted:  10673
+[25/10], loss: 0.6517707705497742 acc: 60.86041005490908
+[25/10],  zero acc: 49.998790992897085
+Ones predicted:  14838
+Zeros predicted:  10592
+[26/10], loss: 0.6514752507209778 acc: 60.876518955104416
+[26/10],  zero acc: 49.99883577093793
+Ones predicted:  14910
+Zeros predicted:  10520
+[27/10], loss: 0.6511958241462708 acc: 60.89769856862195
+[27/10],  zero acc: 49.99887735054729
+Ones predicted:  14975
+Zeros predicted:  10455
+[28/10], loss: 0.6509160399436951 acc: 60.920172526703254
+[28/10],  zero acc: 49.99855475012984
+Ones predicted:  15012
+Zeros predicted:  10418
+[29/10], loss: 0.6506484746932983 acc: 60.94529578694608
+[29/10],  zero acc: 49.99869024230517
+Ones predicted:  14905
+Zeros predicted:  10525
+[30/10], loss: 0.6503480672836304 acc: 60.973065466759614
+[30/10],  zero acc: 49.99881699304983
+Ones predicted:  14962
+Zeros predicted:  10468
+[31/10], loss: 0.6500641107559204 acc: 61.00343811394892
+[31/10],  zero acc: 49.99885396201702
+Ones predicted:  14902
+Zeros predicted:  10528
+[32/10], loss: 0.6497820615768433 acc: 61.02776289416761
+[32/10],  zero acc: 49.99872993193229
+Ones predicted:  14932
+Zeros predicted:  10498
+[33/10], loss: 0.6494925618171692 acc: 61.055395046034135
+[33/10],  zero acc: 49.99915250972687
+Ones predicted:  15025
+Zeros predicted:  10405
+[34/10], loss: 0.6492049098014832 acc: 61.08926934231452
+[34/10],  zero acc: 49.99925156703153
+Ones predicted:  15044
+Zeros predicted:  10386
+[35/10], loss: 0.6489103436470032 acc: 61.114967619879216
+[35/10],  zero acc: 49.99927235683621
+Ones predicted:  15107
+Zeros predicted:  10323
+[36/10], loss: 0.6486352682113647 acc: 61.14370165843643
+[36/10],  zero acc: 49.99929202286766
+Ones predicted:  15058
+Zeros predicted:  10372
+[37/10], loss: 0.6483435034751892 acc: 61.16844173301624
+[37/10],  zero acc: 49.999448523075856
+Ones predicted:  14970
+Zeros predicted:  10460
+[38/10], loss: 0.6480622887611389 acc: 61.19742078484711
+[38/10],  zero acc: 49.99973133175491
+Ones predicted:  15166
+Zeros predicted:  10264
+[39/10], loss: 0.6477771997451782 acc: 61.22468893254748
+[39/10],  zero acc: 49.99960707269155
+Ones predicted:  14900
+Zeros predicted:  10530
+[40/10], loss: 0.6474774479866028 acc: 61.253470059258554
+[40/10],  zero acc: 49.999744437522956
+Ones predicted:  14977
+Zeros predicted:  10453
+[41/10], loss: 0.6471973061561584 acc: 61.283531356222916
+[41/10],  zero acc: 49.9996881529298
+Ones predicted:  14984
+Zeros predicted:  10446
+[42/10], loss: 0.6469038128852844 acc: 61.31344329206075
+[42/10],  zero acc: 49.99957356726214
+Ones predicted:  15099
+Zeros predicted:  10331
+[43/10], loss: 0.6466030478477478 acc: 61.34172768946836
+[43/10],  zero acc: 49.99946419003393
+Ones predicted:  15050
+Zeros predicted:  10380
+[44/10], loss: 0.6463126540184021 acc: 61.372888015717095
+[44/10],  zero acc: 49.99930146256276
+Ones predicted:  15052
+Zeros predicted:  10378
+[45/10], loss: 0.6460267305374146 acc: 61.39893511004812
+[45/10],  zero acc: 49.99943054013268
+Ones predicted:  14904
+Zeros predicted:  10526
+[46/10], loss: 0.6457309126853943 acc: 61.42635399685101
+[46/10],  zero acc: 49.999163984450114
+Ones predicted:  15025
+Zeros predicted:  10405
+[47/10], loss: 0.6454432010650635 acc: 61.45249399694389
+[47/10],  zero acc: 49.99907225496616
+Ones predicted:  15038
+Zeros predicted:  10392
+[48/10], loss: 0.6451430320739746 acc: 61.48154979083972
+[48/10],  zero acc: 49.99893081004504
+Ones predicted:  15099
+Zeros predicted:  10331
+[49/10], loss: 0.6448435187339783 acc: 61.5056974459725
+[49/10],  zero acc: 49.99905697445973
+Ones predicted:  15078
+Zeros predicted:  10352
+Finished Training
+------------------------------------------------------------------
+Misclassified ones:  148 / 291
+------------------------------------------------------------------
+Misclassified zeros:  778 / 2708
+------------------------------------------------------------------
+Accuracy:  69.12304101367123
+------------------------------------------------------------------
+Precision -> Pr(positive example|example classified as positive):  0.15526601520086863
+Recall -> Pr(correctly classified|positive example):  0.49140893470790376
+------------------------------------------------------------------
+F1 Score:  0.23597359735973597
+------------------------------------------------------------------
+Confusion Matrix
+TP:  143  FN:  148
+FP:  778  TN:  1930
+------------------------------------------------------------------
+AUC-ROC Score:  0.6338613602562346
+------------------------------------------------------------------
+Loss:  0.6448435
+##################################################################

@@ -2,6 +2,9 @@ MACHINE LEARNING TODO 
 	⁃	Deal with y_raw nonsense
 	⁃	We need to preprocess without taking the test set into account and check that we are doing it per feature
 	⁃	Perhaps we need to make the inputs have different forms 
+	- 	Take a look at what is meant by the one hot nonesense
+	- 	Need to upsample and downsample in preprocessing
+	-	Validation 
 	⁃	Clean up the code
 	⁃	Finish Part 2
 
@@ -13,8 +16,21 @@ Steps to finishing Part 2:
 	⁃	Test on LabTS
 	⁃	Write Report
 
+-Check that you can do the hyperparameter search using tensorflow --> Figure out if it works on LabTS machine
+-Not sure if putting the datasets in the classes is a good idea
+-Should probably try to break up raw data in preprocessing?
 
-Figure out if it works on LabTS machine
+
+
+Hyperparameters considesed:
+
+	-Number of neurons
+	-Number of layers
+	-Number of epochs before overfitting
+	-Dropout rate
+	-Learning rate
+	-How much upsample and downsample by?
+
 
 ASIDE
 
