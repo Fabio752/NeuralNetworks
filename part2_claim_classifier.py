@@ -88,7 +88,7 @@ class ClaimClassifier():
         self.loss = 0
         self.learning_rate = 0.001
         self.batch_size = 50
-        self.n_epochs = 100
+        self.n_epochs = 1
         self.train = None
         self.val = None
         self.test = None
@@ -315,9 +315,14 @@ class ClaimClassifier():
             POSITIVE class (that had accidents)
         """
         X_clean = self._preprocessor(X_raw)
-        X_clean = Variable(torch.from_numpy(X_clean)).float()
-        out = self.model(X_clean).float()
-        return out.detach().numpy()
+        print("Xclean data type: ", type(X_clean))
+        print("Data type of the return of preprocessor", type(self._preprocessor(X_raw)))
+        X_clean_tensor = Variable(torch.from_numpy(X_clean)).float()
+        print("Data type on the next line: ", type(X_clean))
+        out = self.model(X_clean_tensor).float()
+        out = out.detach().numpy()
+        print("Out at the last line")
+        return out
 
     def evaluate_architecture(self):
         """Architecture evaluation utility.
