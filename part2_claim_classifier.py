@@ -7,7 +7,7 @@ import random
 import sklearn
 import keras
 import torch.nn as nn
-import pandas as pd
+import pandas 
 import torchvision.datasets as dsets
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
@@ -317,7 +317,7 @@ class ClaimClassifier():
         #Taking care of Datarame input
         if isinstance(X_raw, pandas.DataFrame):
             X_raw = X_raw.values
-            
+
         X_clean = self._preprocessor(X_raw)
         print("Xclean data type: ", type(X_clean))
         print("Data type of the return of preprocessor", type(self._preprocessor(X_raw)))
