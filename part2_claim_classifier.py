@@ -7,6 +7,7 @@ import random
 import sklearn
 import keras
 import torch.nn as nn
+import pandas as pd
 import torchvision.datasets as dsets
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
@@ -313,6 +314,10 @@ class ClaimClassifier():
             values corresponding to the probability of beloning to the
             POSITIVE class (that had accidents)
         """
+        #Taking care of Datarame input
+        if isinstance(X_raw, pandas.DataFrame):
+            X_raw = X_raw.values
+            
         X_clean = self._preprocessor(X_raw)
         print("Xclean data type: ", type(X_clean))
         print("Data type of the return of preprocessor", type(self._preprocessor(X_raw)))
@@ -442,19 +447,19 @@ def ClaimClassifierHyperParameterSearch(cc, X_train):
     return  # Return the chosen hyper parameters
 
 
-path_to_train = "part2_train_.csv"
-path_to_val = "part2_validation.csv"
-path_to_test = "part2_test.csv"
-cc = ClaimClassifier()
-#Extracting from csv
-train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
-#Preprocessing the data 
-cc.val = val_raw
+# path_to_train = "part2_train_.csv"
+# path_to_val = "part2_validation.csv"
+# path_to_test = "part2_test.csv"
+# cc = ClaimClassifier()
+# #Extracting from csv
+# train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+# val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
+# #Preprocessing the data 
+# cc.val = val_raw
 
-cc.fit(train_raw)
-cc.evaluate_architecture()
-cc.save_model()
+# cc.fit(train_raw)
+# cc.evaluate_architecture()
+# cc.save_model()
 
 
 
