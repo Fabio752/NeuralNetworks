@@ -22,7 +22,7 @@ from keras.activations import relu,sigmoid
 
 
 
-debug = False
+debug = True
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -132,10 +132,7 @@ class ClaimClassifier():
         ndarray
             A clean data set that is used for training and prediction.
         """
-
-        #TODO Check if data normalisation is correct in the new way (also passing CSV and that nonesense)
-
-        self.raw_data = np.genfromtxt(X_raw, delimiter=',')[1:, :]
+        self.raw_data = X_raw
         self.n_cols = np.size(self.raw_data, 1)
         self.n_rows = np.size(self.raw_data, 0)
         #Create a temporary copy in order to store only the data the model will be training on
@@ -195,19 +192,16 @@ class ClaimClassifier():
         self: (optional)
             an instance of the fitted model
         """
-
-
-        '''if y_raw is None: <--DEAL WITH THIS!'''
-
-        #TODO Comment this out
+        X_clean = self._preprocessor(X_raw)
         one_indexes = []
         zero_indexes = []
 
-        X = X_raw[:, :self.n_cols - 2]
-        y = X_raw[:, self.n_cols-1:]
+        X = X_clean[:, :self.n_cols - 2]
+        if y_raw == None:   
+            y = X_clean[:, self.n_cols-1:]
+        else:
+            y = y_raw
 
-        
-        
         self.count_zeros = 0
         self.count_ones = 0
         for i in range(len(y)):
@@ -217,21 +211,14 @@ class ClaimClassifier():
             elif y[i] == 1.0:
                 self.count_ones += 1
                 self.one_indexes.append(i)
-
         if debug==True:
             print("Original Zeros Counted: ", self.count_zeros)
             print("Original Ones Counted: ", self.count_ones)
 
-
-        #Downsampling
-        #X_ = self.downsample_zeros(X, y, 0.65)
-        #X = X_[0]
-        #y = X_[1]
         #Upsampling
         X_ = self.upsample_ones(X, y)
         X = X_[0]
         y = X_[1]
-
 
         self.count_zeros = 0
         self.count_ones = 0
@@ -321,13 +308,13 @@ class ClaimClassifier():
             values corresponding to the probability of beloning to the
             POSITIVE class (that had accidents)
         """
+        # Preprocessing the data
+        X_clean = self._preprocessor(X_raw)
+        #Passing data through the model
+        out = self.model(X_clean).float()
+        out = out.detach()
 
-        # REMEMBER TO HAVE THE FOLLOWING LINE SOMEWHERE IN THE CODE
-        # X_clean = self._preprocessor(X_raw)
-
-        # YOUR CODE HERE
-
-        return  # YOUR PREDICTED CLASS LABELS
+        return out
 
     def evaluate_architecture(self):
         """Architecture evaluation utility.
@@ -338,7 +325,7 @@ class ClaimClassifier():
         You can use external libraries such as scikit-learn for this
         if necessary.
         """
-        #Run the model on test set
+        #TODO Need to change this
         out = self.model(X_val).float()
         y_val = cc.val[:, cc.val.shape[1]-1:]
         y_val = Variable(torch.from_numpy(y_val)).float()
@@ -436,40 +423,32 @@ def ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val):
                     best_model.append(dropout)
                     best_model.append(leak)
                 print("Best model: ", best_model)
-
-
-    #for batch in batch_sizes:
-    #    print("batch size: ", batch)
-    #    cc.batch_size = batch
-    #    cc.change_model(8, nn.LeakyReLU(0.0))
-    #    cc.n_epochs = 50
-    #    cc.fit(X_train, None)
-    #    cc.evaluate_architecture()
-
     return  # Return the chosen hyper parameters
 
 
 #TODO Shuffle in the preprocessing
 
 
-path_to_train = "part2_train_.csv"
-path_to_val = "part2_validation.csv"
-path_to_test = "part2_test.csv"
-cc = ClaimClassifier()
+#path_to_train = "part2_train_.csv"
+#path_to_val = "part2_validation.csv"
+#path_to_test = "part2_test.csv"
+#cc = ClaimClassifier()
+#raw_data = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+#cc.fit(raw_data)
 #data preprocessing
-cc.train = cc._preprocessor(path_to_train)
+#cc.train = cc._preprocessor(path_to_train)
 #Assigning validation set
-cc.val = cc._preprocessor(path_to_val)
-y_val = cc.val[:, cc.val.shape[1]-1:]
-X_val = cc.val[:, :cc.val.shape[1]-2]
+#cc.val = cc._preprocessor(path_to_val)
+#y_val = cc.val[:, cc.val.shape[1]-1:]
+#X_val = cc.val[:, :cc.val.shape[1]-2]
 #Test the data
-X_val = Variable(torch.from_numpy(X_val)).float()
-y_val = Variable(torch.from_numpy(y_val)).float()
+#X_val = Variable(torch.from_numpy(X_val)).float()
+#y_val = Variable(torch.from_numpy(y_val)).float()
 
 #finding optimum hyperparameters
-X_train = cc.train
+#X_train = cc.train
 
-ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val)
+#ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val)
 
 
 
