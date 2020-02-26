@@ -116,37 +116,6 @@ class ClaimClassifier():
             nn.Sigmoid(),
         )
 
-
-    def _preprocessor2(self, X_raw):
-            """Data preprocessing function.
-
-            This function prepares the features of the data for training,
-            evaluation, and prediction.
-
-            Parameters
-            ----------
-            X_raw : ndarray
-                An array, this is the raw data as downloaded
-
-            Returns
-            -------
-            ndarray
-                A clean data set that is used for training and prediction.
-            """
-
-            #TODO Check if data normalisation is correct in the new way (also passing CSV and that nonesense)
-
-            self.raw_data = X_raw
-            self.n_cols = np.size(self.raw_data, 1)
-            self.n_rows = np.size(self.raw_data, 0)
-            #Create a temporary copy in order to store only the data the model will be training on
-            max = np.max(self.raw_data, axis=0)
-            min = np.min(self.raw_data, axis=0)
-            #Normalize relevant columns
-            self.raw_data = (self.raw_data - min) / (max - min)
-        
-            return self.raw_data 
-
     def _preprocessor(self, X_raw):
         """Data preprocessing function.
 
@@ -348,8 +317,7 @@ class ClaimClassifier():
         X_clean = self._preprocessor(X_raw)
         X_clean = Variable(torch.from_numpy(X_clean)).float()
         out = self.model(X_clean).float()
-        out = out.detach()
-        return  out
+        return out.detach().numpy()
 
     def evaluate_architecture(self):
         """Architecture evaluation utility.
@@ -364,7 +332,7 @@ class ClaimClassifier():
         y_val = self.val[:, self.val.shape[1]-1:]
         y_val = Variable(torch.from_numpy(y_val)).float()
         out = self.predict(X_val)
-        acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_val, True)
+        acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(torch.from_numpy(out), y_val, True)
         print("------------------------------------------------------------------")
         print("Misclassified ones: ", fn, "/", test_ones)
         print("------------------------------------------------------------------")
