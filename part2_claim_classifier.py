@@ -317,6 +317,7 @@ class ClaimClassifier():
         X_clean = self._preprocessor(X_raw)
         print("Xclean data type: ", type(X_clean))
         print("Data type of the return of preprocessor", type(self._preprocessor(X_raw)))
+        print("self.val type: ", type(self.val))
         temp1 = torch.from_numpy(X_clean)
         temp2 = Variable(temp1)
         X_clean = temp2.float()
