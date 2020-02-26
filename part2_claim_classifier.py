@@ -116,6 +116,37 @@ class ClaimClassifier():
             nn.Sigmoid(),
         )
 
+
+    def _preprocessor2(self, X_raw):
+            """Data preprocessing function.
+
+            This function prepares the features of the data for training,
+            evaluation, and prediction.
+
+            Parameters
+            ----------
+            X_raw : ndarray
+                An array, this is the raw data as downloaded
+
+            Returns
+            -------
+            ndarray
+                A clean data set that is used for training and prediction.
+            """
+
+            #TODO Check if data normalisation is correct in the new way (also passing CSV and that nonesense)
+
+            self.raw_data = X_raw
+            self.n_cols = np.size(self.raw_data, 1)
+            self.n_rows = np.size(self.raw_data, 0)
+            #Create a temporary copy in order to store only the data the model will be training on
+            max = np.max(self.raw_data, axis=0)
+            min = np.min(self.raw_data, axis=0)
+            #Normalize relevant columns
+            self.raw_data = (self.raw_data - min) / (max - min)
+        
+            return self.raw_data 
+
     def _preprocessor(self, X_raw):
         """Data preprocessing function.
 
@@ -132,18 +163,16 @@ class ClaimClassifier():
         ndarray
             A clean data set that is used for training and prediction.
         """
+
         self.raw_data = X_raw
         self.n_cols = np.size(self.raw_data, 1)
         self.n_rows = np.size(self.raw_data, 0)
         #Create a temporary copy in order to store only the data the model will be training on
-        raw_data_temp = self.raw_data[:, : self.n_cols-2]
-        max = np.max(raw_data_temp, axis=0)
-        min = np.min(raw_data_temp, axis=0)
+        max = np.max(self.raw_data, axis=0)
+        min = np.min(self.raw_data, axis=0)
         #Normalize relevant columns
-        raw_data_temp = (raw_data_temp - min) / (max - min)
-        self.raw_data[:, : self.n_cols-2] = raw_data_temp
-        #Shuffle to remove bias in the dataset
-        np.random.shuffle(self.raw_data)
+        self.raw_data = (self.raw_data - min) / (max - min)
+    
         return self.raw_data 
 
     def upsample_ones(self, X, y, w=0):
@@ -192,16 +221,24 @@ class ClaimClassifier():
         self: (optional)
             an instance of the fitted model
         """
-        X_clean = self._preprocessor(X_raw)
+
+
+        '''if y_raw is None: <--DEAL WITH THIS!'''
+
+        #TODO Comment this out
         one_indexes = []
         zero_indexes = []
 
-        X = X_clean[:, :self.n_cols - 2]
-        if y_raw == None:   
-            y = X_clean[:, self.n_cols-1:]
+        #Preprocessing the data
+        if y_raw == None:
+            y = X_raw[:, X_raw.shape[1]-1:]
+            X_raw = X_raw[:, :X_raw.shape[1]-2]
         else:
             y = y_raw
+            X = X_raw
 
+        X = self._preprocessor(X_raw)
+     
         self.count_zeros = 0
         self.count_ones = 0
         for i in range(len(y)):
@@ -211,11 +248,11 @@ class ClaimClassifier():
             elif y[i] == 1.0:
                 self.count_ones += 1
                 self.one_indexes.append(i)
+
         if debug==True:
             print("Original Zeros Counted: ", self.count_zeros)
             print("Original Ones Counted: ", self.count_ones)
 
-        #Upsampling
         X_ = self.upsample_ones(X, y)
         X = X_[0]
         y = X_[1]
@@ -308,13 +345,11 @@ class ClaimClassifier():
             values corresponding to the probability of beloning to the
             POSITIVE class (that had accidents)
         """
-        # Preprocessing the data
         X_clean = self._preprocessor(X_raw)
-        #Passing data through the model
+        X_clean = Variable(torch.from_numpy(X_clean)).float()
         out = self.model(X_clean).float()
         out = out.detach()
-
-        return out
+        return  out
 
     def evaluate_architecture(self):
         """Architecture evaluation utility.
@@ -325,12 +360,10 @@ class ClaimClassifier():
         You can use external libraries such as scikit-learn for this
         if necessary.
         """
-        #TODO Need to change this
-        out = self.model(X_val).float()
-        y_val = cc.val[:, cc.val.shape[1]-1:]
+        X_val = self.val[:, :self.val.shape[1]-2]
+        y_val = self.val[:, self.val.shape[1]-1:]
         y_val = Variable(torch.from_numpy(y_val)).float()
-        out = out.detach()
- 
+        out = self.predict(X_val)
         acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(out, y_val, True)
         print("------------------------------------------------------------------")
         print("Misclassified ones: ", fn, "/", test_ones)
@@ -363,8 +396,13 @@ class ClaimClassifier():
         print("Loss: ", self.loss)
         print("##################################################################")
 
-
         return acc, precision, recall, f1, auc_score
+
+    def save_model(self):
+        # Please alter this file appropriately to work in tandem with your load_model function below
+        with open('part2_claim_classifier.pickle', 'wb') as target:
+            pickle.dump(self, target)
+
 
 
 def load_model():
@@ -374,7 +412,7 @@ def load_model():
     return trained_model
 
 # ENSURE TO ADD IN WHATEVER INPUTS YOU DEEM NECESSARRY TO THIS FUNCTION
-def ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val):
+def ClaimClassifierHyperParameterSearch(cc, X_train):
     """Performs a hyper-parameter for fine-tuning the classifier.
 
     Implement a function that performs a hyper-parameter search for your
@@ -413,7 +451,7 @@ def ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val):
                 print("Dropot rate: ", dropout)
                 print("Leak rate: ", leak)
                 cc.change_model(neuron, nn.LeakyReLU(leak), dropout)
-                cc.n_epochs = 50
+                cc.n_epochs = 25
                 cc.fit(X_train, None)
                 acc, precision, recall, f1, auc_score = cc.evaluate_architecture()
                 if auc_score > best_auc:
@@ -423,36 +461,23 @@ def ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val):
                     best_model.append(dropout)
                     best_model.append(leak)
                 print("Best model: ", best_model)
+
     return  # Return the chosen hyper parameters
 
 
-#TODO Shuffle in the preprocessing
+path_to_train = "part2_train_.csv"
+path_to_val = "part2_validation.csv"
+path_to_test = "part2_test.csv"
+cc = ClaimClassifier()
+#Extracting from csv
+train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
+#Preprocessing the data 
+cc.val = val_raw
 
-
-#path_to_train = "part2_train_.csv"
-#path_to_val = "part2_validation.csv"
-#path_to_test = "part2_test.csv"
-#cc = ClaimClassifier()
-#raw_data = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-#cc.fit(raw_data)
-#data preprocessing
-#cc.train = cc._preprocessor(path_to_train)
-#Assigning validation set
-#cc.val = cc._preprocessor(path_to_val)
-#y_val = cc.val[:, cc.val.shape[1]-1:]
-#X_val = cc.val[:, :cc.val.shape[1]-2]
-#Test the data
-#X_val = Variable(torch.from_numpy(X_val)).float()
-#y_val = Variable(torch.from_numpy(y_val)).float()
-
-#finding optimum hyperparameters
-#X_train = cc.train
-
-#ClaimClassifierHyperParameterSearch(cc, X_train, X_val, y_val)
-
-
-
-
+cc.fit(train_raw)
+cc.evaluate_architecture()
+cc.save_model()
 
 
 
