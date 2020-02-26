@@ -8,7 +8,6 @@ import sklearn
 import keras
 import torch.nn as nn
 import torchvision.datasets as dsets
-import pandas as pd
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
 from sklearn import svm, datasets
