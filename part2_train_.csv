@@ -1,4 +1,4 @@
-drv_age1,vh_age,vh_cyl,vh_din,pol_bonus,vh_sale_begin,vh_sale_end,vh_value,vh_speed,claim_amount,made_claim
+drv_age1,vh_age,vh_cyl,vh_din,pol_bonus,vh_sale_begin,vh_sale_end,vh_value,vh_speed,claim_amount,10
 54,11,1461,101,0.5,12,10,18950,179,0.0,0
 69,7,1461,86,0.5,10,8,17450,174,0.0,0
 62,18,2664,125,0.5,19,17,29713,155,0.0,0

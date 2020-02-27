@@ -259,12 +259,14 @@ def example_main():
     y_train = np.reshape(y_train, (y_train.size, 1))
 
     #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
-    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,8),
+    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,16),
                                                             nn.ReLU(),
-                                                            nn.Linear(8,4),
+                                                            nn.Linear(16,6),
+                                                            nn.ReLU(),
+                                                            nn.Linear(6,4),
                                                             nn.ReLU(),
                                                             nn.Linear(4,1),
-                                                            nn.Sigmoid()), n_epochs = 50)
+                                                            nn.Sigmoid()), n_epochs = 75)
 
     pm=PricingModel(False, prediction_model)
     pm.fit(X_train, y_train, claims_raw)
@@ -272,4 +274,4 @@ def example_main():
     #pm = load_model()
     pm.evaluate_architecture(X_test, y_test)
 
-example_main()
+#example_main()
