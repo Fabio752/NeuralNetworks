@@ -110,8 +110,6 @@ class PricingModel():
 
         """
         X_clean = self._preprocessor(X_raw)
-        print(X_clean)
-        print(y_raw)
         nnz = np.where(claims_raw != 0)[0]
         self.y_mean = np.mean(claims_raw[nnz])
         # =============================================================
@@ -189,12 +187,12 @@ def example_main():
     path_to_train = "part3_training_data.csv"
 
     df_train = pd.read_csv(path_to_train, delimiter=",")
-
     y_vals = df_train["made_claim"].values
+    y_vals = np.reshape(y_vals, (y_vals.size, 1))
     claims_raw = df_train["claim_amount"].values
     prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,8),
                                                             nn.ReLU(),
-                                                            nn.Linear(4,4),
+                                                            nn.Linear(8,4),
                                                             nn.ReLU(),
                                                             nn.Linear(4,1),
                                                             nn.Sigmoid()), n_epochs = 5)

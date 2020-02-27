@@ -14,7 +14,6 @@ from torch.utils.data import DataLoader, Dataset
 from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import roc_auc_score
-from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import GridSearchCV
 from keras.models import Sequential
 from keras.layers import Dense,Activation,Embedding,Flatten,LeakyReLU,BatchNormalization
@@ -22,7 +21,7 @@ from keras.activations import relu,sigmoid
 from sklearn.base import BaseEstimator, ClassifierMixin
 
 
-debug = False
+debug = True
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -500,15 +499,15 @@ class HyperParamSearcher():
         print(self.cc.best_params_)
         print(self.cc.best_score_)
 # path_to_train = "part2_train_.csv"
-'''path_to_train = "part2_train_.csv"
-path_to_val = "part2_validation.csv"
-path_to_test = "part2_test.csv"
-# cc = ClaimClassifier()
-# #Extracting from csv
-train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-# cc.fit(train_raw)
-# cc.evaluate_architecture()
-# cc.save_model()
-tuned_parameters = [{ 'n_epochs': [10, 20] }]
-searcher = HyperParamSearcher(tuned_parameters, train_raw)
-searcher.begin()'''
+# path_to_train = "part2_train_.csv"
+# path_to_val = "part2_validation.csv"
+# path_to_test = "part2_test.csv"
+# # cc = ClaimClassifier()
+# # #Extracting from csv
+# train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+# # cc.fit(train_raw)
+# # cc.evaluate_architecture()
+# # cc.save_model()
+# tuned_parameters = [{ 'n_epochs': [10, 20] }]
+# searcher = HyperParamSearcher(tuned_parameters, train_raw)
+# searcher.begin()
