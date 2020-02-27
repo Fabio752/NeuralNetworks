@@ -472,6 +472,19 @@ def ClaimClassifierHyperParameterSearch(cc, X_train):
                 print("Best model: ", best_model)
 
     return  # Return the chosen hyper parameters
+# path_to_train = "part2_train_.csv"
+# path_to_val = "part2_validation.csv"
+# path_to_test = "part2_test.csv"
+# cc = ClaimClassifier()
+# #Extracting from csv
+# train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+# val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
+# #Preprocessing the data 
+# cc.val = val_raw
+
+# cc.fit(train_raw)
+# cc.evaluate_architecture()
+# cc.save_model()
 
 class HyperParamSearcher():
     def __init__(self, param_grid, train_data):
