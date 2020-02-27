@@ -237,9 +237,7 @@ class ClaimClassifier():
             print("Original Zeros Counted: ", self.count_zeros)
             print("Original Ones Counted: ", self.count_ones)
 
-        X_ = self.upsample_ones(X, y)
-        X = X_[0]
-        y = X_[1]
+        X, y = self.upsample_ones(X, y)
 
         self.count_zeros = 0
         self.count_ones = 0
@@ -497,6 +495,6 @@ train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
 # cc.fit(train_raw)
 # cc.evaluate_architecture()
 # cc.save_model()
-tuned_parameters = [{ 'n_epochs': [10, 20], 'learning_rate': [0.001, 0.01], 'batch_size': [25,50] }]
+tuned_parameters = [{ 'n_epochs': [10, 20] }]
 searcher = HyperParamSearcher(tuned_parameters, train_raw)
 searcher.begin()
