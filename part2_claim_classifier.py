@@ -122,7 +122,8 @@ class ClaimClassifier():
         return {
             "n_epochs": self.n_epochs,
             "learning_rate": self.learning_rate,
-            "batch_size": self.batch_size
+            "batch_size": self.batch_size,
+            "model": self.model
         }
     
     def set_params(self, **parameters):
@@ -508,6 +509,24 @@ train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
 # cc.fit(train_raw)
 # cc.evaluate_architecture()
 # cc.save_model()
-tuned_parameters = [{ 'n_epochs': [10, 20] }]
+tuned_parameters = [{ 'n_epochs': [50], 'model': [nn.Sequential(nn.Linear(9,4),nn.ReLU(),nn.Linear(4,4),nn.ReLU(),nn.Linear(4,1),nn.Sigmoid(),), 
+nn.Sequential(nn.Linear(9,5),nn.ReLU(),nn.Linear(5,5),nn.ReLU(),nn.Linear(5,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,6),nn.ReLU(),nn.Linear(6,6),nn.ReLU(),nn.Linear(6,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,7),nn.ReLU(),nn.Linear(7,7),nn.ReLU(),nn.Linear(7,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,8),nn.ReLU(),nn.Linear(8,8),nn.ReLU(),nn.Linear(8,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,9),nn.ReLU(),nn.Linear(9,9),nn.ReLU(),nn.Linear(9,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,10),nn.ReLU(),nn.Linear(10,10),nn.ReLU(),nn.Linear(10,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,25),nn.ReLU(),nn.Linear(25,25),nn.ReLU(),nn.Linear(25,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,50),nn.ReLU(),nn.Linear(50,50),nn.ReLU(),nn.Linear(50,1),nn.Sigmoid(),), 
+nn.Sequential(nn.Linear(9,100),nn.ReLU(),nn.Linear(100,100),nn.ReLU(),nn.Linear(100,1),nn.Sigmoid(),)]}]
 searcher = HyperParamSearcher(tuned_parameters, train_raw)
-searcher.begin()
+#searcher.begin()
+cc=ClaimClassifier()
+X = train_raw[:,:train_raw.shape[1]-1]
+y = train_raw[:,train_raw.shape[1]-1:]
+X, y = self.upsample_ones(X, y)
+
+temp = np.append(X,y,axis=1)
+savetxt('upsampled_data.csv', temp, delimiter=',')
+
+
