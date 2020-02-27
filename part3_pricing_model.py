@@ -2,6 +2,11 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.model_selection import train_test_split
 import pickle
 import numpy as np
+from part2_claim_classifier import ClaimClassifier
+import pandas as pd
+import torch.nn as nn
+
+
 
 
 def fit_and_calibrate_classifier(classifier, X, y):
@@ -41,7 +46,13 @@ class PricingModel():
         # to implement a predict_proba for it before use
         # =============================================================
         self.base_classifier = None # ADD YOUR BASE CLASSIFIER HERE
-
+        self.cols_to_drop = ["id_policy", "pol_duration", "pol_pay_freq", \
+        "pol_payd", "pol_usage", "pol_insee_code", "drv_drv2", \
+        "drv_age1", "drv_age1","drv_age2", "drv_sex1", "drv_sex2", "drv_age_lic1", \
+        "vh_cyl", "vh_make", "vh_model", "drv_age_lic2", \
+        "town_mean_altitude", "town_surface_area", "population", "commune_code", \
+        "regional_department_code", "canton_code", "city_district_code", "vh_type"\
+        , "made_claim", "claim_amount"]
 
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY TO THE _preprocessor METHOD
     def _preprocessor(self, X_raw):
@@ -60,10 +71,23 @@ class PricingModel():
         X: ndarray
             A clean data set that is used for training and prediction.
         """
-        # =============================================================
-        # YOUR CODE HERE
+        X_dropped = X_raw.drop(self.cols_to_drop, axis=1)
 
-        return  # YOUR CLEAN DATA AS A NUMPY ARRAY
+        print(X_dropped.info())
+
+        X_unscaled = pd.get_dummies(X_dropped,prefix=['pol_coverage', 'vh_fuel']).values
+
+        '''print(X_unscaled.describe())
+        print(X_unscaled.info())
+
+        X_unscaled = X_unscaled.values
+
+        max = np.max(X_unscaled, axis=0)
+        min = np.min(X_unscaled, axis=0)
+        #Normalize relevant columns
+        X_scaled = (X_unscaled - min) / (max - min)'''
+
+        return X_unscaled
 
     def fit(self, X_raw, y_raw, claims_raw):
         """Classifier training function.
@@ -85,11 +109,11 @@ class PricingModel():
             an instance of the fitted model
 
         """
+        X_clean = self._preprocessor(X_raw)
         nnz = np.where(claims_raw != 0)[0]
         self.y_mean = np.mean(claims_raw[nnz])
         # =============================================================
         # REMEMBER TO A SIMILAR LINE TO THE FOLLOWING SOMEWHERE IN THE CODE
-        X_clean = self._preprocessor(X_raw)
 
         # THE FOLLOWING GETS CALLED IF YOU WISH TO CALIBRATE YOUR PROBABILITES
         if self.calibrate:
@@ -158,3 +182,22 @@ def load_model():
     with open('part3_pricing_model.pickle', 'rb') as target:
         trained_model = pickle.load(target)
     return trained_model
+
+def example_main():
+    path_to_train = "part3_training_data.csv"
+
+    df_train = pd.read_csv(path_to_train, delimiter=",")
+
+    y_vals = df_train["made_claim"].values
+    claims_raw = df_train["claim_amount"].values
+    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,8),
+                                                            nn.ReLU(),
+                                                            nn.Linear(4,4),
+                                                            nn.ReLU(),
+                                                            nn.Linear(4,1),
+                                                            nn.Sigmoid()), n_epochs = 5)
+    print(prediction_model)
+    pm=PricingModel(prediction_model)
+    pm.fit(df_train, y_vals, claims_raw)
+
+example_main()
