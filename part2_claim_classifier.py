@@ -7,14 +7,13 @@ import random
 import sklearn
 import keras
 import torch.nn as nn
-import pandas 
+import pandas
 import torchvision.datasets as dsets
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
 from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import roc_auc_score
-from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import GridSearchCV
 from keras.models import Sequential
 from keras.layers import Dense,Activation,Embedding,Flatten,LeakyReLU,BatchNormalization
@@ -52,9 +51,9 @@ def get_accuracy(y_out, y_target, test=False):
         return acc, false_negative, true_negative, false_positive, true_positive, test_ones, test_zeros
     else:
         return acc
-   
+
 def get_accuracy_zero_tensor(y_out, y_target):
-  y_pred = y_out > 1       # a Tensor of 0s 
+  y_pred = y_out > 1       # a Tensor of 0s
   num_correct = torch.sum(y_target==y_pred.float())  # a Tensor
   acc = (num_correct.item() * 100.0 / len(y_target))  # scalar
   return acc
@@ -79,6 +78,7 @@ class ClaimClassifier():
         Feel free to alter this as you wish, adding instance variables as
         necessary.
         """
+        print("hello claim classifier here")
         # super(ClaimClassifier, self).__init__()
         self.retrain = False
         self.count_zeros = 0
@@ -88,7 +88,7 @@ class ClaimClassifier():
         self.loss = 0
         self.learning_rate = 0.001
         self.batch_size = 50
-        self.n_epochs = 25
+        self.n_epochs = 200
         self.train = None
         self.val = None
         self.test = None
@@ -125,7 +125,7 @@ class ClaimClassifier():
             "batch_size": self.batch_size,
             "model": self.model
         }
-    
+
     def set_params(self, **parameters):
         for parameter, value in parameters.items():
             print(parameter, value)
@@ -157,8 +157,8 @@ class ClaimClassifier():
         min = np.min(self.raw_data, axis=0)
         #Normalize relevant columns
         self.raw_data = (self.raw_data - min) / (max - min)
-    
-        return self.raw_data 
+
+        return self.raw_data
 
     def upsample_ones(self, X, y, w=0):
         ''' Function to upsample the instances of ones (minority class) in the dataset '''
@@ -187,7 +187,7 @@ class ClaimClassifier():
             if (self.count_ones >= self.count_zeros):
                 return (X,y)
         return (X,y)
-                    
+
 
     def fit(self, X_raw, y_raw=None):
         """Classifier training function.
@@ -206,7 +206,6 @@ class ClaimClassifier():
         self: (optional)
             an instance of the fitted model
         """
-
         one_indexes = []
         zero_indexes = []
 
@@ -235,7 +234,7 @@ class ClaimClassifier():
             print("Original Zeros Counted: ", self.count_zeros)
             print("Original Ones Counted: ", self.count_ones)
 
-        #X, y = self.upsample_ones(X_raw, y)
+        X, y = self.upsample_ones(X_raw, y)
 
         self.count_zeros = 0
         self.count_ones = 0
@@ -253,7 +252,7 @@ class ClaimClassifier():
             print("Length of y: ", len(y[:, 0]))
         if self.count_ones != 0:
             diff = round(self.count_zeros/self.count_ones)
-        
+
         #Prepare data to be accepted by Pytorch
         ds = PrepareData(X=X, y=y)
         ds = DataLoader(ds, batch_size=self.batch_size, shuffle=True)
@@ -261,14 +260,14 @@ class ClaimClassifier():
         optimizer = torch.optim.Adam(self.model.parameters(), lr=self.learning_rate)
         cost_func = nn.BCELoss()
 
-        #Training model 
+        #Training model
         for epoch in range(self.n_epochs):
             count_zeros = 0
             count_ones = 0
             accuracies = []
             zero_accuracies = []
             losses = []
-            
+
             for ix, (_x, _y) in enumerate(ds):
                 #=========make input differentiable=======================
                 _x = Variable(_x).float()
@@ -305,7 +304,7 @@ class ClaimClassifier():
                     print("Zeros predicted: ", count_zeros)
                 else:
                     pass
-
+        return self
         # print("Finished Training")
 
 
@@ -478,7 +477,7 @@ def ClaimClassifierHyperParameterSearch(cc, X_train):
 # #Extracting from csv
 # train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
 # val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
-# #Preprocessing the data 
+# #Preprocessing the data
 # cc.val = val_raw
 
 # cc.fit(train_raw)
@@ -493,20 +492,18 @@ class HyperParamSearcher():
     def begin(self):
         self.cc.fit(self.train_data)
         self.end()
-    
+
     def end(self):
         print(self.cc.best_params_)
         print(self.cc.best_score_)
 #path_to_train = "part2_train_.csv"
-path_to_train = "upsampled_dataset.csv"
+'''path_to_train = "upsampled_dataset.csv"
 path_to_val = "part2_validation.csv"
 path_to_test = "part2_test.csv"
 cc = ClaimClassifier()
 # #Extracting from csv
 train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-
-print(train_raw.shape)
-
+8519
 #cc.fit(train_raw)
 #cc.evaluate_architecture()
 # cc.save_model()
@@ -521,4 +518,4 @@ nn.Sequential(nn.Linear(9,25),nn.ReLU(),nn.Linear(25,25),nn.ReLU(),nn.Linear(25,
 nn.Sequential(nn.Linear(9,50),nn.ReLU(),nn.Linear(50,50),nn.ReLU(),nn.Linear(50,1),nn.Sigmoid(),), 
 nn.Sequential(nn.Linear(9,100),nn.ReLU(),nn.Linear(100,100),nn.ReLU(),nn.Linear(100,1),nn.Sigmoid(),)]}]
 searcher = HyperParamSearcher(tuned_parameters, train_raw)
-searcher.begin()
+searcher.begin()'''

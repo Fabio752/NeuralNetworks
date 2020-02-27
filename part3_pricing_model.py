@@ -290,7 +290,7 @@ def fit_and_calibrate_classifier(classifier, X, y):
 # class for part 3
 class PricingModel():
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY
-    def __init__(self, calibrate_probabilities=False):
+    def __init__(self, calibrate_probabilities=False, model=None):
         """
         Feel free to alter this as you wish, adding instance variables as
         necessary.
@@ -311,8 +311,14 @@ class PricingModel():
         # If you wish to use the classifier in part 2, you will need
         # to implement a predict_proba for it before use
         # =============================================================
-        self.base_classifier = None # ADD YOUR BASE CLASSIFIER HERE
-
+        self.base_classifier = model  # ADD YOUR BASE CLASSIFIER HERE
+        self.cols_to_drop = ["id_policy", "pol_duration", "pol_pay_freq", \
+        "pol_payd", "pol_usage", "pol_insee_code", "drv_drv2", \
+        "drv_age1", "drv_age1","drv_age2", "drv_sex1", "drv_sex2", "drv_age_lic1", \
+        "vh_cyl", "vh_make", "vh_model", "drv_age_lic2", \
+        "town_mean_altitude", "town_surface_area", "population", "commune_code", \
+        "regional_department_code", "canton_code", "city_district_code", "vh_type"\
+        , "made_claim", "claim_amount"]
 
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY TO THE _preprocessor METHOD
     def _preprocessor(self, X_raw):
@@ -331,10 +337,23 @@ class PricingModel():
         X: ndarray
             A clean data set that is used for training and prediction.
         """
-        # =============================================================
-        # YOUR CODE HERE
+        X_dropped = X_raw.drop(self.cols_to_drop, axis=1)
 
-        return  # YOUR CLEAN DATA AS A NUMPY ARRAY
+        # print(X_dropped.info())
+
+        X_unscaled = pd.get_dummies(X_dropped,prefix=['pol_coverage', 'vh_fuel']).values
+
+        '''print(X_unscaled.describe())
+        print(X_unscaled.info())
+
+        X_unscaled = X_unscaled.values
+
+        max = np.max(X_unscaled, axis=0)
+        min = np.min(X_unscaled, axis=0)
+        #Normalize relevant columns
+        X_scaled = (X_unscaled - min) / (max - min)'''
+
+        return X_unscaled
 
     def fit(self, X_raw, y_raw, claims_raw):
         """Classifier training function.
@@ -356,11 +375,11 @@ class PricingModel():
             an instance of the fitted model
 
         """
+        X_clean = self._preprocessor(X_raw)
         nnz = np.where(claims_raw != 0)[0]
         self.y_mean = np.mean(claims_raw[nnz])
         # =============================================================
         # REMEMBER TO A SIMILAR LINE TO THE FOLLOWING SOMEWHERE IN THE CODE
-        X_clean = self._preprocessor(X_raw)
 
         # THE FOLLOWING GETS CALLED IF YOU WISH TO CALIBRATE YOUR PROBABILITES
         if self.calibrate:
@@ -387,12 +406,11 @@ class PricingModel():
             values corresponding to the probability of beloning to the
             POSITIVE class (that had accidents)
         """
-        # =============================================================
-        # REMEMBER TO A SIMILAR LINE TO THE FOLLOWING SOMEWHERE IN THE CODE
-        # X_clean = self._preprocessor(X_raw)
 
+        X_clean = self._preprocessor(X_raw)
+        probabilities = self.base_classifier.predict(X_clean)
 
-        return  # return probabilities for the positive class (label 1)
+        return probabilities
 
     def predict_premium(self, X_raw):
         """Predicts premiums based on the pricing model.
@@ -423,12 +441,72 @@ class PricingModel():
         with open('part3_pricing_model.pickle', 'wb') as target:
             pickle.dump(self, target)
 
+    def evaluate_architecture(self, X_val, y_val):
+        preds = self.predict_claim_probability(X_val)
+        y_val = torch.from_numpy(y_val.values)
+        acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(torch.from_numpy(preds), y_val, True)
+        print("------------------------------------------------------------------")
+        print("Misclassified ones: ", fn, "/", test_ones)
+        print("------------------------------------------------------------------")
+        print("Misclassified zeros: ", fp, "/", test_zeros)
+        print("------------------------------------------------------------------")
+        print("Accuracy: ", acc)
+        print("------------------------------------------------------------------")
+        precision = 0
+        recall = 0
+        f1 = 0
+        if (tp+fp) != 0:
+            precision = tp/(tp+fp)
+        if  (tp+fn) != 0:
+            recall = tp/(tp+fn)
+        print("Precision -> Pr(positive example|example classified as positive): ", precision)
+        print("Recall -> Pr(correctly classified|positive example): ", recall)
+        print("------------------------------------------------------------------")
+        if (precision+recall) != 0:
+            f1 = 2*(precision*recall)/(precision + recall)
+        print("F1 Score: ", f1)
+        print("------------------------------------------------------------------")
+        print("Confusion Matrix")
+        print("TP: ", tp, " FN: ", fn)
+        print("FP: ", fp, " TN: ", tn)
+        print("------------------------------------------------------------------")
+        auc_score = roc_auc_score(y_val, preds)
+        print("AUC-ROC Score: ", auc_score)
+        print("------------------------------------------------------------------")
+
+        return
+
 
 def load_model():
     # Please alter this section so that it works in tandem with the save_model method of your class
     with open('part3_pricing_model.pickle', 'rb') as target:
         trained_model = pickle.load(target)
     return trained_model
+
+def example_main():
+    path_to_train = "part3_training_data.csv"
+    df_full = pd.read_csv(path_to_train, delimiter=",")
+    claims_raw = df_full["claim_amount"].values
+    y = df_full["made_claim"]
+
+    X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.3, random_state = 0)
+    y_train = y_train.values
+    y_train = np.reshape(y_train, (y_train.size, 1))
+
+    #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
+    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,16),
+                                                            nn.ReLU(),
+                                                            nn.Linear(16,6),
+                                                            nn.ReLU(),
+                                                            nn.Linear(6,4),
+                                                            nn.ReLU(),
+                                                            nn.Linear(4,1),
+                                                            nn.Sigmoid()), n_epochs = 75)
+
+    pm=PricingModel(False, prediction_model)
+    pm.fit(X_train, y_train, claims_raw)
+    pm.save_model()
+    #pm = load_model()
     pm.evaluate_architecture(X_test, y_test)
 
-example_main()
+#example_main()
