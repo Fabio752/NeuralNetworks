@@ -19,7 +19,7 @@ from keras.models import Sequential
 from keras.layers import Dense,Activation,Embedding,Flatten,LeakyReLU,BatchNormalization
 from keras.activations import relu,sigmoid
 from sklearn.base import BaseEstimator, ClassifierMixin
-
+from numpy import savetxt
 
 debug = True
 
@@ -88,7 +88,7 @@ class ClaimClassifier():
         self.loss = 0
         self.learning_rate = 0.001
         self.batch_size = 50
-        self.n_epochs = 1
+        self.n_epochs = 25
         self.train = None
         self.val = None
         self.test = None
@@ -122,7 +122,8 @@ class ClaimClassifier():
         return {
             "n_epochs": self.n_epochs,
             "learning_rate": self.learning_rate,
-            "batch_size": self.batch_size
+            "batch_size": self.batch_size,
+            "model": self.model
         }
 
     def set_params(self, **parameters):
@@ -206,14 +207,10 @@ class ClaimClassifier():
             an instance of the fitted model
         """
 
-
-        '''if y_raw is None: <--DEAL WITH THIS!'''
-
-        #TODO Comment this out
         one_indexes = []
         zero_indexes = []
 
-        #Preprocessing the data=
+        #Preprocessing the data
         if y_raw is None:
             y = X_raw[:, X_raw.shape[1]-1:]
             X_raw = X_raw[:, :X_raw.shape[1]-2]
@@ -225,6 +222,7 @@ class ClaimClassifier():
 
         self.count_zeros = 0
         self.count_ones = 0
+        print("Length of y: ", len(y))
         for i in range(len(y)):
             if y[i] == 0.0:
                 self.count_zeros += 1
@@ -237,7 +235,7 @@ class ClaimClassifier():
             print("Original Zeros Counted: ", self.count_zeros)
             print("Original Ones Counted: ", self.count_ones)
 
-        X, y = self.upsample_ones(X, y)
+        #X, y = self.upsample_ones(X_raw, y)
 
         self.count_zeros = 0
         self.count_ones = 0
@@ -247,6 +245,7 @@ class ClaimClassifier():
             elif y[i] == 1.0:
                 self.count_ones += 1
                 self.one_indexes.append(i)
+
         if debug:
             print("Down/Upsampled Zeros Counted: ", self.count_zeros)
             print("Down/Upsampled Ones Counted: ", self.count_ones)
@@ -440,7 +439,7 @@ def ClaimClassifierHyperParameterSearch(cc, X_train):
     6. Batch Size
     7. Batch Normalization
     8. Dropout rate
-    '''
+    '''    
     neurons =[4,6,8,10]
     hidden_layers = [1,2]
     epochs = [25,50,75,100]
@@ -498,16 +497,28 @@ class HyperParamSearcher():
     def end(self):
         print(self.cc.best_params_)
         print(self.cc.best_score_)
-# path_to_train = "part2_train_.csv"
-# path_to_train = "part2_train_.csv"
-# path_to_val = "part2_validation.csv"
-# path_to_test = "part2_test.csv"
-# # cc = ClaimClassifier()
-# # #Extracting from csv
-# train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-# # cc.fit(train_raw)
-# # cc.evaluate_architecture()
-# # cc.save_model()
-# tuned_parameters = [{ 'n_epochs': [10, 20] }]
-# searcher = HyperParamSearcher(tuned_parameters, train_raw)
-# searcher.begin()
+#path_to_train = "part2_train_.csv"
+path_to_train = "upsampled_dataset.csv"
+path_to_val = "part2_validation.csv"
+path_to_test = "part2_test.csv"
+cc = ClaimClassifier()
+# #Extracting from csv
+train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+
+print(train_raw.shape)
+
+#cc.fit(train_raw)
+#cc.evaluate_architecture()
+# cc.save_model()
+tuned_parameters = [{ 'n_epochs': [50], 'model': [nn.Sequential(nn.Linear(9,4),nn.ReLU(),nn.Linear(4,4),nn.ReLU(),nn.Linear(4,1),nn.Sigmoid(),), 
+nn.Sequential(nn.Linear(9,5),nn.ReLU(),nn.Linear(5,5),nn.ReLU(),nn.Linear(5,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,6),nn.ReLU(),nn.Linear(6,6),nn.ReLU(),nn.Linear(6,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,7),nn.ReLU(),nn.Linear(7,7),nn.ReLU(),nn.Linear(7,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,8),nn.ReLU(),nn.Linear(8,8),nn.ReLU(),nn.Linear(8,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,9),nn.ReLU(),nn.Linear(9,9),nn.ReLU(),nn.Linear(9,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,10),nn.ReLU(),nn.Linear(10,10),nn.ReLU(),nn.Linear(10,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,25),nn.ReLU(),nn.Linear(25,25),nn.ReLU(),nn.Linear(25,1),nn.Sigmoid(),),
+nn.Sequential(nn.Linear(9,50),nn.ReLU(),nn.Linear(50,50),nn.ReLU(),nn.Linear(50,1),nn.Sigmoid(),), 
+nn.Sequential(nn.Linear(9,100),nn.ReLU(),nn.Linear(100,100),nn.ReLU(),nn.Linear(100,1),nn.Sigmoid(),)]}]
+searcher = HyperParamSearcher(tuned_parameters, train_raw)
+searcher.begin()
