@@ -266,10 +266,10 @@ def example_main():
                                                             nn.Linear(4,1),
                                                             nn.Sigmoid()), n_epochs = 50)
 
-    '''pm=PricingModel(False, prediction_model)
+    pm=PricingModel(False, prediction_model)
     pm.fit(X_train, y_train, claims_raw)
-    pm.save_model()'''
-    pm = load_model()
+    pm.save_model()
+    #pm = load_model()
     pm.evaluate_architecture(X_test, y_test)
 
 example_main()
