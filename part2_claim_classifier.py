@@ -214,8 +214,8 @@ class ClaimClassifier():
         one_indexes = []
         zero_indexes = []
 
-        #Preprocessing the data
-        if y_raw == None:
+        #Preprocessing the data=
+        if y_raw is None:
             y = X_raw[:, X_raw.shape[1]-1:]
             X_raw = X_raw[:, :X_raw.shape[1]-2]
         else:
@@ -307,7 +307,7 @@ class ClaimClassifier():
                     print("Zeros predicted: ", count_zeros)
                 else:
                     pass
-
+        return self
         # print("Finished Training")
 
 

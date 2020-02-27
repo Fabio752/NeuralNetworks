@@ -24,7 +24,7 @@ def fit_and_calibrate_classifier(classifier, X, y):
 # class for part 3
 class PricingModel():
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY
-    def __init__(self, calibrate_probabilities=False):
+    def __init__(self, calibrate_probabilities=False, model=None):
         """
         Feel free to alter this as you wish, adding instance variables as
         necessary.
@@ -45,7 +45,7 @@ class PricingModel():
         # If you wish to use the classifier in part 2, you will need
         # to implement a predict_proba for it before use
         # =============================================================
-        self.base_classifier = None # ADD YOUR BASE CLASSIFIER HERE
+        self.base_classifier = model  # ADD YOUR BASE CLASSIFIER HERE
         self.cols_to_drop = ["id_policy", "pol_duration", "pol_pay_freq", \
         "pol_payd", "pol_usage", "pol_insee_code", "drv_drv2", \
         "drv_age1", "drv_age1","drv_age2", "drv_sex1", "drv_sex2", "drv_age_lic1", \
@@ -73,7 +73,7 @@ class PricingModel():
         """
         X_dropped = X_raw.drop(self.cols_to_drop, axis=1)
 
-        print(X_dropped.info())
+        # print(X_dropped.info())
 
         X_unscaled = pd.get_dummies(X_dropped,prefix=['pol_coverage', 'vh_fuel']).values
 
@@ -110,6 +110,8 @@ class PricingModel():
 
         """
         X_clean = self._preprocessor(X_raw)
+        print(X_clean)
+        print(y_raw)
         nnz = np.where(claims_raw != 0)[0]
         self.y_mean = np.mean(claims_raw[nnz])
         # =============================================================
@@ -196,8 +198,7 @@ def example_main():
                                                             nn.ReLU(),
                                                             nn.Linear(4,1),
                                                             nn.Sigmoid()), n_epochs = 5)
-    print(prediction_model)
-    pm=PricingModel(prediction_model)
+    pm=PricingModel(False, prediction_model)
     pm.fit(df_train, y_vals, claims_raw)
 
 example_main()
