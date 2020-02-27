@@ -211,7 +211,7 @@ class ClaimClassifier():
         zero_indexes = []
 
         #Preprocessing the data
-        if y_raw == None:
+        if y_raw is None:
             y = X_raw[:, X_raw.shape[1]-1:]
             X_raw = X_raw[:, :X_raw.shape[1]-2]
         else:
