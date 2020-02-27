@@ -2,7 +2,7 @@ from imblearn.over_sampling import SMOTE
 import numpy as np
 
 ratios = [float(i)/10 for i in range(2, 11)]
-path_to_train = "../part2_train_.csv"
+path_to_train = "../../part2_train_.csv"
 print(path_to_train)
 X_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
 
