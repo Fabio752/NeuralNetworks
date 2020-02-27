@@ -82,8 +82,7 @@ class PricingModel():
         "drv_age1", "drv_age1","drv_age2", "drv_sex1", "drv_sex2", "drv_age_lic1", \
         "vh_cyl", "vh_make", "vh_model", "drv_age_lic2", \
         "town_mean_altitude", "town_surface_area", "population", "commune_code", \
-        "regional_department_code", "canton_code", "city_district_code", "vh_type"\
-        , "made_claim", "claim_amount"]
+        "regional_department_code", "canton_code", "city_district_code", "vh_type"]
 
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY TO THE _preprocessor METHOD
     def _preprocessor(self, X_raw):
@@ -121,8 +120,7 @@ class PricingModel():
         return X_unscaled
 
     def fit(self, X_raw, y_raw, claims_raw):
-        """Classifier training function.
-
+aa17517@point04:neural_networks_17$ git branch
         Here you will use the fit function for your classifier.
 
         Parameters
