@@ -120,7 +120,7 @@ class PricingModel():
         return X_unscaled
 
     def fit(self, X_raw, y_raw, claims_raw):
-aa17517@point04:neural_networks_17$ git branch
+        """
         Here you will use the fit function for your classifier.
 
         Parameters
