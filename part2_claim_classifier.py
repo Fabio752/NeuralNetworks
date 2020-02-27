@@ -19,10 +19,10 @@ from sklearn.model_selection import GridSearchCV
 from keras.models import Sequential
 from keras.layers import Dense,Activation,Embedding,Flatten,LeakyReLU,BatchNormalization
 from keras.activations import relu,sigmoid
+from sklearn.base import BaseEstimator, ClassifierMixin
 
 
-
-debug = True
+debug = False
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -74,12 +74,12 @@ class PrepareData(Dataset):
 
 
 class ClaimClassifier():
-    def __init__(self):
+    def __init__(self, **args):
         """
         Feel free to alter this as you wish, adding instance variables as
         necessary.
         """
-        super(ClaimClassifier, self).__init__()
+        # super(ClaimClassifier, self).__init__()
         self.retrain = False
         self.count_zeros = 0
         self.count_ones = 0
@@ -100,6 +100,8 @@ class ClaimClassifier():
             nn.Linear(4,1),
             nn.Sigmoid(),
         )
+        for arg, value in args.items():
+            setattr(self, arg, value)
 
     def change_model(self, n_H, act, dr=0.0):
         self.model = nn.Sequential(
@@ -115,6 +117,19 @@ class ClaimClassifier():
             nn.Linear(n_H,1),
             nn.Sigmoid(),
         )
+
+    def get_params(self, deep=True):
+        return {
+            "n_epochs": self.n_epochs,
+            "learning_rate": self.learning_rate,
+            "batch_size": self.batch_size
+        }
+    
+    def set_params(self, **parameters):
+        for parameter, value in parameters.items():
+            print(parameter, value)
+            setattr(self, parameter, value)
+        return self
 
     def _preprocessor(self, X_raw):
         """Data preprocessing function.
@@ -294,7 +309,7 @@ class ClaimClassifier():
                 else:
                     pass
 
-        print("Finished Training")
+        # print("Finished Training")
 
 
     def predict(self, X_raw):
@@ -319,18 +334,19 @@ class ClaimClassifier():
             X_raw = X_raw.values
 
         X_clean = self._preprocessor(X_raw)
-        print("Xclean data type: ", type(X_clean))
-        print("Data type of the return of preprocessor", type(self._preprocessor(X_raw)))
-        print("self.val type: ", type(self.val))
+        if debug:
+            print("Xclean data type: ", type(X_clean))
+            print("Data type of the return of preprocessor", type(self._preprocessor(X_raw)))
+            print("self.val type: ", type(self.val))
         temp1 = torch.from_numpy(X_clean)
         temp2 = Variable(temp1)
         X_clean = temp2.float()
         #X_clean_tensor = Variable(torch.from_numpy(X_clean)).float()
-        print("Data type on the next line: ", type(X_clean))
+        # print("Data type on the next line: ", type(X_clean))
         out = self.model(X_clean).float()
         out = out.detach().numpy()
-        print(out)
-        print("Out at the last line", type(out))
+        # print(out)
+        # print("Out at the last line", type(out))
         return out
 
     def evaluate_architecture(self):
@@ -379,6 +395,19 @@ class ClaimClassifier():
         print("##################################################################")
 
         return acc, precision, recall, f1, auc_score
+
+    def score(self, X):
+        X_val = X[:, :X.shape[1]-2]
+        y_val = X[:, X.shape[1]-1:]
+        y_val = Variable(torch.from_numpy(y_val)).float()
+        out = self.predict(X_val)
+        auc_score = 0
+        try:
+            auc_score = sklearn.metrics.roc_auc_score(y_val, out)
+        except:
+            auc_score = 0
+        print("Score: " + str(auc_score))
+        return auc_score
 
     def save_model(self):
         # Please alter this file appropriately to work in tandem with your load_model function below
@@ -446,20 +475,28 @@ def ClaimClassifierHyperParameterSearch(cc, X_train):
 
     return  # Return the chosen hyper parameters
 
+class HyperParamSearcher():
+    def __init__(self, param_grid, train_data):
+        self.cc = GridSearchCV(ClaimClassifier(), param_grid, cv=3)
+        self.train_data = train_data
 
+    def begin(self):
+        self.cc.fit(self.train_data)
+        self.end()
+    
+    def end(self):
+        print(self.cc.best_params_)
+        print(self.cc.best_score_)
 # path_to_train = "part2_train_.csv"
-# path_to_val = "part2_validation.csv"
-# path_to_test = "part2_test.csv"
+path_to_train = "part2_train_.csv"
+path_to_val = "part2_validation.csv"
+path_to_test = "part2_test.csv"
 # cc = ClaimClassifier()
 # #Extracting from csv
-# train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-# val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
-# #Preprocessing the data 
-# cc.val = val_raw
-
+train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
 # cc.fit(train_raw)
 # cc.evaluate_architecture()
 # cc.save_model()
-
-
-
+tuned_parameters = [{ 'n_epochs': [10, 20], 'learning_rate': [0.001, 0.01], 'batch_size': [25,50] }]
+searcher = HyperParamSearcher(tuned_parameters, train_raw)
+searcher.begin()
