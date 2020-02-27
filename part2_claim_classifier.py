@@ -88,7 +88,7 @@ class ClaimClassifier():
         self.loss = 0
         self.learning_rate = 0.001
         self.batch_size = 50
-        self.n_epochs = 25
+        self.n_epochs = 200
         self.train = None
         self.val = None
         self.test = None
@@ -206,7 +206,6 @@ class ClaimClassifier():
         self: (optional)
             an instance of the fitted model
         """
-
         one_indexes = []
         zero_indexes = []
 
@@ -235,7 +234,7 @@ class ClaimClassifier():
             print("Original Zeros Counted: ", self.count_zeros)
             print("Original Ones Counted: ", self.count_ones)
 
-        #X, y = self.upsample_ones(X_raw, y)
+        X, y = self.upsample_ones(X_raw, y)
 
         self.count_zeros = 0
         self.count_ones = 0
@@ -498,15 +497,13 @@ class HyperParamSearcher():
         print(self.cc.best_params_)
         print(self.cc.best_score_)
 #path_to_train = "part2_train_.csv"
-path_to_train = "upsampled_dataset.csv"
+'''path_to_train = "upsampled_dataset.csv"
 path_to_val = "part2_validation.csv"
 path_to_test = "part2_test.csv"
 cc = ClaimClassifier()
 # #Extracting from csv
 train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-
-print(train_raw.shape)
-
+8519
 #cc.fit(train_raw)
 #cc.evaluate_architecture()
 # cc.save_model()
@@ -521,4 +518,4 @@ nn.Sequential(nn.Linear(9,25),nn.ReLU(),nn.Linear(25,25),nn.ReLU(),nn.Linear(25,
 nn.Sequential(nn.Linear(9,50),nn.ReLU(),nn.Linear(50,50),nn.ReLU(),nn.Linear(50,1),nn.Sigmoid(),), 
 nn.Sequential(nn.Linear(9,100),nn.ReLU(),nn.Linear(100,100),nn.ReLU(),nn.Linear(100,1),nn.Sigmoid(),)]}]
 searcher = HyperParamSearcher(tuned_parameters, train_raw)
-searcher.begin()
+searcher.begin()'''
