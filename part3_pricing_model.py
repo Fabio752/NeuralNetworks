@@ -5,7 +5,7 @@ import numpy as np
 from part2_claim_classifier import ClaimClassifier
 import pandas as pd
 import torch.nn as nn
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import roc_auc_score
 import torch
 import time
@@ -56,13 +56,13 @@ def fit_and_calibrate_classifier(classifier, X, y):
 # class for part 3
 class PricingModel():
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY
-    def __init__(self, calibrate_probabilities=False, model=None):
+    def __init__(self, **args):
         """
         Feel free to alter this as you wish, adding instance variables as
         necessary.
         """
         self.y_mean = None
-        self.calibrate = calibrate_probabilities
+        # self.calibrate = calibrate_probabilities
         # =============================================================
         # READ ONLY IF WANTING TO CALIBRATE
         # Place your base classifier here
@@ -77,7 +77,7 @@ class PricingModel():
         # If you wish to use the classifier in part 2, you will need
         # to implement a predict_proba for it before use
         # =============================================================
-        self.base_classifier = model  # ADD YOUR BASE CLASSIFIER HERE
+        self.model = ClaimClassifier(**args)  
         self.cols_to_drop = ["id_policy", "pol_duration", "pol_pay_freq", \
         "pol_payd", "pol_usage", "pol_insee_code", "drv_drv2", \
         "drv_age1", "drv_age1","drv_age2", "drv_sex1", "drv_sex2", "drv_age_lic1", \
@@ -132,18 +132,18 @@ class PricingModel():
         #Converting the input ndarray into a pandas dataframe
 
         X_dropped = X_raw.drop(self.cols_to_drop, axis=1)
-        print("##############!!")
-        print(X_dropped.info())
-        print("##############!!")
+        # print("##############!!")
+        # print(X_dropped.info())
+        # print("##############!!")
 
         X_unscaled_pd = pd.get_dummies(X_dropped, columns=['pol_coverage', 'vh_fuel'])
-        print("##############")
-        print(X_unscaled_pd.info())
-        print("##############")
+        # print("##############")
+        # print(X_unscaled_pd.info())
+        # print("##############")
 
         X_unscaled_cols = self.add_missing_dummy_cols(X_unscaled_pd)
 
-        print(X_unscaled_cols.info())
+        # print(X_unscaled_cols.info())
 
 
         X_unscaled = X_unscaled_cols.values
@@ -180,14 +180,8 @@ class PricingModel():
         # REMEMBER TO A SIMILAR LINE TO THE FOLLOWING SOMEWHERE IN THE CODE
 
         # THE FOLLOWING GETS CALLED IF YOU WISH TO CALIBRATE YOUR PROBABILITES
-        if self.calibrate:
-            self.base_classifier = fit_and_calibrate_classifier(
-                self.base_classifier, X_clean, y_raw)
-            print("Xclean dim: ", X_clean.shape, " y_raw: ", y_raw.shape)
-        else:
-            print("Xclean dim: ", X_clean.shape, " y_raw: ", y_raw.shape)
-            self.base_classifier = self.base_classifier.fit(X_clean, y_raw)
-        return self.base_classifier
+        self.model = self.model.fit(X_clean, y_raw)
+        return self.model
 
     def predict_claim_probability(self, X_raw):
         """Classifier probability prediction function.
@@ -207,11 +201,11 @@ class PricingModel():
             POSITIVE class (that had accidents)
         """
 
-        print("Dataframe passed to the predict function:")
-        print(X_raw.info())
+        # print("Dataframe passed to the predict function:")
+        # print(X_raw.info())
 
         X_clean = self._preprocessor(X_raw)
-        probabilities = self.base_classifier.predict(X_clean)
+        probabilities = self.model.predict(X_clean)
 
         return probabilities.flatten()
 
@@ -236,8 +230,8 @@ class PricingModel():
         # REMEMBER TO INCLUDE ANY PRICING STRATEGY HERE.
         # For example you could scale all your prices down by a factor
 
-        print("Xraw in predict premium function:")
-        print(X_raw.info())
+        # print("Xraw in predict premium function:")
+        # print(X_raw.info())
 
         return (self.predict_claim_probability(X_raw) * self.y_mean).flatten()
 
@@ -286,8 +280,7 @@ class PricingModel():
         print("------------------------------------------------------------------")
 
         return
-
-
+        
 def load_model():
     # Please alter this section so that it works in tandem with the save_model method of your class
     with open('part3_pricing_model.pickle', 'rb') as target:
@@ -304,27 +297,24 @@ def example_main():
     y_train = y_train.values
     y_train = np.reshape(y_train, (y_train.size, 1))
 
-    #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
-    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,20),
-                                                            nn.ReLU(),
-                                                            nn.Linear(20,24),
-                                                            nn.ReLU(),
-                                                            nn.Linear(24,16),
-                                                            nn.ReLU(),
-                                                            nn.Linear(16,12),
-                                                            nn.ReLU(),
-                                                            nn.Linear(12,4),
-                                                            nn.ReLU(),
-                                                            nn.Linear(4,1),
-                                                            nn.Sigmoid()), n_epochs =75)
 
-    pm=PricingModel(False, prediction_model)
+    pm=PricingModel(model = nn.Sequential(nn.Linear(16,20),
+                                            nn.ReLU(),
+                                            nn.Linear(20,24),
+                                            nn.ReLU(),
+                                            nn.Linear(24,16),
+                                            nn.ReLU(),
+                                            nn.Linear(16,12),
+                                            nn.ReLU(),
+                                            nn.Linear(12,4),
+                                            nn.ReLU(),
+                                            nn.Linear(4,1),
+                                            nn.Sigmoid()), n_epochs = 5)
     pm.fit(X_train, y_train, claims_raw)
     pm.save_model()
     pm = load_model()
     pm.evaluate_architecture(X_test, y_test)
 
-# example_main()
 
 def test_main():
 
@@ -336,4 +326,5 @@ def test_main():
     print(res1)
     print(res2)
 
+example_main()
 # test_main()

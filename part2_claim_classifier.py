@@ -76,7 +76,6 @@ class ClaimClassifier():
         Feel free to alter this as you wish, adding instance variables as
         necessary.
         """
-        # super(ClaimClassifier, self).__init__()
         self.retrain = False
         self.count_zeros = 0
         self.count_ones = 0
@@ -218,7 +217,7 @@ class ClaimClassifier():
 
         self.count_zeros = 0
         self.count_ones = 0
-        print("Length of y: ", len(y))
+        # print("Length of y: ", len(y))
         for i in range(len(y)):
             if y[i] == 0.0:
                 self.count_zeros += 1
@@ -336,11 +335,11 @@ class ClaimClassifier():
         X_clean = temp2.float()
         #X_clean_tensor = Variable(torch.from_numpy(X_clean)).float()
         # print("Data type on the next line: ", type(X_clean))
-        print("==========================================")
-        print(X_clean)
-        print(X_clean.shape)
-        print(self.model)
-        print("==========================================")
+        # print("==========================================")
+        # print(X_clean)
+        # print(X_clean.shape)
+        # print(self.model)
+        # print("==========================================")
         out = self.model(X_clean).float()
         out = out.detach().numpy()
         # print(out)
