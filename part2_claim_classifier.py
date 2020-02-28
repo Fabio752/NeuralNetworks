@@ -154,7 +154,7 @@ class ClaimClassifier():
         max = np.max(self.raw_data, axis=0)
         min = np.min(self.raw_data, axis=0)
         #Normalize relevant columns
-        self.raw_data = (self.raw_data - min) / (max - min)
+        self.raw_data = np.nan_to_num((self.raw_data - min) / (max - min))
 
         return self.raw_data
 

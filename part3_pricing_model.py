@@ -85,6 +85,33 @@ class PricingModel():
         "town_mean_altitude", "town_surface_area", "population", "commune_code", \
         "regional_department_code", "canton_code", "city_district_code", "vh_type"]
 
+   
+    # the test set might not have all the required columns
+    # so, we hardcode the required cols after 1-hot encoding
+    # we also make sure the columns are in the correct order
+    def add_missing_dummy_cols(self, d):
+        columns = [ "pol_bonus",
+                "pol_sit_duration",      
+                "vh_age",                
+                "vh_din",                
+                "vh_sale_begin",         
+                "vh_sale_end",           
+                "vh_speed",              
+                "vh_value",              
+                "vh_weight",            
+                "pol_coverage_Maxi",     
+                "pol_coverage_Median1",  
+                "pol_coverage_Median2",  
+                "pol_coverage_Mini",     
+                "vh_fuel_Diesel",        
+                "vh_fuel_Gasoline",      
+                "vh_fuel_Hybrid" ]   
+        missing_cols = set(columns) - set(d.columns)
+        for c in missing_cols: d[c] = 0
+        d = d[columns]
+        return d
+
+
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY TO THE _preprocessor METHOD
     def _preprocessor(self, X_raw):
         """Data preprocessing function.
@@ -96,7 +123,7 @@ class PricingModel():
         ----------
         X_raw : ndarray
             An array, this is the raw data as downloaded
-
+.values
         Returns
         -------
         X: ndarray
@@ -105,9 +132,21 @@ class PricingModel():
         #Converting the input ndarray into a pandas dataframe
 
         X_dropped = X_raw.drop(self.cols_to_drop, axis=1)
+        print("##############!!")
         print(X_dropped.info())
+        print("##############!!")
 
-        X_unscaled = pd.get_dummies(X_dropped,prefix=['pol_coverage', 'vh_fuel']).values
+        X_unscaled_pd = pd.get_dummies(X_dropped, columns=['pol_coverage', 'vh_fuel'])
+        print("##############")
+        print(X_unscaled_pd.info())
+        print("##############")
+
+        X_unscaled_cols = self.add_missing_dummy_cols(X_unscaled_pd)
+
+        print(X_unscaled_cols.info())
+
+
+        X_unscaled = X_unscaled_cols.values
 
         '''print(X_unscaled.describe())
         print(X_unscaled.info())

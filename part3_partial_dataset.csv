@@ -1,0 +1,4 @@
+id_policy,pol_bonus,pol_coverage,pol_duration,pol_sit_duration,pol_pay_freq,pol_payd,pol_usage,pol_insee_code,drv_drv2,drv_age1,drv_age2,drv_sex1,drv_sex2,drv_age_lic1,drv_age_lic2,vh_age,vh_cyl,vh_din,vh_fuel,vh_make,vh_model,vh_sale_begin,vh_sale_end,vh_speed,vh_type,vh_value,vh_weight,town_mean_altitude,town_surface_area,population,commune_code,canton_code,city_district_code,regional_department_code,claim_amount,made_claim
+A00013211-V01,0.5,Maxi,36,6,Biannual,No,Retired,68269,No,77,0,M,,55,0,15,1598,111,Gasoline,RENAULT,SCENIC,16,15,185,Tourism,17517,1260,526.0,3216.0,4.8,269.0,20.0,5.0,68,0.0,0
+A00040885-V01,0.5,Maxi,15,5,Yearly,No,WorkPrivate,29019,Yes,52,55,M,F,33,35,12,2184,112,Diesel,NISSAN,ALMERA TINO,12,9,180,Tourism,21500,1480,57.0,4912.0,141.3,19.0,99.0,1.0,29,0.0,0
+A00044495-V01,0.5,Mini,16,6,Monthly,No,Professional,13080,No,52,0,M,,34,0,20,2496,112,Diesel,LAND ROVER,DEFENDER,32,19,130,Commercial,23600,2931,257.0,4488.0,5.3,80.0,27.0,1.0,13,0.0,0
