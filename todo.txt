@@ -1,1 +1,17 @@
 200 epoch, 175 epoch
+
+Architecture 2;
+
+    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(15,20),
+                                                            nn.ReLU(),
+                                                            nn.Linear(20,24),
+                                                            nn.ReLU(),
+                                                            nn.Linear(24,16),
+                                                            nn.ReLU(),
+                                                            nn.Linear(16,12),
+                                                            nn.ReLU(),
+                                                            nn.Linear(12,4),
+                                                            nn.ReLU(),
+                                                            nn.Linear(4,1),
+                                                            nn.Sigmoid()), n_epochs =100)
+
