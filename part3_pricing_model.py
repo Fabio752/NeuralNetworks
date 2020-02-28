@@ -293,23 +293,17 @@ def example_main():
     claims_raw = df_full["claim_amount"].values
     y = df_full["made_claim"]
 
-    X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.3, random_state = 0)
+    X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.2)
     y_train = y_train.values
     y_train = np.reshape(y_train, (y_train.size, 1))
 
 
-    pm=PricingModel(model = nn.Sequential(nn.Linear(16,20),
+    pm=PricingModel(model = nn.Sequential(nn.Linear(16,10),
                                             nn.ReLU(),
-                                            nn.Linear(20,24),
-                                            nn.ReLU(),
-                                            nn.Linear(24,16),
-                                            nn.ReLU(),
-                                            nn.Linear(16,12),
-                                            nn.ReLU(),
-                                            nn.Linear(12,4),
+                                            nn.Linear(10,4),
                                             nn.ReLU(),
                                             nn.Linear(4,1),
-                                            nn.Sigmoid()), n_epochs = 5)
+                                            nn.Sigmoid()), n_epochs = 150)
     pm.fit(X_train, y_train, claims_raw)
     pm.save_model()
     pm = load_model()
@@ -326,5 +320,5 @@ def test_main():
     print(res1)
     print(res2)
 
-# example_main()
+example_main()
 # test_main()
