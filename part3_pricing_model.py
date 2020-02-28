@@ -148,15 +148,7 @@ class PricingModel():
 
         X_unscaled = X_unscaled_cols.values
 
-        '''print(X_unscaled.describe())
-        print(X_unscaled.info())
 
-        X_unscaled = X_unscaled.values
-
-        max = np.max(X_unscaled, axis=0)
-        min = np.min(X_unscaled, axis=0)
-        #Normalize relevant columns
-        X_scaled = (X_unscaled - min) / (max - min)'''
 
         return X_unscaled
 

@@ -232,7 +232,7 @@ class ClaimClassifier():
             print("Original Zeros Counted: ", self.count_zeros)
             print("Original Ones Counted: ", self.count_ones)
 
-        X, y = self.upsample_ones(X_raw, y)
+        X, y = self.upsample_ones(X, y)
 
         self.count_zeros = 0
         self.count_ones = 0
@@ -473,18 +473,18 @@ def ClaimClassifierHyperParameterSearch(cc, X_train):
                 print("Best model: ", best_model)
 
     return  # Return the chosen hyper parameters
-# path_to_train = "part2_train_.csv"
-# path_to_val = "part2_validation.csv"
-# path_to_test = "part2_test.csv"
-# cc = ClaimClassifier()
-# #Extracting from csv
-# train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-# val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
-# #Preprocessing the data
-# cc.val = val_raw
+path_to_train = "part2_train_.csv"
+path_to_val = "part2_validation.csv"
+path_to_test = "part2_test.csv"
+cc = ClaimClassifier()
+#Extracting from csv
+train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
+#Preprocessing the data
+cc.val = val_raw
 
-# cc.fit(train_raw)
-# cc.evaluate_architecture()
+cc.fit(train_raw)
+cc.evaluate_architecture()
 # cc.save_model()
 
 class HyperParamSearcher():
