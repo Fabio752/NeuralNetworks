@@ -283,7 +283,7 @@ def load_model():
 #                                                             nn.Linear(12,4),
 #                                                             nn.ReLU(),
 #                                                             nn.Linear(4,1),
-#                                                             nn.Sigmoid()), n_epochs = 175)
+#                                                             nn.Sigmoid()), n_epochs = 125)
 
 #     pm=PricingModel(False, prediction_model)
 #     pm.fit(X_train, y_train, claims_raw)
