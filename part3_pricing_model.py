@@ -213,7 +213,7 @@ class PricingModel():
         X_clean = self._preprocessor(X_raw)
         probabilities = self.base_classifier.predict(X_clean)
 
-        return probabilities
+        return probabilities.flatten()
 
     def predict_premium(self, X_raw):
         """Predicts premiums based on the pricing model.
@@ -239,12 +239,12 @@ class PricingModel():
         print("Xraw in predict premium function:")
         print(X_raw.info())
 
-        return self.predict_claim_probability(X_raw) * self.y_mean
+        return (self.predict_claim_probability(X_raw) * self.y_mean).flatten()
 
     def save_model(self):
         """Saves the class instance as a pickle file."""
         # =============================================================
-        with open('part3_pricing_model_lh.pickle', 'wb') as target:
+        with open('part3_pricing_model.pickle', 'wb') as target:
             pickle.dump(self, target)
 
     def evaluate_architecture(self, X_val, y_val):
@@ -290,7 +290,7 @@ class PricingModel():
 
 def load_model():
     # Please alter this section so that it works in tandem with the save_model method of your class
-    with open('part3_pricing_model_lh.pickle', 'rb') as target:
+    with open('part3_pricing_model.pickle', 'rb') as target:
         trained_model = pickle.load(target)
     return trained_model
 
@@ -321,7 +321,7 @@ def example_main():
     pm=PricingModel(False, prediction_model)
     pm.fit(X_train, y_train, claims_raw)
     pm.save_model()
-    #pm = load_model()
+    pm = load_model()
     pm.evaluate_architecture(X_test, y_test)
 
 # example_main()

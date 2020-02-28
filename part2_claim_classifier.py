@@ -19,7 +19,7 @@ from keras.layers import Dense,Activation,Embedding,Flatten,LeakyReLU,BatchNorma
 from keras.activations import relu,sigmoid
 from numpy import savetxt
 
-debug = False
+debug = True
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -76,7 +76,6 @@ class ClaimClassifier():
         Feel free to alter this as you wish, adding instance variables as
         necessary.
         """
-        print("hello claim classifier here")
         # super(ClaimClassifier, self).__init__()
         self.retrain = False
         self.count_zeros = 0
@@ -86,7 +85,7 @@ class ClaimClassifier():
         self.loss = 0
         self.learning_rate = 0.001
         self.batch_size = 50
-        self.n_epochs = 200
+        self.n_epochs = 100
         self.train = None
         self.val = None
         self.test = None
@@ -126,7 +125,7 @@ class ClaimClassifier():
 
     def set_params(self, **parameters):
         for parameter, value in parameters.items():
-            print(parameter, value)
+            # print(parameter, value)
             setattr(self, parameter, value)
         return self
 
@@ -473,19 +472,22 @@ def ClaimClassifierHyperParameterSearch(cc, X_train):
                 print("Best model: ", best_model)
 
     return  # Return the chosen hyper parameters
-path_to_train = "part2_train_.csv"
-path_to_val = "part2_validation.csv"
-path_to_test = "part2_test.csv"
-cc = ClaimClassifier()
-#Extracting from csv
-train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
-#Preprocessing the data
-cc.val = val_raw
+def example_main():
+    path_to_train = "part2_train_.csv"
+    path_to_val = "part2_validation.csv"
+    path_to_test = "part2_test.csv"
+    cc = ClaimClassifier()
+    #Extracting from csv
+    train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+    val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
+    #Preprocessing the data
+    cc.val = val_raw
 
-cc.fit(train_raw)
-cc.evaluate_architecture()
-# cc.save_model()
+    cc.fit(train_raw)
+    cc.evaluate_architecture()
+    # cc.save_model()
+
+# example_main()
 
 class HyperParamSearcher():
     def __init__(self, param_grid, train_data):
