@@ -83,7 +83,7 @@ class PricingModel():
         "drv_age1", "drv_age1","drv_age2", "drv_sex1", "drv_sex2", "drv_age_lic1", \
         "vh_cyl", "vh_make", "vh_model", "drv_age_lic2", \
         "town_mean_altitude", "town_surface_area", "population", "commune_code", \
-        "regional_department_code", "canton_code", "city_district_code", "vh_type"]
+        "regional_department_code", "canton_code", "city_district_code", "vh_type", "pol_bonus"]
 
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY TO THE _preprocessor METHOD
     def _preprocessor(self, X_raw):
@@ -105,8 +105,7 @@ class PricingModel():
         #Converting the input ndarray into a pandas dataframe
 
         X_dropped = X_raw.drop(self.cols_to_drop, axis=1)
-
-        # print(X_dropped.info())
+        print(X_dropped.info())
 
         X_unscaled = pd.get_dummies(X_dropped,prefix=['pol_coverage', 'vh_fuel']).values
 
@@ -157,7 +156,6 @@ class PricingModel():
         else:
             print("Xclean dim: ", X_clean.shape, " y_raw: ", y_raw.shape)
             self.base_classifier = self.base_classifier.fit(X_clean, y_raw)
-        time.sleep(10)
         return self.base_classifier
 
     def predict_claim_probability(self, X_raw):
@@ -177,6 +175,9 @@ class PricingModel():
             values corresponding to the probability of beloning to the
             POSITIVE class (that had accidents)
         """
+
+        print("Dataframe passed to the predict function:")
+        print(X_raw.info())
 
         X_clean = self._preprocessor(X_raw)
         probabilities = self.base_classifier.predict(X_clean)
@@ -203,6 +204,9 @@ class PricingModel():
         # =============================================================
         # REMEMBER TO INCLUDE ANY PRICING STRATEGY HERE.
         # For example you could scale all your prices down by a factor
+
+        print("Xraw in predict premium function:")
+        print(X_raw.info())
 
         return self.predict_claim_probability(X_raw) * self.y_mean
 
@@ -259,36 +263,34 @@ def load_model():
         trained_model = pickle.load(target)
     return trained_model
 
-# def example_main():
-#     path_to_train = "part3_training_data.csv"
-#     df_full = pd.read_csv(path_to_train, delimiter=",")
-#     claims_raw = df_full["claim_amount"].values
-#     y = df_full["made_claim"]
+def example_main():
+    path_to_train = "part3_training_data.csv"
+    df_full = pd.read_csv(path_to_train, delimiter=",")
+    claims_raw = df_full["claim_amount"].values
+    y = df_full["made_claim"]
 
-#     X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.3, random_state = 0)
-#     y_train = y_train.values
-#     y_train = np.reshape(y_train, (y_train.size, 1))
+    X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.3, random_state = 0)
+    y_train = y_train.values
+    y_train = np.reshape(y_train, (y_train.size, 1))
 
-#     #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
-#     prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,20),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(20,24),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(24,20),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(20,16),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(16,12),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(12,4),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(4,1),
-#                                                             nn.Sigmoid()), n_epochs = 125)
+    #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
+    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(15,20),
+                                                            nn.ReLU(),
+                                                            nn.Linear(20,24),
+                                                            nn.ReLU(),
+                                                            nn.Linear(24,16),
+                                                            nn.ReLU(),
+                                                            nn.Linear(16,12),
+                                                            nn.ReLU(),
+                                                            nn.Linear(12,4),
+                                                            nn.ReLU(),
+                                                            nn.Linear(4,1),
+                                                            nn.Sigmoid()), n_epochs = 1)
 
-#     pm=PricingModel(False, prediction_model)
-#     pm.fit(X_train, y_train, claims_raw)
-#     pm.save_model()
-#     #pm = load_model()
-#     pm.evaluate_architecture(X_test, y_test)
+    pm=PricingModel(False, prediction_model)
+    pm.fit(X_train, y_train, claims_raw)
+    pm.save_model()
+    #pm = load_model()
+    pm.evaluate_architecture(X_test, y_test)
 
-# example_main()
+example_main()
