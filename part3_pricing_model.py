@@ -263,34 +263,34 @@ def load_model():
         trained_model = pickle.load(target)
     return trained_model
 
-# def example_main():
-#     path_to_train = "part3_training_data.csv"
-#     df_full = pd.read_csv(path_to_train, delimiter=",")
-#     claims_raw = df_full["claim_amount"].values
-#     y = df_full["made_claim"]
+def example_main():
+    path_to_train = "part3_training_data.csv"
+    df_full = pd.read_csv(path_to_train, delimiter=",")
+    claims_raw = df_full["claim_amount"].values
+    y = df_full["made_claim"]
 
-#     X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.3, random_state = 0)
-#     y_train = y_train.values
-#     y_train = np.reshape(y_train, (y_train.size, 1))
+    X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.3, random_state = 0)
+    y_train = y_train.values
+    y_train = np.reshape(y_train, (y_train.size, 1))
 
-#     #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
-#     prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(15,20),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(20,24),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(24,16),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(16,12),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(12,4),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(4,1),
-#                                                             nn.Sigmoid()), n_epochs =100)
+    #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
+    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(15,20),
+                                                            nn.ReLU(),
+                                                            nn.Linear(20,24),
+                                                            nn.ReLU(),
+                                                            nn.Linear(24,16),
+                                                            nn.ReLU(),
+                                                            nn.Linear(16,12),
+                                                            nn.ReLU(),
+                                                            nn.Linear(12,4),
+                                                            nn.ReLU(),
+                                                            nn.Linear(4,1),
+                                                            nn.Sigmoid()), n_epochs =75)
 
-#     pm=PricingModel(False, prediction_model)
-#     pm.fit(X_train, y_train, claims_raw)
-#     pm.save_model()
-#     #pm = load_model()
-#     pm.evaluate_architecture(X_test, y_test)
+    pm=PricingModel(False, prediction_model)
+    pm.fit(X_train, y_train, claims_raw)
+    pm.save_model()
+    #pm = load_model()
+    pm.evaluate_architecture(X_test, y_test)
 
-# example_main()
+#example_main()

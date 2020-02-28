@@ -21,7 +21,7 @@ from keras.activations import relu,sigmoid
 from sklearn.base import BaseEstimator, ClassifierMixin
 from numpy import savetxt
 
-debug = True
+debug = False
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0

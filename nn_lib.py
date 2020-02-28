@@ -728,5 +728,5 @@ def example_main():
     print("Validation accuracy: {}".format(accuracy))
 
 
-if __name__ == "__main__":
-    example_main()
+# if __name__ == "__main__":
+#     example_main()
