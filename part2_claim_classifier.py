@@ -11,14 +11,12 @@ import pandas
 import torchvision.datasets as dsets
 from torch.autograd import Variable
 from torch.utils.data import DataLoader, Dataset
-from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import GridSearchCV
 from keras.models import Sequential
 from keras.layers import Dense,Activation,Embedding,Flatten,LeakyReLU,BatchNormalization
 from keras.activations import relu,sigmoid
-from sklearn.base import BaseEstimator, ClassifierMixin
 from numpy import savetxt
 
 debug = False
@@ -339,6 +337,11 @@ class ClaimClassifier():
         X_clean = temp2.float()
         #X_clean_tensor = Variable(torch.from_numpy(X_clean)).float()
         # print("Data type on the next line: ", type(X_clean))
+        print("==========================================")
+        print(X_clean)
+        print(X_clean.shape)
+        print(self.model)
+        print("==========================================")
         out = self.model(X_clean).float()
         out = out.detach().numpy()
         # print(out)

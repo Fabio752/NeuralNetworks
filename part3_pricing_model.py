@@ -83,7 +83,7 @@ class PricingModel():
         "drv_age1", "drv_age1","drv_age2", "drv_sex1", "drv_sex2", "drv_age_lic1", \
         "vh_cyl", "vh_make", "vh_model", "drv_age_lic2", \
         "town_mean_altitude", "town_surface_area", "population", "commune_code", \
-        "regional_department_code", "canton_code", "city_district_code", "vh_type", "pol_bonus"]
+        "regional_department_code", "canton_code", "city_district_code", "vh_type"]
 
     # YOU ARE ALLOWED TO ADD MORE ARGUMENTS AS NECESSARY TO THE _preprocessor METHOD
     def _preprocessor(self, X_raw):
@@ -213,7 +213,7 @@ class PricingModel():
     def save_model(self):
         """Saves the class instance as a pickle file."""
         # =============================================================
-        with open('part3_pricing_model.pickle', 'wb') as target:
+        with open('part3_pricing_model_lh.pickle', 'wb') as target:
             pickle.dump(self, target)
 
     def evaluate_architecture(self, X_val, y_val):
@@ -259,7 +259,7 @@ class PricingModel():
 
 def load_model():
     # Please alter this section so that it works in tandem with the save_model method of your class
-    with open('part3_pricing_model.pickle', 'rb') as target:
+    with open('part3_pricing_model_lh.pickle', 'rb') as target:
         trained_model = pickle.load(target)
     return trained_model
 
@@ -274,7 +274,7 @@ def example_main():
     y_train = np.reshape(y_train, (y_train.size, 1))
 
     #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
-    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(15,20),
+    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,20),
                                                             nn.ReLU(),
                                                             nn.Linear(20,24),
                                                             nn.ReLU(),
@@ -293,4 +293,16 @@ def example_main():
     #pm = load_model()
     pm.evaluate_architecture(X_test, y_test)
 
-#example_main()
+# example_main()
+
+def test_main():
+
+    classifier = load_model()
+    data = pd.read_csv("part3_training_data.csv")
+    X = data.drop(columns=["claim_amount", "made_claim"])
+    res1 = classifier.predict_premium(X)
+    res2 = classifier.predict_claim_probability(X)
+    print(res1)
+    print(res2)
+
+# test_main()
