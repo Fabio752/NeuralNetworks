@@ -8,6 +8,7 @@ import torch.nn as nn
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_auc_score
 import torch
+import time
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -101,6 +102,8 @@ class PricingModel():
         X: ndarray
             A clean data set that is used for training and prediction.
         """
+        #Converting the input ndarray into a pandas dataframe
+
         X_dropped = X_raw.drop(self.cols_to_drop, axis=1)
 
         # print(X_dropped.info())
@@ -138,6 +141,8 @@ class PricingModel():
             an instance of the fitted model
 
         """
+        #Dropping last two columns and then preprocesing the data
+        X_raw = X_raw.drop(["made_claim", "claim_amount"], axis=1)
         X_clean = self._preprocessor(X_raw)
         nnz = np.where(claims_raw != 0)[0]
         self.y_mean = np.mean(claims_raw[nnz])
@@ -148,8 +153,11 @@ class PricingModel():
         if self.calibrate:
             self.base_classifier = fit_and_calibrate_classifier(
                 self.base_classifier, X_clean, y_raw)
+            print("Xclean dim: ", X_clean.shape, " y_raw: ", y_raw.shape)
         else:
+            print("Xclean dim: ", X_clean.shape, " y_raw: ", y_raw.shape)
             self.base_classifier = self.base_classifier.fit(X_clean, y_raw)
+        time.sleep(10)
         return self.base_classifier
 
     def predict_claim_probability(self, X_raw):
@@ -205,14 +213,19 @@ class PricingModel():
             pickle.dump(self, target)
 
     def evaluate_architecture(self, X_val, y_val):
+        #Dropping last two columns and then preprocesing the data
+        X_val = X_val.drop(["made_claim", "claim_amount"], axis=1)
         preds = self.predict_claim_probability(X_val)
+        print("Predictions:")
+        print(preds)
         y_val = torch.from_numpy(y_val.values)
-        acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(torch.from_numpy(preds), y_val, True)
+        _, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(torch.from_numpy(preds), y_val, True)
         print("------------------------------------------------------------------")
         print("Misclassified ones: ", fn, "/", test_ones)
         print("------------------------------------------------------------------")
         print("Misclassified zeros: ", fp, "/", test_zeros)
         print("------------------------------------------------------------------")
+        acc = (tp+tn)/(tn+tp+fn+fp)
         print("Accuracy: ", acc)
         print("------------------------------------------------------------------")
         precision = 0
@@ -246,30 +259,30 @@ def load_model():
         trained_model = pickle.load(target)
     return trained_model
 
-# def example_main():
-#     path_to_train = "part3_training_data.csv"
-#     df_full = pd.read_csv(path_to_train, delimiter=",")
-#     claims_raw = df_full["claim_amount"].values
-#     y = df_full["made_claim"]
+def example_main():
+    path_to_train = "part3_training_data.csv"
+    df_full = pd.read_csv(path_to_train, delimiter=",")
+    claims_raw = df_full["claim_amount"].values
+    y = df_full["made_claim"]
 
-#     X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.3, random_state = 0)
-#     y_train = y_train.values
-#     y_train = np.reshape(y_train, (y_train.size, 1))
+    X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.3, random_state = 0)
+    y_train = y_train.values
+    y_train = np.reshape(y_train, (y_train.size, 1))
 
-#     #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
-#     prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(18,18),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(18,6),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(6,4),
-#                                                             nn.ReLU(),
-#                                                             nn.Linear(4,1),
-#                                                             nn.Sigmoid()), n_epochs = 75)
+    #y_test = np.reshape(y_test, (y_test.size, 1))  not passed to part 2 model
+    prediction_model = ClaimClassifier(model = nn.Sequential(nn.Linear(16,12),
+                                                            nn.ReLU(),
+                                                            nn.Linear(12,8),
+                                                            nn.ReLU(),
+                                                            nn.Linear(8,4),
+                                                            nn.ReLU(),
+                                                            nn.Linear(4,1),
+                                                            nn.Sigmoid()), n_epochs = 50)
 
-#     pm=PricingModel(False, prediction_model)
-#     pm.fit(X_train, y_train, claims_raw)
-#     #pm.save_model()
-#     #pm = load_model()
-#     pm.evaluate_architecture(X_test, y_test)
+    pm=PricingModel(False, prediction_model)
+    pm.fit(X_train, y_train, claims_raw)
+    pm.save_model()
+    #pm = load_model()
+    pm.evaluate_architecture(X_test, y_test)
 
-# example_main()
+example_main()
