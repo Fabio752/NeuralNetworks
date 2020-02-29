@@ -90,6 +90,7 @@ class PricingModel():
     # so, we hardcode the required cols after 1-hot encoding
     # we also make sure the columns are in the correct order
     def add_missing_dummy_cols(self, d):
+        # we drop some extra columns as well that have really bad corr
         columns = [ 
                 # "pol_bonus",
                 "pol_sit_duration",      
@@ -106,12 +107,15 @@ class PricingModel():
                 "pol_coverage_Mini",     
                 "vh_fuel_Diesel",        
                 "vh_fuel_Gasoline",      
-                # "vh_fuel_Hybrid" # drop this column
+                # "vh_fuel_Hybrid"
                 ]   
         missing_cols = set(columns) - set(d.columns)
         for c in missing_cols: d[c] = 0
         d = d[columns]
+
+        # new columns by feature engineering -> speed/power ratio
         d["SPR"] = d["vh_speed"] / d["vh_din"]
+
         return d
 
 
@@ -314,9 +318,9 @@ def example_main():
     # y_train = np.reshape(y_train, (y_train.size, 1))
 
 
-    pm=PricingModel(model = nn.Sequential(nn.Linear(13,12),
+    pm=PricingModel(model = nn.Sequential(nn.Linear(13,10),
                                             nn.ReLU(),
-                                            nn.Linear(12,8),
+                                            nn.Linear(10,8),
                                             nn.ReLU(),
                                             nn.Linear(8,4),
                                             nn.ReLU(),
