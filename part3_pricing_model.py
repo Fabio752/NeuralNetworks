@@ -298,12 +298,14 @@ def example_main():
     y_train = np.reshape(y_train, (y_train.size, 1))
 
 
-    pm=PricingModel(model = nn.Sequential(nn.Linear(16,10),
+    pm=PricingModel(model = nn.Sequential(nn.Linear(16,12),
                                             nn.ReLU(),
-                                            nn.Linear(10,4),
+                                            nn.Linear(12,8),
+                                            nn.ReLU(),
+                                            nn.Linear(8,4),
                                             nn.ReLU(),
                                             nn.Linear(4,1),
-                                            nn.Sigmoid()), n_epochs = 150)
+                                            nn.Sigmoid()), n_epochs = 100)
     pm.fit(X_train, y_train, claims_raw)
     pm.save_model()
     pm = load_model()
@@ -320,5 +322,5 @@ def test_main():
     print(res1)
     print(res2)
 
-example_main()
+#example_main()
 # test_main()
