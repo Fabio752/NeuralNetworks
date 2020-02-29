@@ -105,7 +105,8 @@ class PricingModel():
                 "pol_coverage_Mini",     
                 "vh_fuel_Diesel",        
                 "vh_fuel_Gasoline",      
-                "vh_fuel_Hybrid" ]   
+                # "vh_fuel_Hybrid" # drop this column
+                ]   
         missing_cols = set(columns) - set(d.columns)
         for c in missing_cols: d[c] = 0
         d = d[columns]
@@ -299,7 +300,7 @@ def example_main():
     y_train = np.reshape(y_train, (y_train.size, 1))
 
 
-    pm=PricingModel(model = nn.Sequential(nn.Linear(17,12),
+    pm=PricingModel(model = nn.Sequential(nn.Linear(16,12),
                                             nn.ReLU(),
                                             nn.Linear(12,8),
                                             nn.ReLU(),
@@ -323,5 +324,5 @@ def test_main():
     print(res1)
     print(res2)
 
-example_main()
+# example_main()
 # test_main()
