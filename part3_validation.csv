@@ -1,3 +1,4 @@
+id_policy,pol_bonus,pol_coverage,pol_duration,pol_sit_duration,pol_pay_freq,pol_payd,pol_usage,pol_insee_code,drv_drv2,drv_age1,drv_age2,drv_sex1,drv_sex2,drv_age_lic1,drv_age_lic2,vh_age,vh_cyl,vh_din,vh_fuel,vh_make,vh_model,vh_sale_begin,vh_sale_end,vh_speed,vh_type,vh_value,vh_weight,town_mean_altitude,town_surface_area,population,commune_code,canton_code,city_district_code,regional_department_code,claim_amount,made_claim
 A00006208-V01,0.64,Median2,11,6,Monthly,No,Professional,74021,Yes,62,60,M,F,39,39,12,1589,87,Gasoline,OPEL,COMBO,14,11,167,Commercial,12678,1135,463.0,594.0,1.3,21.0,31.0,3.0,74,0.0,0
 A00060686-V01,0.5,Maxi,11,6,Monthly,No,WorkPrivate,16385,No,48,0,F,,29,0,9,1422,70,Diesel,VOLKSWAGEN,POLO,10,8,164,Tourism,14340,1091,91.0,913.0,1.1,385.0,31.0,1.0,16,0.0,0
 A00060032-V01,0.5,Median1,9,6,Yearly,No,Retired,34172,No,71,0,M,,50,0,24,1769,60,Diesel,PEUGEOT,205,30,22,155,Commercial,10474,1270,45.0,5711.0,255.1,172.0,99.0,3.0,34,0.0,0

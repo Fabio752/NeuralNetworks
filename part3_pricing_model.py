@@ -291,14 +291,27 @@ def load_model():
     return trained_model
 
 def example_main():
-    path_to_train = "part3_training_data.csv"
+    path_to_train = "part3_train.csv"
+    path_to_val = "part3_validation.csv"
+    path_to_test = "part3_test.csv"
     df_full = pd.read_csv(path_to_train, delimiter=",")
+    df_val = pd.read_csv(path_to_train, delimiter=",")
+    df_test = pd.read_csv(path_to_test, delimiter=",")
     claims_raw = df_full["claim_amount"].values
-    y = df_full["made_claim"]
 
-    X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.2)
-    y_train = y_train.values
+    X_train = df_full
+    y_train = df_full["made_claim"].values
     y_train = np.reshape(y_train, (y_train.size, 1))
+
+    X_val = df_val
+    y_val = df_val["made_claim"]
+
+    X_test = df_test
+    y_test = df_test["made_claim"]
+    
+    # X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.2)
+    # y_train = y_train.values
+    # y_train = np.reshape(y_train, (y_train.size, 1))
 
 
     pm=PricingModel(model = nn.Sequential(nn.Linear(13,12),
@@ -312,6 +325,9 @@ def example_main():
     pm.fit(X_train, y_train, claims_raw)
     pm.save_model()
     pm = load_model()
+    print("========== validation ==========")
+    pm.evaluate_architecture(X_val, y_val)
+    print("============= test =============")
     pm.evaluate_architecture(X_test, y_test)
 
 
