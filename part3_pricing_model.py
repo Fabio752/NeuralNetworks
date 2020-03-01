@@ -318,11 +318,14 @@ def example_main():
     # y_train = np.reshape(y_train, (y_train.size, 1))
 
 
+
     pm=PricingModel(model = nn.Sequential(nn.Linear(13,10),
                                             nn.ReLU(),
                                             nn.Linear(10,8),
                                             nn.ReLU(),
-                                            nn.Linear(8,4),
+                                            nn.Linear(8,6),
+                                            nn.ReLU(),
+                                            nn.Linear(6,4),
                                             nn.ReLU(),
                                             nn.Linear(4,1),
                                             nn.Sigmoid()), n_epochs = 100)
@@ -345,5 +348,29 @@ def test_main():
     print(res1)
     print(res2)
 
+def full_main():
+    path_to_train = "part3_training_data.csv"
+    df_full = pd.read_csv(path_to_train, delimiter=",")
+    claims_raw = df_full["claim_amount"].values
+
+    X_train = df_full
+    y_train = df_full["made_claim"].values
+    y_train = np.reshape(y_train, (y_train.size, 1))
+
+    pm=PricingModel(model = nn.Sequential(nn.Linear(13,10),
+                                            nn.ReLU(),
+                                            nn.Linear(10,8),
+                                            nn.ReLU(),
+                                            nn.Linear(8,6),
+                                            nn.ReLU(),
+                                            nn.Linear(6,4),
+                                            nn.ReLU(),
+                                            nn.Linear(4,1),
+                                            nn.Sigmoid()), n_epochs = 100)
+    pm.fit(X_train, y_train, claims_raw)
+    pm.save_model()
+
+
 # example_main()
 # test_main()
+# full_main()

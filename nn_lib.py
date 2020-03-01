@@ -49,10 +49,10 @@ class _Constants(object):
     # debugging
     @constant
     def DEBUG():
-        return True
+        return False
     @constant
     def VERBOSE():
-        return True
+        return False
     @constant
     def EPOCH_GRANULARITY():
         # how many epochs per log

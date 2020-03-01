@@ -521,8 +521,8 @@ train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
 #cc.evaluate_architecture()
 # cc.save_model()
 '''
-path_to_train = "part2_train_.csv"
-train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-tuned_parameters = [{ 'n_epochs': [50], 'learning_rate' : [0.01,0.001], 'batch_size': [10,25,50,75,100,200], 'dr': [0.0,0.1,0.2], 'lr': [0.1, 0,2]  }]
-searcher = HyperParamSearcher(tuned_parameters, train_raw)
-searcher.begin()
+# path_to_train = "part2_train_.csv"
+# train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+# tuned_parameters = [{ 'n_epochs': [50], 'learning_rate' : [0.01,0.001], 'batch_size': [10,25,50,75,100,200], 'dr': [0.0,0.1,0.2], 'lr': [0.1, 0,2]  }]
+# searcher = HyperParamSearcher(tuned_parameters, train_raw)
+# searcher.begin()
