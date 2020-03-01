@@ -91,7 +91,7 @@ class ClaimClassifier():
         self.dropout_rate = 0.0
         self.leak_rate = 0.0
         self.batch_size = 50
-        self.n_epochs = 40
+        self.n_epochs = 200
         self.train = None
         self.val = None
         self.test = None
