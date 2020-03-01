@@ -374,6 +374,6 @@ def full_main():
     pm.save_model()
 
 
-example_main()
+# example_main()
 # test_main()
 # full_main()
