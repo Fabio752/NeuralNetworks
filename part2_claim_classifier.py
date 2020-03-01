@@ -83,16 +83,23 @@ class ClaimClassifier():
         self.zero_indexes = []
         self.loss = 0
         self.learning_rate = 0.001
+        self.dropout_rate = 0.0
+        self.leak_rate = 0.0
         self.batch_size = 50
-        self.n_epochs = 100
+        self.n_epochs = 200
         self.train = None
         self.val = None
         self.test = None
         self.model = nn.Sequential(
-            nn.Linear(9,4),
-            nn.ReLU(),
-            nn.Linear(4,4),
-            nn.ReLU(),
+            nn.Linear(9,9),
+            nn.Dropout(self.dropout_rate),
+            nn.LeakyReLU(self.leak_rate),
+            nn.Linear(9,7),
+            nn.Dropout(self.dropout_rate),
+            nn.LeakyReLU(self.leak_rate),
+            nn.Linear(7,4),
+            nn.Dropout(self.dropout_rate),
+            nn.LeakyReLU(self.leak_rate),
             nn.Linear(4,1),
             nn.Sigmoid(),
         )
@@ -119,7 +126,9 @@ class ClaimClassifier():
             "n_epochs": self.n_epochs,
             "learning_rate": self.learning_rate,
             "batch_size": self.batch_size,
-            "model": self.model
+            "model": self.model,
+            "dr": self.dropout_rate,
+            "lr": self.leak_rate
         }
 
     def set_params(self, **parameters):
@@ -486,7 +495,7 @@ def example_main():
     cc.evaluate_architecture()
     # cc.save_model()
 
-# example_main()
+#example_main()
 
 class HyperParamSearcher():
     def __init__(self, param_grid, train_data):
@@ -511,15 +520,9 @@ train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
 #cc.fit(train_raw)
 #cc.evaluate_architecture()
 # cc.save_model()
-tuned_parameters = [{ 'n_epochs': [50], 'model': [nn.Sequential(nn.Linear(9,4),nn.ReLU(),nn.Linear(4,4),nn.ReLU(),nn.Linear(4,1),nn.Sigmoid(),), 
-nn.Sequential(nn.Linear(9,5),nn.ReLU(),nn.Linear(5,5),nn.ReLU(),nn.Linear(5,1),nn.Sigmoid(),),
-nn.Sequential(nn.Linear(9,6),nn.ReLU(),nn.Linear(6,6),nn.ReLU(),nn.Linear(6,1),nn.Sigmoid(),),
-nn.Sequential(nn.Linear(9,7),nn.ReLU(),nn.Linear(7,7),nn.ReLU(),nn.Linear(7,1),nn.Sigmoid(),),
-nn.Sequential(nn.Linear(9,8),nn.ReLU(),nn.Linear(8,8),nn.ReLU(),nn.Linear(8,1),nn.Sigmoid(),),
-nn.Sequential(nn.Linear(9,9),nn.ReLU(),nn.Linear(9,9),nn.ReLU(),nn.Linear(9,1),nn.Sigmoid(),),
-nn.Sequential(nn.Linear(9,10),nn.ReLU(),nn.Linear(10,10),nn.ReLU(),nn.Linear(10,1),nn.Sigmoid(),),
-nn.Sequential(nn.Linear(9,25),nn.ReLU(),nn.Linear(25,25),nn.ReLU(),nn.Linear(25,1),nn.Sigmoid(),),
-nn.Sequential(nn.Linear(9,50),nn.ReLU(),nn.Linear(50,50),nn.ReLU(),nn.Linear(50,1),nn.Sigmoid(),), 
-nn.Sequential(nn.Linear(9,100),nn.ReLU(),nn.Linear(100,100),nn.ReLU(),nn.Linear(100,1),nn.Sigmoid(),)]}]
+'''
+path_to_train = "part2_train_.csv"
+train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+tuned_parameters = [{ 'n_epochs': [50], 'learning_rate' : [0.01,0.001], 'batch_size': [10,25,50,75,100,200], 'dr': [0.0,0.1,0.2], 'lr': [0.1, 0,2]  }]
 searcher = HyperParamSearcher(tuned_parameters, train_raw)
-searcher.begin()'''
+searcher.begin()
