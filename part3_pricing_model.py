@@ -10,7 +10,7 @@ from sklearn.metrics import roc_auc_score
 import torch
 import time
 
-picklefilename = 'part3_pricing_model10.pickle'
+picklefilename = 'part3_pricing_model.pickle'
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -322,7 +322,7 @@ def example_main():
                                             nn.Linear(6,4),
                                             nn.ReLU(),
                                             nn.Linear(4,1),
-                                            nn.Sigmoid()), n_epochs = 100)
+                                            nn.Sigmoid()), n_epochs = 75)
     pm.fit(X_train, y_train, claims_raw)
     pm.save_model()
     pm = load_model()
@@ -360,7 +360,7 @@ def full_main():
                                             nn.Linear(6,4),
                                             nn.ReLU(),
                                             nn.Linear(4,1),
-                                            nn.Sigmoid()), n_epochs = 100)
+                                            nn.Sigmoid()), n_epochs = 75)
     pm.fit(X_train, y_train, claims_raw)
     # pm.save_model()
 

@@ -95,26 +95,18 @@ class ClaimClassifier():
         self.train = None
         self.val = None
         self.test = None
-        # self.model = nn.Sequential(
-        #     nn.Linear(9,9),
-        #     nn.Dropout(self.dropout_rate),
-        #     nn.LeakyReLU(self.leak_rate),
-        #     nn.Linear(9,7),
-        #     nn.Dropout(self.dropout_rate),
-        #     nn.LeakyReLU(self.leak_rate),
-        #     nn.Linear(7,4),
-        #     nn.Dropout(self.dropout_rate),
-        #     nn.LeakyReLU(self.leak_rate),
-        #     nn.Linear(4,1),
-        #     nn.Sigmoid(),
-        # )
         self.model = nn.Sequential(
-            nn.Linear(9,4),
-            nn.ReLU(),
-            nn.Linear(4,4),
-            nn.ReLU(),
+            nn.Linear(9,9),
+            nn.Dropout(self.dropout_rate),
+            nn.LeakyReLU(self.leak_rate),
+            nn.Linear(9,7),
+            nn.Dropout(self.dropout_rate),
+            nn.LeakyReLU(self.leak_rate),
+            nn.Linear(7,4),
+            nn.Dropout(self.dropout_rate),
+            nn.LeakyReLU(self.leak_rate),
             nn.Linear(4,1),
-            nn.Sigmoid()
+            nn.Sigmoid(),
         )
         for arg, value in args.items():
             setattr(self, arg, value)
