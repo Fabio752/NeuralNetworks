@@ -90,7 +90,9 @@ class PricingModel():
     # so, we hardcode the required cols after 1-hot encoding
     # we also make sure the columns are in the correct order
     def add_missing_dummy_cols(self, d):
-        columns = [ "pol_bonus",
+        # we drop some extra columns as well that have really bad corr
+        columns = [ 
+                # "pol_bonus",
                 "pol_sit_duration",      
                 "vh_age",                
                 "vh_din",                
@@ -100,15 +102,20 @@ class PricingModel():
                 "vh_value",              
                 "vh_weight",            
                 "pol_coverage_Maxi",     
-                "pol_coverage_Median1",  
-                "pol_coverage_Median2",  
+                # "pol_coverage_Median1",  
+                # "pol_coverage_Median2",  
                 "pol_coverage_Mini",     
                 "vh_fuel_Diesel",        
                 "vh_fuel_Gasoline",      
-                "vh_fuel_Hybrid" ]   
+                # "vh_fuel_Hybrid"
+                ]   
         missing_cols = set(columns) - set(d.columns)
         for c in missing_cols: d[c] = 0
         d = d[columns]
+
+        # new columns by feature engineering -> speed/power ratio
+        d["SPR"] = d["vh_speed"] / d["vh_din"]
+
         return d
 
 
@@ -288,19 +295,32 @@ def load_model():
     return trained_model
 
 def example_main():
-    path_to_train = "part3_training_data.csv"
+    path_to_train = "part3_train.csv"
+    path_to_val = "part3_validation.csv"
+    path_to_test = "part3_test.csv"
     df_full = pd.read_csv(path_to_train, delimiter=",")
+    df_val = pd.read_csv(path_to_train, delimiter=",")
+    df_test = pd.read_csv(path_to_test, delimiter=",")
     claims_raw = df_full["claim_amount"].values
-    y = df_full["made_claim"]
 
-    X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.2)
-    y_train = y_train.values
+    X_train = df_full
+    y_train = df_full["made_claim"].values
     y_train = np.reshape(y_train, (y_train.size, 1))
 
+    X_val = df_val
+    y_val = df_val["made_claim"]
 
-    pm=PricingModel(model = nn.Sequential(nn.Linear(16,12),
+    X_test = df_test
+    y_test = df_test["made_claim"]
+    
+    # X_train, X_test, y_train, y_test = train_test_split(df_full, y, test_size = 0.2)
+    # y_train = y_train.values
+    # y_train = np.reshape(y_train, (y_train.size, 1))
+
+
+    pm=PricingModel(model = nn.Sequential(nn.Linear(13,10),
                                             nn.ReLU(),
-                                            nn.Linear(12,8),
+                                            nn.Linear(10,8),
                                             nn.ReLU(),
                                             nn.Linear(8,4),
                                             nn.ReLU(),
@@ -309,6 +329,9 @@ def example_main():
     pm.fit(X_train, y_train, claims_raw)
     pm.save_model()
     pm = load_model()
+    print("========== validation ==========")
+    pm.evaluate_architecture(X_val, y_val)
+    print("============= test =============")
     pm.evaluate_architecture(X_test, y_test)
 
 
@@ -322,5 +345,5 @@ def test_main():
     print(res1)
     print(res2)
 
-#example_main()
+# example_main()
 # test_main()
