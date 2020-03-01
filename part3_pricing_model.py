@@ -10,6 +10,8 @@ from sklearn.metrics import roc_auc_score
 import torch
 import time
 
+picklefilename = 'part3_pricing_model.pickle'
+
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
     true_positive = 0
@@ -245,7 +247,7 @@ class PricingModel():
     def save_model(self):
         """Saves the class instance as a pickle file."""
         # =============================================================
-        with open('part3_pricing_model.pickle', 'wb') as target:
+        with open(picklefilename, 'wb') as target:
             pickle.dump(self, target)
 
     def evaluate_architecture(self, X_val, y_val):
@@ -290,16 +292,17 @@ class PricingModel():
         
 def load_model():
     # Please alter this section so that it works in tandem with the save_model method of your class
-    with open('part3_pricing_model.pickle', 'rb') as target:
+    with open(picklefilename, 'rb') as target:
         trained_model = pickle.load(target)
     return trained_model
 
 def example_main():
     path_to_train = "part3_train.csv"
+    path_to_full_train = "part3_training_data.csv"
     path_to_val = "part3_validation.csv"
     path_to_test = "part3_test.csv"
-    df_full = pd.read_csv(path_to_train, delimiter=",")
-    df_val = pd.read_csv(path_to_train, delimiter=",")
+    df_full = pd.read_csv(path_to_full_train, delimiter=",")
+    df_val = pd.read_csv(path_to_val, delimiter=",")
     df_test = pd.read_csv(path_to_test, delimiter=",")
     claims_raw = df_full["claim_amount"].values
 
@@ -371,6 +374,6 @@ def full_main():
     pm.save_model()
 
 
-# example_main()
+example_main()
 # test_main()
 # full_main()
