@@ -21,7 +21,7 @@ from numpy import savetxt
 
 debug = True
 
-picklefilename = 'part2_claim_classifier.pickle'
+picklefilename = 'part2_claim_classifierX.pickle'
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -78,6 +78,9 @@ class ClaimClassifier():
         Feel free to alter this as you wish, adding instance variables as
         necessary.
         """
+        self.trained = False
+        self.scaleMax = None
+        self.scaleMin = None
         self.retrain = False
         self.count_zeros = 0
         self.count_ones = 0
@@ -88,7 +91,7 @@ class ClaimClassifier():
         self.dropout_rate = 0.0
         self.leak_rate = 0.0
         self.batch_size = 50
-        self.n_epochs = 200
+        self.n_epochs = 1
         self.train = None
         self.val = None
         self.test = None
@@ -139,7 +142,7 @@ class ClaimClassifier():
             setattr(self, parameter, value)
         return self
 
-    def _preprocessor(self, X_raw):
+    def _preprocessor(self, X_raw, predicting=False):
         """Data preprocessing function.
 
         This function prepares the features of the data for training,
@@ -160,10 +163,19 @@ class ClaimClassifier():
         self.n_cols = np.size(self.raw_data, 1)
         self.n_rows = np.size(self.raw_data, 0)
         #Create a temporary copy in order to store only the data the model will be training on
-        max = np.max(self.raw_data, axis=0)
-        min = np.min(self.raw_data, axis=0)
-        #Normalize relevant columns
-        self.raw_data = np.nan_to_num((self.raw_data - min) / (max - min))
+        _max = None
+        _min = None
+        if predicting:
+            # print("--- predict preprocessing ---")
+            _max = self.scaleMax
+            _min = self.scaleMin
+        else:
+            _max = np.max(self.raw_data, axis=0)
+            _min = np.min(self.raw_data, axis=0)
+            self.scaleMax = _max
+            self.scaleMin = _min
+
+        self.raw_data = np.nan_to_num((self.raw_data - _min) / (_max - _min))
 
         return self.raw_data
 
@@ -311,6 +323,7 @@ class ClaimClassifier():
                     print("Zeros predicted: ", count_zeros)
                 else:
                     pass
+        self.trained=True
         return self
         # print("Finished Training")
 
@@ -332,11 +345,15 @@ class ClaimClassifier():
             values corresponding to the probability of beloning to the
             POSITIVE class (that had accidents)
         """
+        if not self.trained:
+            print("MODEL NOT TRAINED")
+            raise 
+
         #Taking care of Datarame input
         if isinstance(X_raw, pandas.DataFrame):
             X_raw = X_raw.values
-
-        X_clean = self._preprocessor(X_raw)
+        
+        X_clean = self._preprocessor(X_raw, True)
         # if debug:
         #     print("Xclean data type: ", type(X_clean))
         #     print("Data type of the return of preprocessor", type(self._preprocessor(X_raw)))
@@ -369,6 +386,7 @@ class ClaimClassifier():
         X_val = self.val[:, :self.val.shape[1]-2]
         y_val = self.val[:, self.val.shape[1]-1:]
         y_val = Variable(torch.from_numpy(y_val)).float()
+        print("!!!!!!!!!!!!!")
         out = self.predict(X_val)
         acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(torch.from_numpy(out), y_val, True)
         print("------------------------------------------------------------------")

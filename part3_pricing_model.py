@@ -141,19 +141,10 @@ class PricingModel():
         #Converting the input ndarray into a pandas dataframe
 
         X_dropped = X_raw.drop(self.cols_to_drop, axis=1)
-        # print("##############!!")
-        # print(X_dropped.info())
-        # print("##############!!")
 
         X_unscaled_pd = pd.get_dummies(X_dropped, columns=['pol_coverage', 'vh_fuel'])
-        # print("##############")
-        # print(X_unscaled_pd.info())
-        # print("##############")
 
         X_unscaled_cols = self.add_missing_dummy_cols(X_unscaled_pd)
-
-        # print(X_unscaled_cols.info())
-
 
         X_unscaled = X_unscaled_cols.values
 
@@ -333,8 +324,8 @@ def example_main():
                                             nn.Linear(4,1),
                                             nn.Sigmoid()), n_epochs = 100)
     pm.fit(X_train, y_train, claims_raw)
-    pm.save_model()
-    pm = load_model()
+    # pm.save_model()
+    # pm = load_model()
     print("========== validation ==========")
     pm.evaluate_architecture(X_val, y_val)
     print("============= test =============")
@@ -371,7 +362,7 @@ def full_main():
                                             nn.Linear(4,1),
                                             nn.Sigmoid()), n_epochs = 100)
     pm.fit(X_train, y_train, claims_raw)
-    pm.save_model()
+    # pm.save_model()
 
 
 # example_main()
