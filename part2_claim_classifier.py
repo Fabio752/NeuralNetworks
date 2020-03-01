@@ -21,6 +21,8 @@ from numpy import savetxt
 
 debug = True
 
+picklefilename = 'part2_claim_classifier.pickle'
+
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
     true_positive = 0
@@ -417,14 +419,14 @@ class ClaimClassifier():
 
     def save_model(self):
         # Please alter this file appropriately to work in tandem with your load_model function below
-        with open('part2_claim_classifier.pickle', 'wb') as target:
+        with open(picklefilename, 'wb') as target:
             pickle.dump(self, target)
 
 
 
 def load_model():
     # Please alter this section so that it works in tandem with the save_model method of your class
-    with open('part2_claim_classifier.pickle', 'rb') as target:
+    with open(picklefilename, 'rb') as target:
         trained_model = pickle.load(target)
     return trained_model
 
@@ -482,20 +484,21 @@ def ClaimClassifierHyperParameterSearch(cc, X_train):
     return  # Return the chosen hyper parameters
 def example_main():
     path_to_train = "part2_train_.csv"
+    path_to_full_train = "part2_training_data.csv"
     path_to_val = "part2_validation.csv"
     path_to_test = "part2_test.csv"
     cc = ClaimClassifier()
     #Extracting from csv
-    train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
+    train_raw = np.genfromtxt(path_to_full_train, delimiter=',')[1:, :]
     val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
     #Preprocessing the data
     cc.val = val_raw
 
     cc.fit(train_raw)
     cc.evaluate_architecture()
-    # cc.save_model()
+    cc.save_model()
 
-#example_main()
+# example_main()
 
 class HyperParamSearcher():
     def __init__(self, param_grid, train_data):
@@ -523,6 +526,19 @@ train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
 '''
 # path_to_train = "part2_train_.csv"
 # train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
-# tuned_parameters = [{ 'n_epochs': [50], 'learning_rate' : [0.01,0.001], 'batch_size': [10,25,50,75,100,200], 'dr': [0.0,0.1,0.2], 'lr': [0.1, 0,2]  }]
+# # tuned_parameters = [{ 'n_epochs': [50], 'learning_rate' : [0.01,0.001], 'batch_size': [10,25,50,75,100,200], 'dr': [0.0,0.1,0.2], 'lr': [0.1, 0,2]  }]
+# tuned_parameters = [{ 
+#     'model': 
+#         [
+#             nn.Sequential(
+#                 nn.Linear(9,9),
+#                 nn.ReLU(),
+#                 nn.Linear(9,9),
+#                 nn.ReLU(),
+#                 nn.Linear(9,1),
+#                 nn.Sigmoid(),
+#             )
+#         ]
+#  }]
 # searcher = HyperParamSearcher(tuned_parameters, train_raw)
 # searcher.begin()
