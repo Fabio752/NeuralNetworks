@@ -21,7 +21,7 @@ from numpy import savetxt
 
 debug = True
 
-picklefilename = 'part2_claim_classifierX.pickle'
+picklefilename = 'part2_claim_classifier.pickle'
 
 def get_accuracy(y_out, y_target, test=False):
     false_positive = 0
@@ -91,22 +91,30 @@ class ClaimClassifier():
         self.dropout_rate = 0.0
         self.leak_rate = 0.0
         self.batch_size = 50
-        self.n_epochs = 1
+        self.n_epochs = 40
         self.train = None
         self.val = None
         self.test = None
+        # self.model = nn.Sequential(
+        #     nn.Linear(9,9),
+        #     nn.Dropout(self.dropout_rate),
+        #     nn.LeakyReLU(self.leak_rate),
+        #     nn.Linear(9,7),
+        #     nn.Dropout(self.dropout_rate),
+        #     nn.LeakyReLU(self.leak_rate),
+        #     nn.Linear(7,4),
+        #     nn.Dropout(self.dropout_rate),
+        #     nn.LeakyReLU(self.leak_rate),
+        #     nn.Linear(4,1),
+        #     nn.Sigmoid(),
+        # )
         self.model = nn.Sequential(
-            nn.Linear(9,9),
-            nn.Dropout(self.dropout_rate),
-            nn.LeakyReLU(self.leak_rate),
-            nn.Linear(9,7),
-            nn.Dropout(self.dropout_rate),
-            nn.LeakyReLU(self.leak_rate),
-            nn.Linear(7,4),
-            nn.Dropout(self.dropout_rate),
-            nn.LeakyReLU(self.leak_rate),
+            nn.Linear(9,4),
+            nn.ReLU(),
+            nn.Linear(4,4),
+            nn.ReLU(),
             nn.Linear(4,1),
-            nn.Sigmoid(),
+            nn.Sigmoid()
         )
         for arg, value in args.items():
             setattr(self, arg, value)
@@ -167,6 +175,8 @@ class ClaimClassifier():
         _min = None
         if predicting:
             # print("--- predict preprocessing ---")
+            # print(self.scaleMax)
+            # print(self.scaleMin)
             _max = self.scaleMax
             _min = self.scaleMin
         else:
@@ -386,7 +396,6 @@ class ClaimClassifier():
         X_val = self.val[:, :self.val.shape[1]-2]
         y_val = self.val[:, self.val.shape[1]-1:]
         y_val = Variable(torch.from_numpy(y_val)).float()
-        print("!!!!!!!!!!!!!")
         out = self.predict(X_val)
         acc, fn, tn, fp, tp, test_ones, test_zeros = get_accuracy(torch.from_numpy(out), y_val, True)
         print("------------------------------------------------------------------")
@@ -507,7 +516,7 @@ def example_main():
     path_to_test = "part2_test.csv"
     cc = ClaimClassifier()
     #Extracting from csv
-    train_raw = np.genfromtxt(path_to_full_train, delimiter=',')[1:, :]
+    train_raw = np.genfromtxt(path_to_train, delimiter=',')[1:, :]
     val_raw = np.genfromtxt(path_to_val, delimiter=',')[1:, :]
     #Preprocessing the data
     cc.val = val_raw
